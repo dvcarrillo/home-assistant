@@ -1,2 +1,4 @@
 # TFG
-My BSc end thesis at Universidad de Granada
+My BSc End Thesis at Universidad de Granada
+
+*Ongoing project…*
