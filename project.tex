@@ -3,13 +3,13 @@
 \usepackage{listings}
 \usepackage{xspace}
 \usepackage[utf8]{inputenc}
-\usepackage[spanish]{babel}
+\usepackage[spanish, english]{babel}
 
 % \usepackage[style=list, number=none]{glossary} %
-%\usepackage{titlesec}
-%\usepackage{pailatino}
+\usepackage{titlesec}
+% \usepackage{pailatino}
 
-\decimalpoint
+% \decimalpoint
 \usepackage{dcolumn}
 \newcolumntype{.}{D{.}{\esperiod}{-1}}
 \makeatletter
@@ -47,6 +47,7 @@ Telecomunicación\xspace}
 \newcommand{\myUni}{\protect{Universidad de Granada}\xspace}
 \newcommand{\myLocation}{Granada\xspace}
 \newcommand{\myTime}{\today\xspace}
+\newcommand{\myTimeES}{{\selectlanguage{spanish}\today}}
 \newcommand{\myVersion}{Version 0.1\xspace}
 
 \hypersetup{
@@ -66,7 +67,7 @@ pdfproducer = {pdflatex}
 \usepackage{url}
 \usepackage{colortbl,longtable}
 \usepackage[stable]{footmisc}
-%\usepackage{index}
+\usepackage{index}
 
 %\makeindex
 %\usepackage[style=long, cols=2,border=plain,toc=true,number=none]{glossary}
@@ -176,29 +177,29 @@ pdfproducer = {pdflatex}
 \begin{document}
 \input{front/front}
 \input{prefaces/preface}
-%\frontmatter
-%\tableofcontents
-%\listoffigures
-%\listoftables
-%
-%\mainmatter
-%\setlength{\parskip}{5pt}
+\frontmatter
+\tableofcontents
+\listoffigures
+\listoftables
 
-%\input{capitulos/01_Introduccion}
+\mainmatter
+\setlength{\parskip}{5pt}
+
+\input{chapters/01_Introduction}
+
+%\input{chapters/02_EspecificacionRequisitos}
 %
-%\input{capitulos/02_EspecificacionRequisitos}
+%\input{chapters/03_Planificacion}
 %
-%\input{capitulos/03_Planificacion}
+%\input{chapters/04_Analisis}
 %
-%\input{capitulos/04_Analisis}
+%\input{chapters/05_Diseno}
 %
-%\input{capitulos/05_Diseno}
+%\input{chapters/06_Implementacion}
 %
-%\input{capitulos/06_Implementacion}
+%\input{chapters/07_Pruebas}
 %
-%\input{capitulos/07_Pruebas}
-%
-%\input{capitulos/08_Conclusiones}
+%\input{chapters/08_Conclusiones}
 %
 %%\chapter{Conclusiones y Trabajos Futuros}
 %
