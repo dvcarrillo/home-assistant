@@ -28,6 +28,8 @@
 
 \usepackage[pdfborder={000}]{hyperref} %referencia
 
+\newcommand{\BibTeX}{{\sc Bib}\TeX}
+
 % ********************************************************************
 % Re-usable information
 % ********************************************************************
@@ -203,11 +205,12 @@ pdfproducer = {pdflatex}
 %
 %%\chapter{Conclusiones y Trabajos Futuros}
 %
-%
-%%\nocite{*}
-%\bibliography{bibliografia/bibliografia}\addcontentsline{toc}{chapter}{Bibliografía}
-%\bibliographystyle{miunsrturl}
-%
+
+% \nocite{*}
+\bibliographystyle{plain}
+\bibliography{bibliography/bibliography}
+\addcontentsline{toc}{chapter}{Bibliography}
+
 %\appendix
 %\input{apendices/manual_usuario/manual_usuario}
 %%\input{apendices/paper/paper}
