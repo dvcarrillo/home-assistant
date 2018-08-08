@@ -131,8 +131,8 @@ centralized architecture.
 \subsection{Centralized Architecture}
 In a centralized Smart Home Environment architecture, the Control System, which is realized by means of a computer
 system, is in charge of acquiring data from sensors, providing a user interface, and executing the control algorithms and 
-sending instructions to actuators.\cite{badica13} In the example in the figure \ref{fig:sh-basic-structure}, the sensor (in gold) 
-can represent a smoke detector that can trigger the alarm (the actuator) to alert the householders.
+sending instructions to actuators.\cite{badica13} In the example in the figure \ref{fig:sh-basic-structure}, the sensor, in the
+upper right corner, could represent a smoke detector that can trigger the alarm (the actuator) to alert the householders.
 
 \bigskip
 The controller is often called Home Gateway, and in this case it is the central computer. It is also responsible of making 
@@ -142,19 +142,66 @@ interfacing with domotic devices and basic processing, and to delegate to more p
 part of the processing.
 
 \bigskip
+If they are placed in a powerful system, it is probably beneficial to use this architecture and get the maximum performance,
+which is ideal in big, complex systems.\cite{raulCarreteroElegir} However, there is only a controller and the system fully depends
+on it. If it failed, the whole system could be affected, which is a major issue in a Smart Home Environment.
+
+\bigskip
 This is the most popular architecture in home automation, partly because product manufacturers tend to centralize communications
 between their intelligent devices in a hub or gateway of the same brand, which users need to install to operate the rest of the devices.
 
+\subsection{Decentralized Architecture}
+In this case, there is more than one controller in the system. They are interconnected with a bus, so each one of them can interact
+and communicate with the rest. An example system that could use this architecture is a system with smart devices connected to 
+hubs from different makers, and all of them interconnected thanks to a system that can work with all of them.
+
+\bigskip
+In the figure \ref{fig:decentralized-sh-architecture}, we can spot three different controllers. Although the example shows a simple
+configuration, with this architecture it would be possible to interconnect big centralized systems, making one even bigger. Each
+controller is an independent system, and in this case they represent a lightning system, a voice assistant and a smart system for
+the garage.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\textwidth]{images/Chapter_02/decentralized-sh-architecture.png}
+	\caption{Decentralized Smart Home architecture}
+	\label{fig:decentralized-sh-architecture}
+\end{figure}
+
 \subsection{Distributed Architecture}
 In a distributed Smart Home Environment architecture, the Control System software is conceptualized and implemented as a 
-distributed computing system, that is, a series of intercommunicating computers working together to achieve an end, which in this 
+distributed computing system, that is, a series of intercommunicating devices working together to achieve an end, which in this 
 case is running a Smart Home system.
 
 \bigskip
 The distributed architecture benefits from the computational resources of smart devices to integrate software components into the 
-nodes of the Home Automation network, which produces a big increase in performance and modularity. However, the cost of 
-this architecture is significantly higher compared to the centralized architecture, and therefore it is hard to achieve a big degree of
-granularity. For this reason, this architecture is often applied conceptually, while still physically centralized into the Home Gateway.
+nodes of the Home Automation network, which produces a big increase in autonomy and modularity\cite{raulCarreteroElegir}. 
+However, the cost of this architecture is significantly higher compared to the centralized architecture, and therefore it is hard to achieve 
+a fully distributed architecture. For this reason, this architecture is often applied conceptually, while still physically centralized into
+the Home Gateway.
 
+\bigskip
+In the figure \ref{fig:distributed-sh-architecture} we can see an example of this architecture applied over a similar example as the one
+shown in \ref{fig:sh-basic-structure}. In this case, we can distinguish 4 independent but intercommunicated devices. For instance, 
+the one at the upper right corner could contain a motion and a sound sensor, that could activate the alarm system located in the bottom
+right corner. The most important part about the distributed architecture is that each device acts as a controller as well, so there are not
+independent controllers anymore.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\textwidth]{images/Chapter_02/distributed-sh-architecture.png}
+	\caption{Distributed Smart Home architecture}
+	\label{fig:distributed-sh-architecture}
+\end{figure}
+
+\subsection{Hybrid Architecture}
+This architecture is a hybrid of the architectures mentioned above. In a system that follows this architecture, we may find
+a central controller (such as a centralized system), or a set of them (as the decentralized system), but also the end devices are
+controllers themselves, as it happens with distributed systems.
+
+\bigskip
+The main benefit of this architecture is that the devices are able to retrieve, process and communicate the information they get
+directly between them, so it does not have to pass through the controller. On the downside, this architecture could create an 
+unnecessary mess in our system.
 
 
