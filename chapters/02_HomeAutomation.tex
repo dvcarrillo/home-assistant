@@ -110,14 +110,44 @@ Home market at this moment: the United States.
 	\label{fig:sh-market-revenue}
 \end{figure}
 
-Predictions are not bad either, as they show that this trend will continue in the coming years, reaching 34,5 million of the 
+\bigskip
+Predictions are not bad either: they show that this trend will continue in the coming years, reaching 34.5 million of the 
 US dollars, and this is just in the United States, although there will be similar situations in the rest of the world.
 
-\section{Home Automation architectures}
+\section{Home Automation System Design}
 After a look at the definition and history of Home Automation and its benefits, I am going to explain how these systems are 
-usually organized.
+usually organized. There is more than one valid way, and it will always depend on the requirements and conditions of the user,
+the home environment and of course the capabilities of its components. The figure \ref{fig:sh-basic-structure} is a good 
+example of a basic organization for Home Automation\cite{embeddedHASystemDesign}. This organization has a name, indeed:
+centralized architecture.
 
+\begin{figure}
+	\centering
+	\includegraphics[width=0.55\textwidth]{images/Chapter_02/basic-sh-structure.png}
+	\caption{Centralized Smart Home structure}
+	\label{fig:sh-basic-structure}
+\end{figure}
 
+\subsection{Centralized Architecture}
+In a centralized Smart Home Environment architecture, the Control System, which is realized by means of a computer
+system, is in charge of acquiring data from sensors, providing a user interface, and executing the control algorithms and 
+sending instructions to actuators.\cite{badica13} In the example in the figure \ref{fig:sh-basic-structure}, the sensor (in gold) 
+can represent a smoke detector that can trigger the alarm (the actuator) to alert the householders.
+
+\bigskip
+The controller is often called Home Gateway, and in this case it is the central computer. It is also responsible of making 
+accessible the system via Internet, as well as providing services to the home residents. An option to increase its performance 
+while maintaining the same architecture is to limit the functionalities of the Home Gateway to data acquisition, software 
+interfacing with domotic devices and basic processing, and to delegate to more powerful servers outside home the most
+part of the processing.
+
+\bigskip
+This is the most popular architecture in home automation, partly because product manufacturers tend to centralize communications
+between their intelligent devices in a hub or gateway of the same brand, which users need to install to operate the rest of the devices.
+
+\subsection{Distributed Architecture}
+In a distributed Smart Home Environment architecture, the Control System software is conceptualized and implemented as a distributed 
+computing system.
 
 
 
