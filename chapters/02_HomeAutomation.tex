@@ -8,7 +8,6 @@ In this chapter, I am going to analyze this technology and its current state, in
 products.
 
 \section{What is Home Automation?}
-
 Although science fiction has represented the idea of smart houses since the past century, including in them
 an intelligence able to respond to all the dweller’s needs and desires, it has never felt as close to real world as today.
 
@@ -23,6 +22,17 @@ Unlike many may think, we don't actually need a very modern house, since advance
 in older, traditional buildings. This fact makes domotics a real possibility in every situation. In fact, the number of home 
 automation systems installed in Europe is expected to reach around 29 million by 2019.\cite{statistaInstalled}
 
+Therefore, a Smart Home is expected to meet the following applications.
+\begin{itemize}
+	\item Temperature control, including heating, air conditioning and air ventilation.
+	\item Lightning control.
+	\item Occupancy detection.
+	\item Power control.
+	\item Security system, including theft, or smoke or fire detection.
+	\item Baby and pet care.
+	\item Basic health control, like water and air monitoring.
+\end{itemize}
+
 \begin{figure}
 	\centering
 	\includegraphics[width=0.9\textwidth]{images/Chapter_02/security.jpg}
@@ -30,6 +40,7 @@ automation systems installed in Europe is expected to reach around 29 million by
 	\label{fig:security-in-smarthome}
 \end{figure}
 
+\bigskip
 There is not an exact point where we can set the beginning of the domotics as a real concept, but during the last century
 there has been some remarkable efforts, and even before. In 1898, Nikola Tesla created a wireless control for a toy boat, 
 the first of its kind \cite{betanewsHistory}. That marks the beginning of wireless technologies, one of the fundamental
@@ -56,7 +67,7 @@ Home Automation has not stopped gaining ground on our homes and now it is experi
 in its lifetime, with the unstoppable growth of the Internet of Things (IoT) and the simultaneous development of Artificial 
 Intelligence for the general public, with the biggest companies, like Google and Apple, investing millions of dollars on it.
 Devices like Amazon Echo and Google Home, or assistants like Siri, Cortana, Google Assistant and Amazon Alexa are a 
-good representative of this trend. I will talk in depth about them in the following sections.
+good representative of this trend. I will talk in depth about them in the following chapters.
 
 We have always imagined that Smart Homes would bring us a whole world of benefits. And that is partly true, but
 they have ended up offering benefits that no one could imagine some decades before, when matters such as energy
@@ -163,7 +174,7 @@ the garage.
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.7\textwidth]{images/Chapter_02/decentralized-sh-architecture.png}
+	\includegraphics[width=0.9\textwidth]{images/Chapter_02/decentralized-sh-architecture.png}
 	\caption{Decentralized Smart Home architecture}
 	\label{fig:decentralized-sh-architecture}
 \end{figure}
@@ -202,5 +213,6 @@ The main benefit of this architecture is that the devices are able to retrieve, 
 directly between them, so it does not have to pass through the controller. On the downside, this architecture could create an 
 unnecessary mess in our system.
 
-
-
+\bigskip
+In further chapters, I will explore more in depth Home Automation applications and technologies, showing different devices and
+their usages. Finally, I will use this knowledge to create a home automation controller, which will be functional in a real environment.
