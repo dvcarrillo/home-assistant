@@ -4,7 +4,6 @@ Home automation, also known as domotics, has been a recurrent topic in Computer 
 has become a reality in the last decades, thanks to the growth and decrease in the price of embedded
 systems and wireless technologies, that have permitted to create distributed systems, the heart of this technology.
 
-\bigskip
 In this chapter, I am going to analyze this technology and its current state, including its implementation in commercial
 products.
 
@@ -13,7 +12,6 @@ products.
 Although science fiction has represented the idea of smart houses since the past century, including in them
 an intelligence able to respond to all the dweller’s needs and desires, it has never felt as close to real world as today.
 
-\bigskip
 The basic idea of home automation is to employ sensors and control systems to monitor a dwelling, and accordingly 
 adjust the various mechanisms that provide heat, ventilation, lighting, and other services. By more closely tuning the 
 dwelling’s mechanical systems to the dweller’s needs, the automated \"intelligent\" home can provide a safer, more 
@@ -21,7 +19,6 @@ comfortable, and more economical dwelling.\cite{smarthouse98} For example, the a
 the intensity and direction of the sunlight, and adequate the house according to its condition (which would include
 closing the blinds and adjusting the air conditioner).
 
-\bigskip
 Unlike many may think, we don't actually need a very modern house, since advanced systems can be perfectly integrated 
 in older, traditional buildings. This fact makes domotics a real possibility in every situation. In fact, the number of home 
 automation systems installed in Europe is expected to reach around 29 million by 2019.\cite{statistaInstalled}
@@ -33,20 +30,17 @@ automation systems installed in Europe is expected to reach around 29 million by
 	\label{fig:security-in-smarthome}
 \end{figure}
 
-\bigskip
 There is not an exact point where we can set the beginning of the domotics as a real concept, but during the last century
 there has been some remarkable efforts, and even before. In 1898, Nikola Tesla created a wireless control for a toy boat, 
 the first of its kind \cite{betanewsHistory}. That marks the beginning of wireless technologies, one of the fundamental
 parts of Home Automation. 
 
-\bigskip
 In 1975, after lots of appearances of the idea of home automation in films, the first general purpose home automation
 technology, called X10, was developed. X10 defines a protocol for communication between electrical devices, which uses power
 line wiring for signaling and control, where the signals involve brief radio frequency bursts representing digital information.
 Therefore, it also defines a wireless radio based protocol. Surprisingly, the X10 technology is still widely used and available,
 with millions of units in use worldwide.
 
-\bigskip
 However, it was not until 1984 that the word Smart Home appeared, invented by the \textit{American Association of House
 Builders}. After that, different inventions rapidly followed one another, with devices such as\\ \textit{The Clapper} (which 
 was operated through sound, like a clap or a bark) and interest from the biggest technological companies, like Microsoft.
@@ -58,14 +52,12 @@ was operated through sound, like a clap or a bark) and interest from the biggest
 	\label{fig:the-clapper}
 \end{figure}
 
-\bigskip
 Home Automation has not stopped gaining ground on our homes and now it is experiencing one of the best moments
 in its lifetime, with the unstoppable growth of the Internet of Things (IoT) and the simultaneous development of Artificial 
 Intelligence for the general public, with the biggest companies, like Google and Apple, investing millions of dollars on it.
 Devices like Amazon Echo and Google Home, or assistants like Siri, Cortana, Google Assistant and Amazon Alexa are a 
 good representative of this trend. I will talk in depth about them in the following sections.
 
-\bigskip
 We have always imagined that Smart Homes would bring us a whole world of benefits. And that is partly true, but
 they have ended up offering benefits that no one could imagine some decades before, when matters such as energy
 savings were not as important as today. These benefits are responsible for their increasing popularity, and they can be 
@@ -95,7 +87,6 @@ summarized in the following points:
 	gain time  to spend with their families.
 \end{itemize}
 
-\bigskip
 This range of benefits has made possible to see home automation systems in many homes, but also in offices. Now, almost 
 every new house that is built is prepared for domotics, including Internet access points in every room, a big amount of plugs, 
 and a lot of space to extend its capabilities in a future. Indeed, the global home automation and security control market is 
@@ -110,16 +101,29 @@ Home market at this moment: the United States.
 	\label{fig:sh-market-revenue}
 \end{figure}
 
-\bigskip
 Predictions are not bad either: they show that this trend will continue in the coming years, reaching 34.5 million of the 
 US dollars, and this is just in the United States, although there will be similar situations in the rest of the world.
 
 \section{Home Automation System Design}
 After a look at the definition and history of Home Automation and its benefits, I am going to explain how these systems are 
 usually organized. There is more than one valid way, and it will always depend on the requirements and conditions of the user,
-the home environment and of course the capabilities of its components. The figure \ref{fig:sh-basic-structure} is a good 
-example of a basic organization for Home Automation\cite{embeddedHASystemDesign}. This organization has a name, indeed:
-centralized architecture.
+the home environment and of course the capabilities of its components. 
+
+First of all, from all the elements present in a Smart Home Environment, we can mainly distinguish the following ones:
+
+\begin{itemize}
+	\item \textbf{Controller or controllers:} which are usually devices in charge of processing the data and take decisions, as
+	well as communicate the devices between them and with other controllers, if any.
+	\item \textbf{Sensors:} they are devices that are capable of perceiving changes in their environment by different means
+	(audio, video, movement...). Examples of sensors are motion sensors or microphones.
+	\item \textbf{Actuators:} these devices are the opposite of the sensors. They can inform of events, but they can also make
+	changes in their environment. An actuator could be a light bulb or a speaker.
+	\item \textbf{Communication mediums:} this is what devices and controllers use for communication. They can use the power 
+	grid, or by wireless protocols, like WiFi or Zigbee.
+\end{itemize}
+
+The figure \ref{fig:sh-basic-structure} is a good example of a basic organization for Home 
+Automation\cite{embeddedHASystemDesign}. This organization has a name, indeed: centralized architecture.
 
 \begin{figure}
 	\centering
@@ -134,19 +138,16 @@ system, is in charge of acquiring data from sensors, providing a user interface,
 sending instructions to actuators.\cite{badica13} In the example in the figure \ref{fig:sh-basic-structure}, the sensor, in the
 upper right corner, could represent a smoke detector that can trigger the alarm (the actuator) to alert the householders.
 
-\bigskip
 The controller is often called Home Gateway, and in this case it is the central computer. It is also responsible of making 
 accessible the system via Internet, as well as providing services to the home residents. An option to increase its performance 
 while maintaining the same architecture is to limit the functionalities of the Home Gateway to data acquisition, software 
 interfacing with domotic devices and basic processing, and to delegate to more powerful servers outside home the most
 part of the processing.
 
-\bigskip
 If they are placed in a powerful system, it is probably beneficial to use this architecture and get the maximum performance,
 which is ideal in big, complex systems.\cite{raulCarreteroElegir} However, there is only a controller and the system fully depends
 on it. If it failed, the whole system could be affected, which is a major issue in a Smart Home Environment.
 
-\bigskip
 This is the most popular architecture in home automation, partly because product manufacturers tend to centralize communications
 between their intelligent devices in a hub or gateway of the same brand, which users need to install to operate the rest of the devices.
 
@@ -155,7 +156,6 @@ In this case, there is more than one controller in the system. They are intercon
 and communicate with the rest. An example system that could use this architecture is a system with smart devices connected to 
 hubs from different makers, and all of them interconnected thanks to a system that can work with all of them.
 
-\bigskip
 In the figure \ref{fig:decentralized-sh-architecture}, we can spot three different controllers. Although the example shows a simple
 configuration, with this architecture it would be possible to interconnect big centralized systems, making one even bigger. Each
 controller is an independent system, and in this case they represent a lightning system, a voice assistant and a smart system for
@@ -171,16 +171,15 @@ the garage.
 \subsection{Distributed Architecture}
 In a distributed Smart Home Environment architecture, the Control System software is conceptualized and implemented as a 
 distributed computing system, that is, a series of intercommunicating devices working together to achieve an end, which in this 
-case is running a Smart Home system.
+case is running a Smart Home system. The integration and interoperability of heterogeneous domotic devices is achieved by an
+intermediary software layer called \textit{middleware}.\cite{badica13}
 
-\bigskip
 The distributed architecture benefits from the computational resources of smart devices to integrate software components into the 
 nodes of the Home Automation network, which produces a big increase in autonomy and modularity\cite{raulCarreteroElegir}. 
 However, the cost of this architecture is significantly higher compared to the centralized architecture, and therefore it is hard to achieve 
 a fully distributed architecture. For this reason, this architecture is often applied conceptually, while still physically centralized into
 the Home Gateway.
 
-\bigskip
 In the figure \ref{fig:distributed-sh-architecture} we can see an example of this architecture applied over a similar example as the one
 shown in \ref{fig:sh-basic-structure}. In this case, we can distinguish 4 independent but intercommunicated devices. For instance, 
 the one at the upper right corner could contain a motion and a sound sensor, that could activate the alarm system located in the bottom
@@ -199,9 +198,9 @@ This architecture is a hybrid of the architectures mentioned above. In a system 
 a central controller (such as a centralized system), or a set of them (as the decentralized system), but also the end devices are
 controllers themselves, as it happens with distributed systems.
 
-\bigskip
 The main benefit of this architecture is that the devices are able to retrieve, process and communicate the information they get
 directly between them, so it does not have to pass through the controller. On the downside, this architecture could create an 
 unnecessary mess in our system.
+
 
 
