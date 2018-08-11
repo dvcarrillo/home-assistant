@@ -2,13 +2,37 @@
 
 The aim of this chapter is to provide a detailed analysis of the devices more closely related to this project, now that we have a 
 clearer idea about its main pillars. I will go into many of the available commercial devices and software in the fields of home 
-automation, voice assistance and smart devices. By comparing them, I hope to get the best technologies I can implement in
-the final outcome of this project.
+automation, voice assistance and smart devices.
 
 \section{Home Automation Systems}
 This section covers all the hardware and software systems related to home automation. As we will see, there are lots of solutions
 with very different purposes: while there is Amazon Alexa, a full hardware and software system that integrates other home automation
-systems, we can also find pure online solutions, like the automation platform IFTTT.
+systems, we can also find pure online solutions, like the automation platform IFTTT. Sometimes, home automation systems are
+built underneath a virtual assistant, as it happens with Amazon Alexa, so some devices are going to appear in this section and in the
+next one. However, they will analyzed from two different perspectives, as having a good virtual assistant does not mean having a
+good home automation system.
+
+\subsection{Philips Hue}
+Philips Hue is a personal wireless lighting system aimed at the smart home. In combines LED light bulbs, LED strips and other 
+lightning devices, and sensors that can be configured in their mobile app, so they can modify the home lightning based on a set of
+rules. There is a wide range of products, including color and only white lights, so users can build a pretty customizable lightning
+experience.\cite{philipsHueMeethue}
+
+The system requires a bridge connected to the Internet (called Philips Hue Smart Hub) in order to work. This is because the Hue
+devices do not use WiFi in order to communicate with the bridge, but the system needs to have WiFi to be controllable from a 
+mobile phone. So, it follows a centralized architecture. Moreover, Philips does not provide any type of assistant or external interface
+to manage the system apart from the mobile application by default, although Hue works with the most popular home automation
+systems, like Alexa or Apple Home, that provide much more flexible home automation management.
+
+\subsection{LG SmartThinQ}
+LG SmartThinQ groups the range of Wi-Fi enabled home appliances made by the company LG, including refrigerators, dishwashers,
+vacuum cleaners or air purifiers, between others. As of September 2017, they were the most extensive range of devices of their kind.\cite{lgSmartThinq}
+
+Unlike Philips Hue, SmartThinQ devices do not require a bridge to work. They can be controlled from the mobile phone and, in some
+cases, like in the refrigerators, they include a touchscreen to interact with the device. However, LG does not provide any extra device
+or virtual assistant to interact with them, though they are manageable through Amazon Alexa and Google Assistant.
+
+
 
 
 % Incluir dispositivos que he estudiado, sistemas domóticos y alternativas a openHAB, asistentes de voz, etc
