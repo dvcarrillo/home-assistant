@@ -20,9 +20,16 @@ experience.\cite{philipsHueMeethue}
 
 The system requires a bridge connected to the Internet (called Philips Hue Smart Hub) in order to work. This is because the Hue
 devices do not use WiFi in order to communicate with the bridge, but the system needs to have WiFi to be controllable from a 
-mobile phone. So, it follows a centralized architecture. Moreover, Philips does not provide any type of assistant or external interface
+mobile phone. Thus, it follows a centralized architecture. Moreover, Philips does not provide any type of assistant or external interface
 to manage the system apart from the mobile application by default, although Hue works with the most popular home automation
-systems, like Alexa or Apple Home, that provide much more flexible home automation management.
+systems, like Alexa or Apple HomeKit, that provide much more flexible home automation management.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.9\textwidth]{images/Chapter_04/philips-hue.jpg}
+	\caption{A Philips Hue dimmer switch, three color light bulbs and the Hue Smart Hub}
+	\label{fig:philips-hue}
+\end{figure}
 
 \subsection{LG SmartThinQ}
 LG SmartThinQ groups the range of Wi-Fi enabled home appliances made by the company LG, including refrigerators, dishwashers,
@@ -50,7 +57,37 @@ Samsung allows is impossible. Also, users are forced to purchase the Smart Home 
 device, unlike other similar systems. The system is compatible with Bixby, the virtual assistant from Samsung.
 
 \subsection{Google Home}
+Introduced at Google I/O 2016, the annual Google developer conference, \textit{Google Home} is the name of Google's smart speaker, 
+which is Google's biggest insight into home automation technology. Its aim is to work with all the possible smart home devices, so it 
+follows the same idea as the Samsung SmartThings system, being a \textit{maker-independent} system, as long as, of course, devices 
+are compatible with it. Also, Google Home brings all the functions of Google Assistant to the smart speaker.
 
+The main difference with SmartThings is that this system is mainly voice-driven. The home automation layer is pushed down to just 
+one more function of the virtual assistant, and Google does not even provide a graphical interface to manage the smart devices.
+Anyway, normally the makers of each device provide a mobile application from where users can manage their devices in a more
+user-friendly interface, but having a centralized view is a desirable feature. On the bright side, all Google devices that support
+Google Assistant can automatically control smart home devices. 
+
+The number of compatible devices with the Google Assistant, unlike SmartThings, is very high, and almost any new smart home 
+device is tagged as compatible with it.
+
+\subsection{Apple HomeKit}
+HomeKit is the result of Apple's efforts to create a home automation environment adapted to its devices. It has been also made to work
+with a wide range of devices, but in this case, Apple included some notable security policies, with the goal of achieving the highest 
+security and privacy. In fact, all HomeKit devices need to be approved by Apple first.
+
+On iPhone and Mac computers (starting with macOS Mojave), Apple includes an application called Home, which displays all 
+of the smart home devices in a convenient way and lets people organize and manage them. In addition, it is also possible to establish 
+automation rules, based on the user's location, time of day, actions or even occupancy of the house. Furthermore, Apple also provides
+integration with their personal assistant, Siri. As it happens with the Google Assistant, all Apple devices configured with the same Apple 
+ID will have the same information automatically synchronized.\cite{appleIOSHome}
+
+Although this is a very comprehensive home automation system, the number of compatible devices is not as high as in other options. 
+Apple has been lately working on promoting their home automation system and their assistant by introducing the HomePod, their smart
+speaker with Siri.
+
+\subsection{Somfy}
+...
 
 % Incluir dispositivos que he estudiado, sistemas domóticos y alternativas a openHAB, asistentes de voz, etc
 % Ejemplo de comparación entre asistentes de voz: https://en.wikipedia.org/wiki/Virtual_assistant
