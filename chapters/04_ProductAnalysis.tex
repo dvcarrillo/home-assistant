@@ -120,14 +120,15 @@ OpenHAB's compatibility is somewhat limited when it comes to home automation dev
 protocols, such as ZigBee and Z-Wave, to get rid of specific gateways from other systems.\cite{openHABAddons} 
 
 \subsection{Home-Assistant.io}
-Home-Assistant.io, or simply Home Assistant, is a open source home automation platform running on Python 3. Based on a distribution
-called \textit{Hass.io}, it creates a secured local server in the computer where it is installed. It is accessible via HTTP and also includes
-a web user interface that will automate the process of discovering and configuring devices. In terms of functionality, it is very similar to 
-openHAB, although it might be a little simpler for some users, as it uses the YAML syntax for configuration, while openHAB has its own.
+Home-Assistant.io, or simply Home Assistant, is a open source home automation platform running on Python 3.\cite{homeAssistantio}
+Based on a distribution called \textit{Hass.io}, it creates a secured local server in the computer where it is installed. It is accessible via 
+HTTP and also includes a web user interface that will automate the process of discovering and configuring devices. In terms of 
+functionality, it is very similar to openHAB, although it might be a little simpler for some users, as it uses the YAML syntax for 
+configuration, while openHAB has its own.
 
 Its functionality is organized in \textit{Components}, the name that Home Assistant gives to any add-on, which will add a compatibility
 layer with a device, system or service. They are fully backed by the Home Assistant community and they are similar in number and type to
-what openHAB provides, but with very interesting additions, including Wink and Arduino. 
+what openHAB provides, but with very interesting additions, including Wink and Arduino.
 
 \begin{figure}
 	\centering
@@ -137,11 +138,11 @@ what openHAB provides, but with very interesting additions, including Wink and A
 \end{figure}
 
 \subsection{Jeedom}
-Jeedom is a open source, multi-protocol, autonomous and customizable home automation software. It is aimed for individuals and
-professionals, and provides custom support for both. They also sell what they call \textit{Boxes}, which are small computers with
-Jeedom pre-installed, although their software can be installed on any Linux system. Jeedom also provides mobile phone apps for Android
-and iOS, which connect to the Jeedom system by scanning a QR code. As in the previous platforms, they also provide the \textit{Jeedom Market},
-from where users can add new features to their system.
+Jeedom is a open source, multi-protocol, autonomous and customizable home automation software.\cite{jeedomDoc} It is aimed for 
+individuals and professionals, and provides custom support for both. They also sell what they call \textit{Boxes}, which are small 
+computers with Jeedom pre-installed, although their software can be installed on any Linux system. Jeedom also provides mobile phone
+apps for Android and iOS, which connect to the Jeedom system by scanning a QR code. As in the previous platforms, they also provide 
+the \textit{Jeedom Market}, from where users can add new features to their system.
 
 Also, there are different Jeedom versions, which are called \textit{Service packs}. There is the free and open source version, which
 includes the lowest number of functionalities. Then, the other versions can be purchased, although some of them come with their Boxes,
@@ -168,7 +169,7 @@ The table \ref{table:home-automation-comparison} represents a comparison of the 
 			Somfy                & Somfy                                                 & No                     & No                   & Hybrid                & None                                                & Mobile app                                                     & Somfy smart home devices and controls & Only for Somfy devices                                                                                          \\ \hline
 			openHAB              & The openHAB Community and the openHAB Foundation e.V. & Yes                    & Yes                  & Decentralized         & A computer with Internet connection                 & \begin{tabular}[c]{@{}c@{}}myopenHAB\\ openHABian\end{tabular} & None                                  & Compatible with devices and services from different makers, fully customizable                                  \\ \hline
 			Home Assistant       & The Home Assistant community                          & Yes                    & Yes                  & Decentralized         & A computer with Internet connection                 & \begin{tabular}[c]{@{}c@{}}iOS app\\ Hass.io\end{tabular}      & None                                  & Compatible with devices and services from different makers, fully customizable                                  \\ \hline
-			Jeedom               & Jeedom SAS                                            & Part.             & Part.           & Decentralized         & A computer with Internet connection or a Jeedom Box & Mobile app                                                     & Jeedom Boxes                          & Compatible with devices and services from different makers                                                      \\ \hline
+			Jeedom               & Jeedom SAS                                            & Partly             & Partly           & Decentralized         & A computer with Internet connection or a Jeedom Box & Mobile app                                                     & Jeedom Boxes                          & Compatible with devices and services from different makers                                                      \\ \hline
 		\end{tabular}}
 		\caption{Comparison between different home automation systems}
 		\label{table:home-automation-comparison}
@@ -176,8 +177,68 @@ The table \ref{table:home-automation-comparison} represents a comparison of the 
 \end{sidewaystable}
 
 \section{Voice Assistants}
-The objective of this section is to explore the main voice assistants available commercially, focusing mainly on the ones that also
-enable smart home control.
+The objective of this section is to explore the main voice assistants available commercially. As I explained previously, the services
+provided by virtual assistants, and in particular voice assistants, are very varied. One of them is smart home control, and many of
+the home-oriented voice assistants provide it. The focus on this section will be on them, the most closely related to my project.
+
+\subsection{Samsung Bixby}
+Bixby is the virtual assistant that Samsung includes in their phones, introduced in 2017, along with the introduction of the Samsung 
+Galaxy S8 phone. It is the evolution of their previous voice assistant, \textit{S Voice}.
+
+Bixby is divided in three parts: \textit{Bixby Voice}, which is the voice assistant, \textit{Bixby Vision}, an assistant that works through
+image recognition, and \textit{Bixby Home}, a dashboard that provides different information depending on the current 
+conditions.\cite{samsungBixby}
+
+Bixby has been widely criticized for his intrusiveness and its lack of utility in many situations. In addition, it is only available in English
+and Chinese at this moment. As for home automation, it is seamlessly integrated with Samsung SmartThings, making it possible to send
+basic commands to devices via voice.
+
+\subsection{Google Assistant}
+Google Assistant is the name of the virtual assistant developed by Google. It was introduced in 2016, and at this moment it is
+available for mobile phones (with Android and iOS operating systems), laptops, TVs, cars and smart watches. It is also integrated in 
+Google Home, their smart speaker.\cite{googleAssistant}
+
+The most remarkable feature of this assistant is its ability to engage in two-way conversations, thanks to a powerful artificial intelligence
+developed by Google, and Google Duplex, a new technology that Google is developing, which will allow it to have natural conversations,
+mimicking the human voice.
+
+Google Assistant is able to manage a wides range of smart home devices and in a very flexible way, thanks to its outstanding voice 
+recognition.
+
+\subsection{Amazon Alexa}
+Alexa is the virtual assistant by Amazon, and it is included by default in all their Echo devices (Amazon's smart speakers), Fire TVs
+(digital media players) and Fire tablets. It is also available for iOS and Android devices as a standalone application. Its capabilities are
+very similar to those of its competitors: music playback, making to-do lists, setting alarms, playing podcasts and audiobooks, providing 
+information, such as weather forecast and general knowledge, and of course voice interaction and home automation management.
+
+Alexa differentiates from the rest on its skill system. A \textit{skill} is a functionality developed by a third-party vendor that the user
+can install in the assistant in order to extend is capabilities. They can be, for instance, news services or little games. Amazon is 
+constantly encouraging the creation of new skills for Alexa between the developer community.\cite{amazonAlexa}
+
+\subsection{Apple Siri}
+Siri is the voice assistant developed by Apple, and the one who began the revolution of voice assistance in mobile phones. Introduced
+back in 2011 and included in the iPhone 4S, it has been present in all the iOS devices (iPhones, iPads and iPods) since then, and lately
+in the macOS devices (Macintosh computers) and in the Apple Watch as well.\cite{appleIOSSiri} Its range of functionalities is also 
+similar to its competitors, but with a slightly narrower range of possible interactions, which can make Siri feel a little less natural.
+
+In later iOS versions, Apple has implemented Siri suggestions, which use the artificial intelligence that Siri provides to suggest 
+applications to the user based in the current circumstances. Siri is able to adapt over time to the user's personal preferences by 
+customizing search results and other responses. In the latest version of iOS, iOS 11, Siri has a much more natural voice, that can
+also simulate different moods.
+
+\subsection{Mycroft}
+Mycroft is the name of a suite of software and hardware tools that use natural language processing and machine learning to provide
+an open source voice assistant.\cite{mycroftDocumentation} Unlike the other virtual assistant we have seen previously, Mycroft is
+fully open source and free. It has been undergoing heavy development since late 2017, but now it claims to be usable effectively 
+by developers and enthusiasts, making it the world's first fully open source AI voice assistant. But unfortunately, it is not yet usable
+by the general user.
+
+Mycroft is available for Linux-based operating systems and Android, but it is not ready yet for macOS and Windows, making it harder 
+to spread as quickly as other virtual assistants have done. However, to make up for this, they are selling their own smart speaker, 
+called Mark, currently in its second version.
+
+
+
 
 
 % Incluir dispositivos que he estudiado, sistemas domóticos y alternativas a openHAB, asistentes de voz, etc
