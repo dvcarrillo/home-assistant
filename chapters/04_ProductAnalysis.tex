@@ -33,7 +33,8 @@ systems, like Alexa or Apple HomeKit, that provide much more flexible home autom
 
 \subsection{LG SmartThinQ}
 LG SmartThinQ groups the range of Wi-Fi enabled home appliances made by the company LG, including refrigerators, dishwashers,
-vacuum cleaners or air purifiers, between others. As of September 2017, they were the most extensive range of devices of their kind.\cite{lgSmartThinq}
+vacuum cleaners or air purifiers, between others. As of September 2017, they were the most extensive range of devices of their 
+kind.\cite{lgSmartThinq}
 
 Unlike Philips Hue, SmartThinQ devices do not require a bridge to work. They can be controlled from the mobile phone and, in some
 cases, like in the refrigerators, they include a touchscreen to interact with the device. However, LG does not provide any extra device
@@ -113,7 +114,7 @@ to automation rules.
 In its most recent version, openHAB 2, it has implemented new user interfaces that automate many processes, so it is almost unnecessary
 to write a single line of code, making the system more attractive to all types of users. OpenHAB needs to be installed in a computer that 
 will act as a server in the local network, making the system accessible via HTTP. It also offers more connectivity options that I will explore 
-in the following chapters.
+in the following chapters. The architecture, in this case, is decentralized, as there may be multiple controllers, including openHAB itself.
 
 OpenHAB's compatibility is somewhat limited when it comes to home automation devices, but it supports Apple HomeKit and common 
 protocols, such as ZigBee and Z-Wave, to get rid of specific gateways from other systems.\cite{openHABAddons} 
@@ -130,7 +131,7 @@ what openHAB provides, but with very interesting additions, including Wink and A
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.9\textwidth]{images/Chapter_04/home-assistant-configuration.png}
+	\includegraphics[width=0.95\textwidth]{images/Chapter_04/home-assistant-configuration.png}
 	\caption{Home-Assistant.io web user interface}
 	\label{fig:home-assistant-configuration}
 \end{figure}
@@ -151,25 +152,32 @@ experience}, could annoy some users and make them lean towards other platforms.
 \\~\\
 
 It seems difficult to directly compare these home automation systems, but all of them share characteristics that we can contrast. 
-The table %referenciar
-represents a comparison of the features that I consider most important
+The table \ref{table:home-automation-comparison} represents a comparison of the features that I consider most important.
 
-\begin{table}
+\begin{sidewaystable}[]
 	\begin{center}
-	\begin{tabular}{ | l | c | r | }
-		\hline
-		1 & 2 & 3 \\ \hline
-		4 & 5 & 6 \\ \hline
-		7 & 8 & 9 \\
-		\hline
-	\end{tabular}
-	\caption{hello world!}
+		\resizebox{\textwidth}{!}{
+		\begin{tabular}{|p{0.1\linewidth}|p{0.15\linewidth}|p{0.05\linewidth}|p{0.05\linewidth}|p{0.15\linewidth}|p{0.15\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.39\linewidth}|}
+			\hline
+			\textbf{System name} & \textbf{Developer}                                    & \textbf{Free} & \textbf{Open source} & \textbf{Architecture} & \textbf{Requirements}                               & \textbf{Extra software}                                        & \textbf{Extra hardware}               & \textbf{Compatibility}                                                                                          \\ \hline
+			Hue                  & Philips                                               & No                     & No                   & Centralized           & Hue Smart Hub                                       & Mobile app                                                     & Hue devices                           & \begin{tabular}[c]{@{}c@{}}Only for Hue devices\\ Integrable in Alexa, Google Assistant, HomeKit\end{tabular}   \\ \hline
+			SmartThinQ           & LG                                                    & No                     & No                   & Hybrid                & None                                                & Mobile app                                                     & SmartThinQ devices                    & \begin{tabular}[c]{@{}c@{}}Only for SmartThinQ devices \\ Integrable in Alexa and Google Assistant\end{tabular} \\ \hline
+			SmartThings          & Samsung                                               & No                     & No                   & Centralized           & Smart Home Hub                                      & Mobile app                                                     & Samsung smart home devices            & \begin{tabular}[c]{@{}c@{}}Compatible with devices from different makers\\ Integrated in Bixby\end{tabular}     \\ \hline
+			Assistant            & Google                                                & No                     & No                   & Centralized           & A device with Google Assistant                      & Google Home app                                                & Google Home smart speaker             & Huge compatibility with devices from different makers                                                           \\ \hline
+			HomeKit              & Apple                                                 & No                     & No                   & Decentralized         & An Apple device                                     & Home app                                                       & Apple HomePod                         & \begin{tabular}[c]{@{}c@{}}Compatible with devices from different makers\\ Integrated in Siri\end{tabular}      \\ \hline
+			Somfy                & Somfy                                                 & No                     & No                   & Hybrid                & None                                                & Mobile app                                                     & Somfy smart home devices and controls & Only for Somfy devices                                                                                          \\ \hline
+			openHAB              & The openHAB Community and the openHAB Foundation e.V. & Yes                    & Yes                  & Decentralized         & A computer with Internet connection                 & \begin{tabular}[c]{@{}c@{}}myopenHAB\\ openHABian\end{tabular} & None                                  & Compatible with devices and services from different makers, fully customizable                                  \\ \hline
+			Home Assistant       & The Home Assistant community                          & Yes                    & Yes                  & Decentralized         & A computer with Internet connection                 & \begin{tabular}[c]{@{}c@{}}iOS app\\ Hass.io\end{tabular}      & None                                  & Compatible with devices and services from different makers, fully customizable                                  \\ \hline
+			Jeedom               & Jeedom SAS                                            & Part.             & Part.           & Decentralized         & A computer with Internet connection or a Jeedom Box & Mobile app                                                     & Jeedom Boxes                          & Compatible with devices and services from different makers                                                      \\ \hline
+		\end{tabular}}
+		\caption{Comparison between different home automation systems}
+		\label{table:home-automation-comparison}
 	\end{center}
-\end{table}
-
-
+\end{sidewaystable}
 
 \section{Voice Assistants}
+The objective of this section is to explore the main voice assistants available commercially, focusing mainly on the ones that also
+enable smart home control.
 
 
 % Incluir dispositivos que he estudiado, sistemas domóticos y alternativas a openHAB, asistentes de voz, etc
