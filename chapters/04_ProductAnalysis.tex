@@ -14,8 +14,8 @@ good home automation system.
 
 \subsection{Philips Hue}
 Philips Hue is a personal wireless lighting system aimed at the smart home. In combines LED light bulbs, LED strips and other 
-lightning devices, and sensors that can be configured in their mobile app, so they can modify the home lightning based on a set of
-rules. There is a wide range of products, including color and only white lights, so users can build a pretty customizable lightning
+lighting devices, and sensors that can be configured in their mobile app, so they can modify the home lighting based on a set of
+rules. There is a wide range of products, including color and only white lights, so users can build a pretty customizable lighting
 experience.\cite{philipsHueMeethue}
 
 The system requires a bridge connected to the Internet (called Philips Hue Smart Hub) in order to work. This is because the Hue
@@ -96,7 +96,7 @@ and have created their own home automation technologies, such as \textit{Radio T
 Network (SDN)}.\cite{somfyOurStory}
 
 Their range of products goes from control devices (as hand-held remotes, mobile applications and wireless switches) and sensors (sunlight,
-temperature, wind) to blinds, lightning systems and other smart home utilities. Unfortunately, the control devices only work with Somfy 
+temperature, wind) to blinds, lighting systems and other smart home utilities. Unfortunately, the control devices only work with Somfy 
 devices. The system follows a hybrid architecture, where each device is a controller, but there can also be extra controllers, like the 
 hand-held remotes.
 \\~\\
@@ -176,6 +176,247 @@ The table \ref{table:home-automation-comparison} represents a comparison of the 
 	\end{center}
 \end{sidewaystable}
 
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+\section{Home Automation Devices and Related Services}
+In this section I will explore different devices, services and protocols that may be suitable for the outcome of this project.
+The section presents a brief description of each device and a comparison between the same type of devices. These devices are
+usually handled in the same way in open source home automation systems. For example, in openHAB they are called bindings,
+and each of them is installable over the base system. As the main idea is to use open source technologies in this project, I will focus
+on compatible devices, and analyze them based on their integration with openHAB. Therefore, I will talk about bindings, which
+is the abstraction layer that openHAB employs for devices, services and protocols.
+
+\subsection{Alarms}
+
+\subsubsection{DSC PowerSeries Alarm System}
+The DSC PowerSeries Alarm System is a popular do-it-yourself home security system, which can be monitored and controlled remotely
+through a standard web-browser or mobile device.\\~\\
+Pros:
+\begin{itemize}
+	\item Supporting a DIY Alarm System is acceptable due to the range of users we expect to cover
+	\item Communication via API (OpenHAB binding)
+\end{itemize}
+Cons:
+\begin{itemize}
+	\item Availability of this product outside USA 
+\end{itemize}
+
+\subsection{Amazon Dash Button}
+The Amazon Dash Button is a cheap and small Wi-Fi connected device to order products from Amazon with the simple press of
+a button. This Binding allows to integrate Dash Buttons into the controller.\\~\\
+What to consider:
+\begin{itemize}
+	\item Privacy concern: The Dash Button will try to contact the Amazon servers every time the button is pressed. Details about 
+	this can be read in this section of the documentation.
+	\item The Binding uses Pcap4J in order to capture ARP and BOOTP requests send by the Amazon Dash Button. Buttons will 
+	hence only be usable within the same network as your openHAB instance.
+\end{itemize}
+Pros:
+\begin{itemize}
+	\item Usability
+	\item Communication via API (OpenHAB binding)
+	\item Easy to configure
+\end{itemize}
+Cons:
+\begin{itemize}
+	\item Not open source
+	\item Manual device addition
+\end{itemize}
+
+\subsection{AV Receivers}
+
+\subsubsection{Denon}
+The openHAB Denon Binding allows interaction with Denon AV receivers.\\~\\
+Pros:
+\begin{itemize}
+	\item Plenty of available settings
+	\item Communication via API (OpenHAB binding)
+\end{itemize}
+Cons:
+\begin{itemize}
+	\item Not a common device
+	\item Manual device addition
+\end{itemize}
+
+\subsubsection{Marantz}
+Denon binding also seem to work with Marantz devices.
+
+\subsubsection{Onkyo}
+This binding integrates the Onkyo AV receivers. Binding should be compatible with Onkyo 
+AV receivers which support ISCP (Integra Serial Control Protocol) over Ethernet (eISCP).\\~\\
+Pros:
+\begin{itemize}
+	\item Communication via API (OpenHAB binding)
+	\item Usually cheaper than Denon devices
+\end{itemize}
+Cons:
+\begin{itemize}
+	\item Quite limited product support
+\end{itemize}
+
+\subsection{Digital Media Players}
+
+\subsubsection{Google Chromecast}
+The binding integrates Google Chromecast streaming devices.
+It not only acts as a typical binding, but also registers each Chromecast device as an audio sink that can be used for playback.
+
+The binding currently supports the “classic” Chromecast that is an HDMI dongle as well as the Chromecast Audio, which only does
+ audio streaming and offers a headphone jack.
+
+Chromecast devices are discovered on the network using UPnP. No authentication is required for accessing the devices on the network.
+They can also be manually added.\\~\\
+Pros:
+\begin{itemize}
+	\item Common device
+	\item Automatic discovery
+	\item Communication via API (OpenHAB binding)
+\end{itemize}
+Cons:
+\begin{itemize}
+	\item Not many actions can be performed
+	\item Current library might be problematic because of how it works
+\end{itemize}
+
+\subsubsection{Kodi}
+Kodi is a free and open source software media center for playing videos, music, pictures, games, and more. Kodi runs on Linux, OS X,
+BSD, Windows, iOS, and Android. It allows users to play and view most videos, music, podcasts, and other digital media files from local
+and network storage media and the internet.
+The Kodi Binding integrated Kodi media center support with openHAB, allowing both controlling the player as well as retrieving player
+status data like the currently played movie title.\\~\\
+What to consider:
+\begin{itemize}
+	\item Needs some initial configuration in Kodi.
+\end{itemize}
+Pros:
+\begin{itemize}
+	\item Auto-discovery feature
+	\item Fully open source 
+	\item Extremely cheap and useful solution, capable of running in almost every device
+	\item Communication via API (OpenHAB binding)
+\end{itemize}
+
+\subsubsection{Plex}
+This binding supports multiple clients connected to a Plex Media Server. With this binding, it’s possible to dim the lights when a video
+starts playing, for example.
+Most changes are pushed to the binding using web sockets. Polling (and the corresponding refresh interval) is only applicable to the 
+online/offline status of clients.\\~\\
+What to consider:
+\begin{itemize}
+	\item It is necessary to configure the username and password (or to use the Plex token) in order to make it work.
+\end{itemize}
+Pros:
+\begin{itemize}
+	\item Plex is a free and easy to use media centre, available for many platforms
+	\item Wide control of the Plex Media Server from OpenHAB
+	\item Communication via API (OpenHAB binding)
+\end{itemize}
+Cons:
+\begin{itemize}
+	\item Plex is not fully open source
+\end{itemize}
+	
+\subsection{Garage Door Control}
+
+\subsubsection{Chamberlain MyQ}
+Chamberlain MyQ system allows you to connect the garage door to the internet to be controlled from anywhere using a smartphone. Using
+this API, The Chamberlain MyQ Binding can get the status of the garage door opener and send commands to open or close it.\\~\\
+Pros:
+\begin{itemize}
+	\item Easy to control, only needs the user and password to start working
+	\item Communication via API (OpenHAB binding)
+	\item Availability in Europe
+\end{itemize}
+Cons:
+\begin{itemize}
+	\item High price (Starting at EUR 200, Amazon Spain price)
+\end{itemize}
+
+\subsection{Garden Care}
+
+\subsubsection{Gardena}
+This binding allows to integrate, view and control Gardena Smart Home devices in the openHAB environment.\\~\\
+Pros:
+\begin{itemize}
+	\item There are not many smart solutions for garden care, but Gardena can fulfil any needs
+	\item Communication via API (OpenHAB binding)
+\end{itemize}
+Cons:
+\begin{itemize}
+	\item Needs an account to discover the devices, though the discovery is fully automatic once the account is set
+\end{itemize}
+
+\subsection{Lighting}
+
+\subsubsection{Philips Hue Lighting System}
+This binding integrates the Philips Hue Lighting system. The integration happens through the Hue bridge, which
+acts as an IP gateway to the ZigBee devices.\\~\\
+What to consider:
+\begin{itemize}
+	\item The Hue Smart Bridge is required.
+	\item Almost all available Hue devices are supported by this binding. This includes not only the “friends of Hue”,
+	but also products like the LivingWhites adapter.
+	\item Devices need to be registered with the Hue bridge before it is possible for this binding to use them.
+	\item The Hue bridge is discovered through UPnP in the local network. Once it is added as a Thing, its authentication
+	button (in the middle) needs to be pressed in order to authorize the binding to access it. Once the binding is authorized, 
+	it automatically reads all devices that are set up on the Hue bridge and puts them in the Inbox
+\end{itemize}
+Pros:
+\begin{itemize}
+	\item Philps Hue is a beautiful and easy way to take advantage of home automation and smart devices. Its devices are very
+	common and useful, being the final user its main target
+	\item Compatibility with many other systems (Alexa, Apple HomeKit, etc.)
+	\item Communication via API (OpenHAB binding)
+\end{itemize}
+Cons:
+\begin{itemize}
+	\item Need an extra device (the Hue Smart Bridge) to communicate with the rest of them
+\end{itemize}
+
+\subsubsection{LIFX LED Lightning}
+This binding integrates the LIFX LED Lights. All LIFX lights are directly connected to the WLAN and the binding communicates with
+them over a UDP protocol.\\~\\
+What to consider:
+\begin{itemize}
+	\item The binding is able to auto-discover all lights in a network over the LIFX UDP protocol. Therefore, all lights must be turned on
+\end{itemize}
+Pros:
+\begin{itemize}
+	\item LIFX is one of the most popular alternatives to Philips Hue
+	\item No need of any extra device
+	\item Communication via API (OpenHAB binding)
+\end{itemize}
+Cons:
+\begin{itemize}
+	\item More expensive that Philips Hue (EUR 65 vs. EUR 45, Amazon Spain prices)
+	\item Less compatibility than Philips Hue
+\end{itemize}
+
+
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+
 \section{Voice Assistants}
 The objective of this section is to explore the main voice assistants available commercially. As I explained previously, the services
 provided by virtual assistants, and in particular voice assistants, are very varied. One of them is smart home control, and many of
@@ -205,16 +446,6 @@ mimicking the human voice.
 Google Assistant is able to manage a wides range of smart home devices and in a very flexible way, thanks to its outstanding voice 
 recognition.
 
-\subsection{Amazon Alexa}
-Alexa is the virtual assistant by Amazon, and it is included by default in all their Echo devices (Amazon's smart speakers), Fire TVs
-(digital media players) and Fire tablets. It is also available for iOS and Android devices as a standalone application. Its capabilities are
-very similar to those of its competitors: music playback, making to-do lists, setting alarms, playing podcasts and audiobooks, providing 
-information, such as weather forecast and general knowledge, and of course voice interaction and home automation management.
-
-Alexa differentiates from the rest on its skill system. A \textit{skill} is a functionality developed by a third-party vendor that the user
-can install in the assistant in order to extend is capabilities. They can be, for instance, news services or little games. Amazon is 
-constantly encouraging the creation of new skills for Alexa between the developer community.\cite{amazonAlexa}
-
 \subsection{Apple Siri}
 Siri is the voice assistant developed by Apple, and the one who began the revolution of voice assistance in mobile phones. Introduced
 back in 2011 and included in the iPhone 4S, it has been present in all the iOS devices (iPhones, iPads and iPods) since then, and lately
@@ -226,19 +457,55 @@ applications to the user based in the current circumstances. Siri is able to ada
 customizing search results and other responses. In the latest version of iOS, iOS 11, Siri has a much more natural voice, that can
 also simulate different moods.
 
+\subsection{Amazon Alexa}
+Alexa is the virtual assistant by Amazon, and it is included by default in all their Echo devices (Amazon's smart speakers), Fire TVs
+(digital media players) and Fire tablets. It is also available for iOS and Android devices as a standalone application. Its capabilities are
+very similar to those of its competitors: music playback, making to-do lists, setting alarms, playing podcasts and audiobooks, providing 
+information, such as weather forecast and general knowledge, and of course voice interaction and home automation management.
+This means that, as in the previous cases, there is also a home automation system underlying the assistant in Alexa.
+
+Alexa differentiates from the rest on its skill system. A \textit{skill} is a functionality developed by a third-party vendor that the user
+can install in the assistant in order to extend is capabilities. They can be, for instance, news services or little games. Amazon is 
+constantly encouraging the creation of new skills for Alexa between the developer community.\cite{amazonAlexa}
+
 \subsection{Mycroft}
 Mycroft is the name of a suite of software and hardware tools that use natural language processing and machine learning to provide
 an open source voice assistant.\cite{mycroftDocumentation} Unlike the other virtual assistant we have seen previously, Mycroft is
 fully open source and free. It has been undergoing heavy development since late 2017, but now it claims to be usable effectively 
 by developers and enthusiasts, making it the world's first fully open source AI voice assistant. But unfortunately, it is not yet usable
-by the general user.
+by the general user, as it still requires technical skills.
 
 Mycroft is available for Linux-based operating systems and Android, but it is not ready yet for macOS and Windows, making it harder 
 to spread as quickly as other virtual assistants have done. However, to make up for this, they are selling their own smart speaker, 
 called Mark, currently in its second version.
 
+Mycroft is modular, which makes the system easily customizable, and uses a skill system similar to Amazon Alexa. It comes with a 
+number of default skills, such as setting an alarm, providing the weather, or telling the time. The other skills are also installable via 
+voice commands, based on a list of community-contributed skills. The number of additional skills is not as high as in Alexa, but it
+is constantly growing, and Mycroft encourages its users to contribute to the project.
 
+\bigskip
+The table \ref{table:voice-assistants-comparison} shows a comparison between the most important aspects of the previous voice
+assistants. In this table, note that \textit{Smart Home} means having Home Automation capabilities, and always on means that the
+user is able to trigger the assistant via the voice. For example, Siri is able to react to the sentence \textit{Hey Siri!}, even if the
+device is with the screen off.
 
+\begin{table}[]
+	\begin{center}
+		\resizebox{\textwidth}{!}{
+		\begin{tabular}{|l|l|p{0.08\linewidth}|p{0.09\linewidth}|p{0.18\linewidth}|l|l|p{0.1\linewidth}|}
+			\hline
+			\textbf{Name} & \textbf{Developer}                                                          & \textbf{Free} & \textbf{Open source} & \textbf{Home Automation}                                    & \textbf{Mobile app}                                            & \textbf{Extra devices}                                                              & \textbf{Always on} \\ \hline
+			Bixby         & Samsung                                                                     & No            & No                   & \begin{tabular}[l]{@{}l@{}}Yes\\- SmartThings\end{tabular} & \begin{tabular}[l]{@{}l@{}}Yes\\ Samsung phones\end{tabular} & No                                                                                  & Yes                \\ \hline
+			Assistant     & Google                                                                      & No            & No                   & Yes                                                         & \begin{tabular}[l]{@{}l@{}}Yes\\ Android\end{tabular}        & Google Home                                                                         & Yes                \\ \hline
+			Siri          & Apple                                                                       & No            & No                   & \begin{tabular}[l]{@{}l@{}}Yes\\- HomeKit\end{tabular}     & \begin{tabular}[l]{@{}l@{}}Yes\\ iOS\end{tabular}            & HomePod                                                                             & Yes                \\ \hline
+			Alexa         & Amazon                                                                      & No            & No                   & Yes                                                         & \begin{tabular}[l]{@{}l@{}}Yes\\ iOS, Android\end{tabular}   & \begin{tabular}[l]{@{}l@{}}Echo\\ Echo Dot\\ Echo Dot Kids\\ Echo Plus\end{tabular} & Yes                \\ \hline
+			Mycroft       & \begin{tabular}[l]{@{}l@{}}Mycroft and the\\ Mycroft Community\end{tabular} & Yes           & Yes                  & Yes                                                         & \begin{tabular}[l]{@{}l@{}}Yes\\ Android\end{tabular}        & \begin{tabular}[l]{@{}l@{}}Mark II\\ Mark I\end{tabular}                            & Yes                \\ \hline
+		\end{tabular}}
+	\caption{Comparison between different voice assistants}
+	\label{table:voice-assistants-comparison}
+	\end{center}
+\end{table}
 
 
 % Incluir dispositivos que he estudiado, sistemas domóticos y alternativas a openHAB, asistentes de voz, etc
