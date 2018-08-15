@@ -161,14 +161,14 @@ The table \ref{table:home-automation-comparison} represents a comparison of the 
 		\begin{tabular}{|p{0.1\linewidth}|p{0.15\linewidth}|p{0.05\linewidth}|p{0.05\linewidth}|p{0.15\linewidth}|p{0.15\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.39\linewidth}|}
 			\hline
 			\textbf{System name} & \textbf{Developer}                                    & \textbf{Free} & \textbf{Open source} & \textbf{Architecture} & \textbf{Requirements}                               & \textbf{Extra software}                                        & \textbf{Extra hardware}               & \textbf{Compatibility}                                                                                          \\ \hline
-			Hue                  & Philips                                               & No                     & No                   & Centralized           & Hue Smart Hub                                       & Mobile app                                                     & Hue devices                           & \begin{tabular}[c]{@{}c@{}}Only for Hue devices\\ Integrable in Alexa, Google Assistant, HomeKit\end{tabular}   \\ \hline
-			SmartThinQ           & LG                                                    & No                     & No                   & Hybrid                & None                                                & Mobile app                                                     & SmartThinQ devices                    & \begin{tabular}[c]{@{}c@{}}Only for SmartThinQ devices \\ Integrable in Alexa and Google Assistant\end{tabular} \\ \hline
-			SmartThings          & Samsung                                               & No                     & No                   & Centralized           & Smart Home Hub                                      & Mobile app                                                     & Samsung smart home devices            & \begin{tabular}[c]{@{}c@{}}Compatible with devices from different makers\\ Integrated in Bixby\end{tabular}     \\ \hline
+			Hue                  & Philips                                               & No                     & No                   & Centralized           & Hue Smart Hub                                       & Mobile app                                                     & Hue devices                           & \begin{tabular}[l]{@{}l@{}}Only for Hue devices\\ Integrable in Alexa, Google Assistant, HomeKit\end{tabular}   \\ \hline
+			SmartThinQ           & LG                                                    & No                     & No                   & Hybrid                & None                                                & Mobile app                                                     & SmartThinQ devices                    & \begin{tabular}[l]{@{}l@{}}Only for SmartThinQ devices \\ Integrable in Alexa and Google Assistant\end{tabular} \\ \hline
+			SmartThings          & Samsung                                               & No                     & No                   & Centralized           & Smart Home Hub                                      & Mobile app                                                     & Samsung smart home devices            & \begin{tabular}[l]{@{}l@{}}Compatible with devices from different makers\\ Integrated in Bixby\end{tabular}     \\ \hline
 			Assistant            & Google                                                & No                     & No                   & Centralized           & A device with Google Assistant                      & Google Home app                                                & Google Home smart speaker             & Huge compatibility with devices from different makers                                                           \\ \hline
-			HomeKit              & Apple                                                 & No                     & No                   & Decentralized         & An Apple device                                     & Home app                                                       & Apple HomePod                         & \begin{tabular}[c]{@{}c@{}}Compatible with devices from different makers\\ Integrated in Siri\end{tabular}      \\ \hline
+			HomeKit              & Apple                                                 & No                     & No                   & Decentralized         & An Apple device                                     & Home app                                                       & Apple HomePod                         & \begin{tabular}[l]{@{}l@{}}Compatible with devices from different makers\\ Integrated in Siri\end{tabular}      \\ \hline
 			Somfy                & Somfy                                                 & No                     & No                   & Hybrid                & None                                                & Mobile app                                                     & Somfy smart home devices and controls & Only for Somfy devices                                                                                          \\ \hline
-			openHAB              & The openHAB Community and the openHAB Foundation e.V. & Yes                    & Yes                  & Decentralized         & A computer with Internet connection                 & \begin{tabular}[c]{@{}c@{}}myopenHAB\\ openHABian\end{tabular} & None                                  & Compatible with devices and services from different makers, fully customizable                                  \\ \hline
-			Home Assistant       & The Home Assistant community                          & Yes                    & Yes                  & Decentralized         & A computer with Internet connection                 & \begin{tabular}[c]{@{}c@{}}iOS app\\ Hass.io\end{tabular}      & None                                  & Compatible with devices and services from different makers, fully customizable                                  \\ \hline
+			openHAB              & The openHAB Community and the openHAB Foundation e.V. & Yes                    & Yes                  & Decentralized         & A computer with Internet connection                 & \begin{tabular}[l]{@{}l@{}}myopenHAB\\ openHABian\end{tabular} & None                                  & Compatible with devices and services from different makers, fully customizable                                  \\ \hline
+			Home Assistant       & The Home Assistant community                          & Yes                    & Yes                  & Decentralized         & A computer with Internet connection                 & \begin{tabular}[l]{@{}l@{}}iOS app\\ Hass.io\end{tabular}      & None                                  & Compatible with devices and services from different makers, fully customizable                                  \\ \hline
 			Jeedom               & Jeedom SAS                                            & Partly             & Partly           & Decentralized         & A computer with Internet connection or a Jeedom Box & Mobile app                                                     & Jeedom Boxes                          & Compatible with devices and services from different makers                                                      \\ \hline
 		\end{tabular}}
 		\caption{Comparison between different home automation systems}
@@ -176,26 +176,14 @@ The table \ref{table:home-automation-comparison} represents a comparison of the 
 	\end{center}
 \end{sidewaystable}
 
-%
-%
-%
-%
-%
-%
-%
-%
-%
-%
-%
-%
-%
+\bigskip
 \section{Home Automation Devices and Related Services}
 In this section I will explore different devices, services and protocols that may be suitable for the outcome of this project.
 The section presents a brief description of each device and a comparison between the same type of devices. These devices are
-usually handled in the same way in open source home automation systems. For example, in openHAB they are called bindings,
-and each of them is installable over the base system. As the main idea is to use open source technologies in this project, I will focus
-on compatible devices, and analyze them based on their integration with openHAB. Therefore, I will talk about bindings, which
-is the abstraction layer that openHAB employs for devices, services and protocols.
+usually handled in the same way in open source home automation systems. For example, in openHAB they are called 
+bindings\cite{openHABDocs}, and each of them is installable over the base system. As the main idea is to use open source technologies 
+in this project, I will focus on compatible devices, and analyze them based on their integration with openHAB. Therefore, I will talk about 
+bindings, which is the abstraction layer that openHAB employs for devices, services and protocols.
 
 \subsection{Alarms}
 
@@ -616,21 +604,89 @@ Pros:
 	\item Communication via API (OpenHAB binding)
 \end{itemize}
 
+\subsection{Xiaomi Mi Smart Home}
 
-%
-%
-%
-%
-%
-%
-%
-%
-%
-%
-%
-%
-%
+This binding allows openHAB to communicate with the Xiaomi Smart Home Suite. This includes the following devices:
+\begin{itemize}
+	\item Xiaomi Smart Gateway v2 (with radio support)
+	\item Xiaomi Smart Temperature and Humidity Sensor (round one)
+	\item Xiaomi Smart Door/Window Sensor (round one)
+	\item Xiaomi Wireless Switch (round one)
+	\item Xiaomi Motion Sensor / IR Human Body sensor
+	\item Xiaomi Smart Plug
+	\item Xiaomi Smart Magic Cube
+	\item Xiaomi Aqara ZigBee Wired Wall Switch (1 and 2 buttons)
+	\item Xiaomi Aqara ZigBee Wireless Wall Switch (1 and 2 buttons)
+	\item Xiaomi Aqara Smart Curtain
+	\item Xiaomi Aqara Water Leak Sensor
+	\item Xiaomi Aqara Wireless Switch (square one)
+	\item Xiaomi Aqara Temperature, Humidity and Pressure Sensor (square one)
+	\item Xiaomi Aqara Door/Window Sensor (square one)
+	\item Xiaomi Aqara Motion Sensor (with light intensity support)
+	\item Xiaomi Mijia Honeywell Gas Alarm Detector
+	\item Xiaomi Mijia Honeywell Fire Alarm Detector
+\end{itemize}
+What to consider:
+\begin{itemize}
+	\item The MiHome app is necessary in order to connect the Gateway
+\end{itemize}
+Pros:
+\begin{itemize}
+	\item Xiaomi is an extremely affordable brand that offers many devices for Home Automation. 
+	\item Easy to install and configure
+	\item Communication via API (OpenHAB binding)
+\end{itemize}
+Cons:
+\begin{itemize}
+	\item Needs extra hardware (Smart Gateway) and software (MiHome app)
+\end{itemize}
 
+\subsection{Other devices and services}
+
+\subsubsection{Logitech Harmony  Hub}
+The Harmony Hub binding is used to enable communication between openHAB2 and multiple Logitech Harmony Hub devices. Logitech Smart
+Hub devices can control other devices like Apple TV, Amazon Alexa, or Sonos devices. The Binding works as a bridge between the Harmony 
+Hub and the devices connected to it.\\~\\
+Pros:
+\begin{itemize}
+	\item Might be beneficial to consider it given the fact that there could be devices (with proprietary communication protocols) that 
+	we wouldn’t be able to support, like Apple TV
+	\item Communication via API (OpenHAB binding)
+\end{itemize}
+Cons:
+\begin{itemize}
+	\item Limited API
+\end{itemize}
+
+\subsubsection{Epson Projectors}
+This binding is compatible with Epson projectors which support ESC/VP21 protocol over serial port.\\~\\
+Pros:
+\begin{itemize}
+	\item Communication via API (OpenHAB binding)
+\end{itemize}
+Cons:
+\begin{itemize}
+	\item Seems that only business-oriented projectors are compatible with this binding
+\end{itemize}
+
+\subsubsection{MQTT}
+This binding allows openHAB to act as an MQTT (MQ Telemetry Transport) client, so that openHAB items can send and receive MQTT 
+messages from or to an MQTT broker.\\~\\
+What to consider:
+\begin{itemize}
+	\item Implementing MQTT makes us able to use OwnTracks, a location service that uses MQTT that focuses on privacy.
+\end{itemize}
+
+\subsubsection{NTP}
+The NTP binding is used for displaying the local date and time based update from an NTP server. Discovery is used to place one default 
+tem in the inbox as a convenient way to add a Thing for the local time.
+
+\subsubsection{Weather Binding}
+The Weather binding collects current and forecast weather data from different providers with a free weather API. You can also display
+weather data with highly customizable HTML layouts and icons. It is also possible to install the WeatherUnderground and YahooWeather
+bindings.
+
+\bigskip
 \section{Voice Assistants}
 The objective of this section is to explore the main voice assistants available commercially. As I explained previously, the services
 provided by virtual assistants, and in particular voice assistants, are very varied. One of them is smart home control, and many of
