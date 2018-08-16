@@ -71,3 +71,17 @@ before.\cite{eclipseSmartHomeDocs} The last part is the core of openHAB 2, which
 As the diagram in the figure \ref{fig:openhab-architecture} indicates, we can add to this system extensions from Eclipse SmartHome and
 add-ons from the first and second version of openHAB.
 
+\section{Conceptual Elements}
+As Eclipse SmartHome is the logic part of OpenHAB 2, all the elements I am listing are part of it. Eclipse SmartHome strictly differentiates
+between the physical view and the functional view of the system. While the first one is required for setup and configuration, the functional
+part covers the information that matter to applications, like UIs and automation logic.
+
+That said, I will explore the different elements that Eclipse SmartHome considers in this section. I will explain each one in detail below.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.6\textwidth]{images/Chapter_05/openhab-concepts-basics.png}
+	\caption{A simplification of the concepts of Thing and Item}
+	\label{fig:openhab-concepts-basics}
+\end{figure}
+
