@@ -80,7 +80,7 @@ between the physical view and the functional view of the system. The physical vi
 on the system, the connections between them (e.g. wires, Netatmo devices, WiFi hardware) and other physical aspects of the system.
 The functional view focuses on how information about the devices, connections, and so on, is represented in user interfaces, focusing
 on how rules effect representations of physical devices in software. The functional view focuses on how an action in a user interface
-affects the software associated with the physical device it represents.
+affects the software associated with the physical device it represents.\cite{openHABDocs}
 
 That said, I will explore the different elements that Eclipse SmartHome considers in this section. The greatest difference that we can find
 related to devices, is between \textit{Things} and \textit{Items}. Generally speaking, Things represent physical systems that can be added
@@ -224,20 +224,198 @@ Channels can be linked to multiple Items and Items can be linked to multiple Cha
 Thing Discovery is the process that the system makes in order to show the devices connected in your network. Many technologies, 
 devices and systems can be discovered automatically or browsed through an API.
 
-In Eclipse SmartHome bindings implement \textit{Discovery Services} for things, which provide \textit{Discovery Results}. All Discovery 
+In Eclipse SmartHome bindings implement \textit{Discovery Services} for Things, which provide \textit{Discovery Results}. All Discovery 
 Results are regarded as suggestions to the user and are put into the \textit{Inbox}.
 
 \subsubsection{Inbox}
-he inbox holds a list of all discovered things from all active discovery services. A discovery result represents a discovered thing of a 
-specific thing type, that could be instantiated as a thing. The result usually contains properties that identify the discovered things 
-further like IP address or a serial number. Each discovery result also has a timestamp when it was added to or updated in the inbox 
-and it may also contain a time to live, indicating the time after which it is be automatically removed from the inbox.
+The Inbox holds a list of all discovered Things from all active discovery services. A discovery result represents a discovered Thing of a 
+specific Thing type, that could be instantiated as a Thing. The result usually contains properties that identify the discovered Things 
+further like IP address or a serial number. Each discovery result also has a timestamp when it was added to or updated in the Inbox 
+and it may also contain a time to live, indicating the time after which it is be automatically removed from the Inbox.
 
-Discovery results can either be ignored or approved, where in the latter case a thing is created for them and they become available in 
-the application. If an entry is ignored, it will be hidden in the inbox without creating a thing for it.
+Discovery results can either be ignored or approved, where in the latter case a Thing is created for them and they become available in 
+the application. If an entry is ignored, it will be hidden in the Inbox without creating a Thing for it.
 
-There are options for automating the approval or ignorance of devices.
+Eclipse SmartHome offers a service that is capable of automatically ignore discovery results on the Inbox, whenever a Thing is created
+manually, that represents the same Thing, as the respective discovery result would create. This Thing would either have the same Thing
+UID or the value of its representation property is equal to the representation property's value in the discovery result. The service is
+enabled by default.
 
+\subsection{Audio and Video}
+Audio and voice features are an important aspect of any smart home solution as it is a very natural way to interact with the user.
 
+Eclipse SmartHome comes with a very modular architecture that makes it possible in plenty of situations. At its core, there is the notion
+of an \textit{audio stream}. Audio streams are provided by \textit{audio sources} and consumed by \textit{audio sinks}.
 
+\begin{itemize}
+	\item \textbf{Audio Streams} are essentially a byte stream with a given audio format.
+	\item \textbf{Audio Formats} define the container (e.g. WAV), encoding, bit rate, sample frequency and depth and the bit order (little endian
+	or big endian).
+	\item \textbf{Audio Sources} are services capable of producing audio streams, which are able to support different formats and provide a
+	stream in a requested format upon request. Typical audio sources are microphones, and a continuous stream is expected from them.
+	\item \textbf{Audio Sinks} are services that accept audio streams of certain formats. Typically, these are expected to play the audio stream, 
+	for example, a speaker.
+	\item \textbf{Text-to-Speech (TTS)} services are similar to audio sources with respect to the ability to create audio streams. The different 
+	is that they take a string as an input and will synthesize it to a spoken text using a given voice.
+	\item \textbf{Speech-to-Text (STT)} services are similar to audio sinks, but they do not simply play back the stream, but convert it to a 
+	plain string.
+\end{itemize}
 
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\textwidth]{images/Chapter_05/oh-audio-stream.png}
+	\caption{Eclipse SmartHome audio stream scheme}
+	\label{fig:oh-audio-stream}
+\end{figure}
+
+TTS and STT can provide information about the voices that they support, formats and locales. In TTS, each voice supports exactly one 
+locale.
+
+However, the STT service itself does not seem to be very useful. In order to process the generated string, there is the concept of a 
+\textit{human language interpreter}.
+
+\subsubsection{Human Language Interpreter}
+A Human Language Interpreter takes a string as an input. It then derives actions from it, like sending commands to devices, or replies 
+with a string, which opens the possibility to realize conversations. The figure \ref{fig:human-language-interpreter} shows a simple
+schema of how it works.
+
+In fact, an interpreter is not directly related to audio streams, but operates only with strings, so it is suitable either for voice 
+assistants or chatbots for console, Twitter or other messaging services.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.9\textwidth]{images/Chapter_05/human-language-interpreter.png}
+	\caption{A Human Language Interpreter transforms strings into other strings or commands}
+	\label{fig:human-language-interpreter}
+\end{figure}
+
+Applications can dynamically choose which services to use, so that different sinks can be used for different use cases. Defaults can be 
+set as configuration for all those services in case an application does not ask for any specific service.
+
+\bigskip
+\section{A Developer Perspective on openHAB}
+OpenHAB 2 is a great open source, technology agnostic home automation platform that is able to manage lots of smart services and devices.
+
+However, from a developer point of view, OpenHAB is not a complete platform itself, but rather an aggregation of features from different 
+repositories, and mainly from Eclipse SmartHome:
+
+\begin{itemize}
+	\item \textbf{Eclipse SmartHome Framework}: the major parts of the core functionality are held by this repository. It contains bindings,
+	services and items, amongst others, as openHAB does.
+	\item \textbf{OpenHAB 2 Core and openHAB add-ons}: add-ons of openHAB that use the Eclipse SmartHome API.
+	\item \textbf{Eclipse SmartHome Extensions}: openHAB is compatible with all extensions that are available for the Eclipse SmartHome 
+	Framework and maintained within their repositories.
+\end{itemize}
+
+\subsection{Development environment set up}
+Installing the development environment is a different process than installing OpenHAB itself, as a developer would require a local copy of
+the source code of all elements, including the bindings, in an IDE. 
+
+The process for installing OpenHAB 2 as a developer requires first to install Eclipse IDE with the OpenHAB-related repositories, which are 
+the ones listed previously. It is usually required to have Maven 3 installed, and it is mandatory to have Oracle JDK 8 beforehand, because 
+OpenHAB is fully coded in Java. \cite{openHABGithub}
+
+The Eclipse installer downloads a copy of the repositories that the developer selects and installs and integrates them with Eclipse IDE 
+automatically. Then, user can compile, run and debug the project from the IDE.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=1\textwidth]{images/Chapter_05/openhab2-ide.png}
+	\caption{Eclipse SmartHome IDE with the OpenHAB repositories}
+	\label{fig:openhab2-ide}
+\end{figure}
+
+\subsection{Platform structure}
+Installing the platform as mentioned above provides us with a clear knowledge of the platform’s structure and makes it easy to perform 
+any modification or addition to it. The OpenHAB 2 code is highly modular and presents a very well-defined organization, as can be seen 
+in the figure \ref{fig:openhab2-structure}. Below there is a detailed explanation about the structure.
+
+\begin{sidewaysfigure}
+	\centering
+	\includegraphics[width=1\textwidth]{images/Chapter_05/openhab2-structure.png}
+	\caption{OpenHAB 2 structure}
+	\label{fig:openhab2-structure}
+\end{sidewaysfigure}
+
+We can divide OpenHAB 2 in five parts, which are composed by one or more subsections that host differentiated code parts, each one
+performing services, connecting to devices or managing the internal system:
+
+\begin{itemize}
+	\item \textbf{Runtime}: these are the basic libraries that OpenHAB need in order to execute properly, which come mostly from Eclipse 
+	SmartHome. It is a big collection of different services:
+	\begin{itemize}
+		\item \textbf{Automation files}: they are in charge of the automated services in the platform, so they manage triggers and events.
+		\item \textbf{Configuration files}: hosts the configuration files of the platform, such as the user folders or the listeners for the 
+		item discovery process.
+		\item \textbf{I/O management}: these libraries manage the inputs and outputs of the system, such as the MQTT communication 
+		or the REST APIs.
+		\item \textbf{Storage management}: a pair of libraries that are in charge of storing JSON files and managing MapDB databases. 
+		\item \textbf{User interfaces}: the user interfaces OpenHAB provides by default are the BasicUI, the ClassicUI, the HomeBuilder 
+		and the PaperUI (being this the most common in OpenHAB 2, as it requires zero manual configuration). These UIs are all part 
+		of this repository and they come from OpenHAB, not from Eclipse SmartHome. However, Eclipse also provides packages for 
+		internal aspects of the UI and for icons.
+	\end{itemize}
+	\item \textbf{Eclipse SmartHome Extensions}: functionality of Eclipse SmartHome can be extended through different additions, such 
+	as bindings or other UIs. In this case, we can find:
+	\begin{itemize}
+		\item \textbf{Bindings}: they are the most important part of our system. Bindings integrate external systems, like services, protocols 
+		or single devices to the platform. Therefore, the main purpose of a binding is to translate events from the Eclipse SmartHome 
+		event bus to the external system and vice versa. This repository contains bindings for communicating via Bluetooth, or to Philips 
+		Hue or DMX devices, amongst others. Many other bindings that OpenHAB support are located in the OpenHAB Add-ons repository.
+		\item \textbf{User interfaces}: includes a bunch of UIs from Eclipse SmartHome, from which the OpenHAB UIs were created.
+		\item \textbf{Data and UI management files}: this category contains additional configuration files and for managing UI’s elements.
+	\end{itemize}
+	\item \textbf{Infrastructure}: includes the binary files of OpenHAB. The end-user version of OpenHAB consists in only this repository.
+	\item \textbf{OpenHAB add-ons}: these are libraries that OpenHAB introduced to Eclipse SmartHome. They extend its functionality to 
+	make it a fully usable Home Automation environment.
+	\begin{itemize}
+		\item \textbf{Extra bindings}: OpenHAB created a huge number of new bindings for Eclipse SmartHome, from the binding for 
+		Amazon Dash Button to the one for Samsung TVs. They cover an enormous range of smart devices, and the list is constantly growing.
+		\item \textbf{Extra I/O services}: some bindings, like the Apple HomeKit binding, require I/O services that Eclipse SmartHome 
+		does not originally include. In addition, new services like the OpenHAB cloud are also contained here.
+		\item \textbf{TTS services}: OpenHAB 2 has added Text-To-Speech and Speech-To-Text functionality to Eclipse SmartHome, which is 
+		also part of the OpenHAB add-ons repository.
+	\end{itemize}
+	\item \textbf{Other projects}: this repository holds libraries that are not part of any of the others, and it is a mix of additional bindings 
+	(EnOcean, FritzBox…), additional actions and more services. Although they are located in this repository, they are officially supported 
+	by OpenHAB.
+\end{itemize}
+
+\subsection{OSGi}
+OpenHab is based on OSGi. The OSGi technology is a set of specifications that define a dynamic component system for Java. These 
+specifications enable a development model where applications are dynamically composed of many different and reusable components. 
+
+The OSGi specifications enable components to hide their implementations from other components while communicating through services, 
+which are objects that are specifically shared between components.\cite{openHABDocs} The main features of OSGi are modularity, 
+runtime dynamics and service orientation.
+
+\subsubsection{OSGi Containers}
+Different containers might implement different parts of the OSGi specifications and might provide slightly different API. The OpenHAB 
+project uses Equinox, which is the reference implementation of the OSGi R4.x Core Specification and one of the mostly used as well.
+
+\subsubsection{Definitions}
+\begin{itemize}
+	\item \textbf{Bundle}: the OSGi components made by the developers. A bundle is comprised of Java classes and other resources, 
+	which together can provide functions to end users.
+	\item \textbf{Service}: any object that is registered in the OSGi Service Registry and can be looked up using its interface name(s).
+	\item \textbf{Manifest}: descriptive information about the bundle, contained in its JAR file.
+	\item \textbf{Service} Registry: enables a bundle to publish objects to a shared registry, advertised via a given set of Java interfaces.
+\end{itemize}
+
+\subsubsection{Layer Structure}
+As the figure \ref{fig:osgi-layering} shows, the OSGi framework consists of layers build on top of each other:
+
+\begin{itemize}
+	\item \textbf{Module layer}: responsible for managing dependencies between bundles and for class loading.
+	\item \textbf{Life Cycle Layer}: controls the life cycle of the bundles.
+	\item \textbf{Service Layer}: defines a dynamic model of communication between different modules.
+	\item \textbf{Actual Services}: this is the application layer, using all other layers.
+	\item \textbf{Security Layer}: optional layer that manages permissions for different modules.
+\end{itemize}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.8\textwidth]{images/Chapter_05/osgi-layering.png}
+	\caption{OSGi layer structure}
+	\label{fig:osgi-layering}
+\end{figure}
