@@ -71,3 +71,69 @@ and she thinks that companies should give more accessible explanations about it.
 \subsection{Software Requirements Specification}
 With the Software Requirements Specification (SRS), I try to describe the project to develop from a functional point of view, that is,
 to determine the capabilities that the software system will have.
+
+The domotic controller will be able to control all modern devices in our home, regardless of their maker and the technology they use.
+It will provide an easy to use user interface and the ability to easily install, modify or remove the devices. It will also include natural
+human-computer interaction through the voice. A more detailed specification of the requirements can be found in the subsections
+below.
+
+\subsubsection{Functional Requirements}
+Functional requirements are a description of the facility or feature required. They deal with what the system should do or provide 
+for users.\cite{sqaFunctionalNonFunctional}
+
+\begin{itemize}
+	\item \textbf{FR1}: The system will be able to retrieve automatically the status of the different properties of the elements.
+	\item \textbf{FR2}: The system will be able to retrieve automatically data from its different data providers.
+	\item \textbf{FR3}: The system will not need any operation to launch openHAB after it is powered on.
+	\item \textbf{FR4}: The system will be able to turn itself off safely.
+	\item \textbf{FR5}: The system will automatically detect new smart devices connected to the local network.
+	\item \textbf{FR6}: The system will be able to detect the possible operations with each connected smart device. 
+	\item \textbf{FR7}: The system will be able to operate with the connected devices according to the detected possible operations.
+	\item \textbf{FR8}: The system will be able to tell the user in an understandable manner the current connection status for each
+	device.
+	\item \textbf{FR9}: The system will provide different user interfaces, so users can choose one between them, according to
+	their needs.
+	\item \textbf{FR10}: The user will be able to change the configuration of the system from a graphical user interface.
+	\item \textbf{FR11}: The system will be manually configurable and modifiable using configuration files.
+	\item \textbf{FR12}: The system will automatically include and configure new devices found in the network, after the user decides
+	to add them.
+	\item \textbf{FR13}: The user will be able to configure the name, display icon, IP and all possible aspects of the item directly from
+	the user interface.
+	\item \textbf{FR14}: The system will allow the user to make groups of items.
+	\item \textbf{FR15}: The system will allow the user to add groups of items to other groups of items.
+	\item \textbf{FR16}: The system will be modular and include a package system. Each package supports a set of devices.
+	\item \textbf{FR17}: The package system will be accessible from the graphical user interface.
+	\item \textbf{FR18}: The installation of packages will be done automatically after the user clicks on the install button.
+	\item \textbf{FR19}: The removal of packages will be done automatically after the user clicks on the remove button.
+	\item \textbf{FR20}: The system will maintain an updated and classified list of packages according to an external repository.
+	\item \textbf{FR21}: The system will be manageable from external sources.
+	\item \textbf{FR22}: The system will be accessible from external devices and from the Internet.
+	\item \textbf{FR23}: The system will allow to have automation rules defined by the user.
+	\item \textbf{FR24}: The voice assistant will allow to perform the main operations of each device in the system.
+	\item \textbf{FR25}: The voice assistant will be able to answer in different languages.
+	\item \textbf{FR26}: The voice assistant will be able to do power management tasks in the system, such as powering the system
+	off or restarting the system.
+	\item \textbf{FR27}: The voice assistant will be operable through mechanical methods or by voice.
+	\item \textbf{FR28}: The users will be able to edit and adapt the functionalities of the voice assistant according to their needs.
+	\item \textbf{FR29}: The voice assistant will provide spoken feedback if there has been an error performing the given command.
+	\item \textbf{FR30}: The voice assistant will be able to print debug information in the command line if it is required.
+\end{itemize}
+
+\subsubsection{Non-Functional Requirements}
+Non-functional requirements detail constraints, targets or control mechanisms for the new system. They describe how, how well or
+to what standard a function should be provided.\cite{sqaFunctionalNonFunctional}
+
+\begin{itemize}
+	\item \textbf{NFR1}: The system, along with the voice assistant, will be installable in the Raspberry Pi.
+	\item \textbf{NFR2}: The system and the voice assistant will provide a satisfactory response rate.
+	\item \textbf{NFR3}: The user interfaces of the home automation system will be adaptable to the size and resolution of the
+	user's screen.
+	\item \textbf{NFR4}: The user interfaces will be made according to modern standards, like Material Design.
+	\item \textbf{NFR5}: The home automation system will run in a local server, created in the machine which executes it.
+	\item \textbf{NFR6}: In order to allow external connections, the home automation system will provide a REST API.
+	\item \textbf{NFRXXX:}: The voice assistant will recognize English.
+	\item \textbf{NFRXXX:}: The voice assistant will be fast in its response. Therefore, its procedure for deciding a response will 
+	be optimal.
+	\item \textbf{NFRXXX:}: The voice assistant will operate with the home automation system via REST, so it can be installed in a
+	different computer than the one with the home assistant.
+\end{itemize}
