@@ -26,26 +26,27 @@ for, as currently we do not have means and time for making true research-based p
 
 After thinking about the main uses of this system and the people that would be interested on it, I have extracted these three personas, 
 representing its main uses, although not the only ones. I have built them with the online platform Xtensio, and the figures
-\ref{fig:persona-oswald-douglas}, \ref{fig:persona-anna-lahtinen} and \ref{fig:persona-rosario-vera} represent them.
+\ref{fig:persona-oswald-douglas}, \ref{fig:persona-anna-lahtinen} and \ref{fig:persona-rosario-vera} represent them. I tried to extract 
+a varied range of backgrounds, current situations, desires and worries. 
 
-I tried to extract a varied range of backgrounds, current situations, desires and worries. Oswald Douglas (figure 
-\ref{fig:persona-oswald-douglas}) is a freelance technology blogger from Dallas, USA, that is very interested in the areas of home 
-automation and Internet of Things. He is looking to automate his own home and write about his experience in his blog. He already has 
-experience with technology, and this next step will not be too difficult for him. His interests are clear: to try cutting-edge technology 
-in his own home and make the most of home automation.
+Oswald Douglas (figure \ref{fig:persona-oswald-douglas}) is a freelance technology blogger from Dallas, USA, that is very interested 
+in the areas of home automation and Internet of Things. He is looking to automate his own home and write about his experience in 
+his blog. He already has experience with technology, and this next step will not be too difficult for him. His interests are clear: 
+to try cutting-edge technology in his own home and make the most of home automation.
 
-Anna Lahtinen is a 16 year-old high school student from Lappeenranta, Finland. She is up to date on technology but she is not passionate 
-about it. However, she heard about home automation and thinks that she could enjoy a better media experience with it. In addition, she 
-thinks that adding smart color light bulbs to her bedroom would make it look more beautiful. However, she feels that there is a lack
-of general information about devices and the set up and configuration of a home automation system. She thinks that the price
-of it is too high as well.
+Anna Lahtinen (figure \ref{fig:persona-anna-lahtinen}) is a 16 year-old high school student from Lappeenranta, Finland. She is up 
+to date on technology but she is not passionate about it. However, she heard about home automation and thinks that she could enjoy 
+a better media experience with it. In addition, she thinks that adding smart color light bulbs to her bedroom would make it look more 
+beautiful. However, she feels that there is a lack of general information about devices and the set up and configuration of a home 
+automation system. She thinks that the price of it is too high as well.
 
-Rosario Vera is an administrative from Vitoria-Gasteiz, Spain. She is 37 years old, is married and has two young children. She is not 
-very familiar with technology, but she has heard about home automation in the news and thinks that it could fit her needs. Rosario
-and her husband work outside home, and sometimes their children need to be alone at home. Home automation would provide more security
-to the home and would allow them to have more spare time. Voice assistance would be helpful for their children when they are alone,
-as it is a very easy and natural way to interact with technology. However, she is concerned about their privacy regarding these systems
-and she thinks that companies should give more accessible explanations about it. In addition, she finds these systems difficult to use.
+Rosario Vera (figure \ref{fig:persona-rosario-vera}) is an administrative from Vitoria-Gasteiz, Spain. She is 37 years old, is married and 
+has two young children. She is not very familiar with technology, but she has heard about home automation in the news and thinks 
+that it could fit her needs. Rosario and her husband work outside home, and sometimes their children need to be alone at home. Home 
+automation would provide more security to the home and would allow them to have more spare time. Voice assistance would be helpful 
+for their children when they are alone, as it is a very easy and natural way to interact with technology. However, she is concerned about 
+their privacy regarding these systems and she thinks that companies should give more accessible explanations about it. In addition, 
+she finds these systems difficult to use.
 
 \begin{sidewaysfigure}
 	\centering
@@ -143,3 +144,147 @@ to what standard a function should be provided.\cite{sqaFunctionalNonFunctional}
 	\item \textbf{NFR15}: The voice assistant will operate with the home automation system via REST, so it can be installed in a
 	different computer than the one with the home assistant.
 \end{itemize}
+
+\subsection{Use Cases}
+The next step after the specification of requirements is to specify the use cases of the system.
+
+Use case diagrams are usually referred to as behavior diagrams used to describe a set of actions (use cases) that some system or 
+systems (subject) should or can perform in collaboration with one or more external users of the system (actors).\cite{umlUseCaseDiagrams}
+
+%TODO
+%Hacer los diagramas de casos de uso tal y como indiqué en UC-device-and-service-control.xml
+%Dividir los requisitos de modo que queden subsistemas funcionales diferenciados
+
+\subsection{Functional Subsystems}
+%TODO
+%Especificar aquí los subsistemas funcionales
+
+\subsection{Implementation Possibilities}
+After exploring what users would expect from a system like this, it is worth thinking about how it should be implemented. Together 
+with my director, I proposed different options to meet the previous requirements.
+
+\subsubsection{Web Platform}
+A well designed web platform is a great idea nowadays. If this platform is hosted in a local server, it means that it can be accessed
+from any device connected to the network. With the correct configuration, it could be even reachable from anywhere in the world.
+It is easy to implement and maintain, and users with basic web development knowledge would be able to easily modify it. In addition,
+the same web platform can be adaptable to any device and resolution, thanks to responsive designs. It would also work if we attach
+a tactile screen to the Raspberry Pi.
+
+OpenHAB mounts a web platform in a local server by default, and provides several adaptable user interfaces, so this solution would
+not require much effort, and it offers many possibilities.
+
+\subsubsection{Desktop Application}
+Another solution, focused on the Raspberry Pi desktop (where we mainly want to implement the system), is developing a desktop 
+application with an adapted user interface for tactile screens. The advantage of a desktop application is that it usually requires 
+less resources and it is faster, but it is a specific solution for the Raspberry Pi, so it would only work there. We would need a 
+different application if we wanted it to run on mobile phones or tablets.
+
+We would need to make it from scratch, as openHAB does not provide any desktop application.
+
+\subsubsection{Mobile Application}
+Mobile phones and \textit{tablets} are common devices that are widely used to manage smart homes. Some setups have a tablet located 
+somewhere in the home, which is only used for managing the domotic devices. An application is faster and more accessible than a web
+platform, and users are more used to them, so it would be convenient in some cases.
+
+However, making the system only accessible from a mobile or tablet application would reduce the utility of the Raspberry Pi, and 
+would at least require two devices (one for the local server and another one for accessing it). Although it is a good complement to the
+system, it is not convenient to base it only on a mobile application. However, it is applicable in a hybrid solution.
+
+\subsubsection{Hybrid Solution}
+A hybrid solution consists of applying two or more solutions together of those specified above. For example, providing a web platform 
+and an optional mobile application to easily manage the system from a mobile device.
+
+OpenHAB provides a web platform, as explained above, and a mobile application for iOS and Android than connects to the web platform.
+
+\subsubsection{Comparison}
+The table \ref{table:possible-implementations} compares all the possibilities for the implementation of the system.
+
+\begin{table}[]
+	\centering
+	\resizebox{\textwidth}{!}{%
+		\begin{tabular}{|l|c|c|c|c|}
+			\hline
+			\multicolumn{1}{|c|}{\textbf{Feature}}                                  & \textbf{\begin{tabular}[c]{@{}c@{}}Web\\ platform\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}Desktop \\ application\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}Mobile\\ application\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}Hybrid\\ Solution\end{tabular}} \\ \hline
+			\begin{tabular}[c]{@{}l@{}}Support for \\ multiple devices\end{tabular} & Yes                                                             & Only PCs                                                                & \begin{tabular}[c]{@{}c@{}}Only mobile\\ phones/tablets\end{tabular}  & Yes                                                                \\ \hline
+			\begin{tabular}[c]{@{}l@{}}Allows access\\ from Internet\end{tabular}   & Yes                                                             & No                                                                      & No                                                                    & Yes                                                                \\ \hline
+			\begin{tabular}[c]{@{}l@{}}Control from\\ Raspberry Pi\end{tabular}     & Yes                                                             & Yes                                                                     & No                                                                    & Yes                                                                \\ \hline
+			\begin{tabular}[c]{@{}l@{}}Easy \\ implementation\end{tabular}          & Yes                                                             & No                                                                      & No                                                                    & Yes                                                                \\ \hline
+			\begin{tabular}[c]{@{}l@{}}Maximum\\ performance\end{tabular}           & No                                                              & Yes                                                                     & Yes                                                                   & Partially                                                          \\ \hline
+		\end{tabular}%
+	}
+	\caption{Comparison between possible implementations}
+	\label{table:possible-implementations}
+\end{table}
+
+As we can see, the hybrid solution, which is a web platform and mobile application, meets all the features in the best way, and 
+offers easy and fast implementation. At this point, I have not considered the implementation of the voice assistant, which I will 
+talk about in following sections.
+
+\bigskip
+\section{System Analysis}
+%TODO
+%Introducir la sección
+
+\subsection{Conceptual Model}
+%TODO
+%Especificar el modelo conceptual
+
+\bigskip
+\section{System Design}
+%TODO
+%Introducir la seccion
+
+\subsection{Architecture}
+%TODO
+%Especificar la arquitectura del sistema, se puede hacer una explicacion rapida de los subsistemas que lo componen
+
+\subsection{Conceptual Class Diagram}
+%TODO
+%Introducir y especificar el DCC
+
+\bigskip
+\section{Implementation}
+In this section, I will explain the process that I have followed to implement the home automation controller, along with the voice
+assistant.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.8\textwidth]{images/Chapter_06/raspberry-pi-3b.jpg}
+	\caption{Raspberry Pi 3}
+	\label{fig:raspberry-pi-3b}
+\end{figure}
+
+As I have mentioned before, the main objective is to install the system in a Raspberry Pi, which is an affordable and small computer,
+with enough power and connectivity options to install a home automation system on it, and even a voice assistant. The possibilities 
+of this device are endless: it can work with or without display, and has a special connector to which the user can connect screens, 
+microphones, speakers and many other accessories. It also has USB ports on its high-end models, and accepts all the USB 
+accessories that a normal computer would accept.
+
+The first approach to this system was to install Raspbian, a Linux distribution provided by openHAB, over a Raspberry Pi 3 Model B+ 
+(figure \ref{fig:raspberry-pi-3b}). Raspbian has openHAB preinstalled and configured, so it is ready to use. The first idea was to 
+have a computer with openHAB and then a voice assistant in other machine. I installed the distribution on this mini PC, but after 
+reviewing the possible voice assistants, I found that it was not the best way to implement it. 
+
+I found the Google AIY Voice Kit, which is a kit provided by Google to makers that want to play around with voice recognition.
+They provide a package with some accessories for the Raspberry Pi and a cardboard box that is meant to contain the board and the
+accessories. Then, I reconsidered the architecture. It would be also possible to install openHAB in the same machine as the virtual
+assistant. This way, we would need just one machine for all. It would be a voice assistant, but with a local server, accessible from
+all the devices connected to the local network. It would be possible to attach a screen to it as well, so the user can manage the
+smart home graphically from the same device.
+
+I thought this would be the best solution, and it would still meet all the requirements specified previously. So, I began working on it.
+
+\subsection{Introduction to Google AIY Voice Kit}
+The AIY Voice Kit is a do-it-yourself project created by Google that demonstrates how easy and inexpensive can be to create a natural 
+voice recognizer that works with Google Assistant, at a price of only EUR 30 in Europe. The project, aimed for makers, also lets the 
+user add their own questions, which is the most powerful part for our purpose. 
+
+The idea is to adapt the device in order to fetch the voice commands that the microphone captures and manage them in OpenHAB, 
+making the system act following user’s instructions.
+
+First of all, I will explain the making and setting up process.
+
+
+
+
+
