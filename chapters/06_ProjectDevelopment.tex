@@ -250,7 +250,7 @@ assistant.
 \begin{figure}
 	\centering
 	\includegraphics[width=0.8\textwidth]{images/Chapter_06/raspberry-pi-3b.jpg}
-	\caption{Raspberry Pi 3}
+	\caption{Raspberry Pi 3 Model B}
 	\label{fig:raspberry-pi-3b}
 \end{figure}
 
@@ -258,9 +258,9 @@ As I have mentioned before, the main objective is to install the system in a Ras
 with enough power and connectivity options to install a home automation system on it, and even a voice assistant. The possibilities 
 of this device are endless: it can work with or without display, and has a special connector to which the user can connect screens, 
 microphones, speakers and many other accessories. It also has USB ports on its high-end models, and accepts all the USB 
-accessories that a normal computer would accept.
+accessories that a normal computer would accept.\cite{raspberryPiDocs}
 
-The first approach to this system was to install Raspbian, a Linux distribution provided by openHAB, over a Raspberry Pi 3 Model B+ 
+The first approach to this system was to install Raspbian, a Linux distribution provided by openHAB, over a Raspberry Pi 3 Model B 
 (figure \ref{fig:raspberry-pi-3b}). Raspbian has openHAB preinstalled and configured, so it is ready to use. The first idea was to 
 have a computer with openHAB and then a voice assistant in other machine. I installed the distribution on this mini PC, but after 
 reviewing the possible voice assistants, I found that it was not the best way to implement it. 
@@ -282,9 +282,117 @@ user add their own questions, which is the most powerful part for our purpose.
 The idea is to adapt the device in order to fetch the voice commands that the microphone captures and manage them in OpenHAB, 
 making the system act following user’s instructions.
 
-First of all, I will explain the making and setting up process.
+\subsubsection{Capabilities}
+The main advantage of the Google AIY Voice Kit, and the reason why we have chosen it for this project, is that we can access the 
+Google Cloud Voice API and create our own voice interfaces. Everything is coded in Python, and we can create voice commands to 
+control it.
 
+This, along with the more than reasonable quality of its stereo microphone and speaker, make it a very useful device that could 
+perfectly fit in a smart home, despite its looks.
 
+The device is capable of recognizing the “OK Google” command, as well triggering the assistant when the big red button is pressed, 
+and, by default, it is capable of doing almost everything that the Google Assistant on smartphones can do, including integration 
+with the apps in the user’s smartphone and reading the news, among other things.
 
+\subsubsection{The Main Challenge}
+The challenge is to explore how Google AIY Voice Kit and OpenHAB 2, both installed on the same system, can work together and, 
+if it is possible, connect them so a standard user can control its smart home using voice commands and universal, open source solutions.
 
+\subsection{Building the Google AIY Voice Kit}
+For making the voice recognizer, I primarily used:
+
+\begin{itemize}
+	\item Cardboard for the body of the device.
+	\item A speaker.
+	\item A Voice HAT microphone board and an accessory board.
+	\item A big button with a light inside to trigger the voice recognition.
+	\item A Raspberry Pi Model 3 B.
+	\item An 8GB microSD card.
+	\item Cables to connect everything.
+\end{itemize}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\textwidth]{images/Chapter_06/aiy-voice-kit.jpeg}
+	\caption{The AIY Voice Kit}
+	\label{fig:aiy-voice-kit}
+\end{figure}
+
+First of all, I had to put all the items together and assemble the cardboard body. The Voice HAT accessory board is connected to the 
+Raspberry Pi through its GPIO connector, which is adapted to connect the rest of devices: the speaker, the microphone board and the
+button. Once everything was correctly connected, I had to assemble the cardboard body, which was composed by two 
+pieces.\cite{aiyProjectsVoice}
+
+The next step was to write the Voice Kit SD image\cite{voiceKitSdImage} to the microSD card. I used the \textit{Etcher.io} macOS 
+application for this purpose. 
+
+The system includes everything that the Raspberry Pi needs to use the connected devices, so I only needed to check that they worked 
+fine and were correctly connected. The system also includes two demos with Google Assistant: one that triggers the assistant by saying 
+“OK Google!”, and another that needs the button to be pressed to trigger it.
+
+To make any demo or a new app that uses Google Assistant work, it is necessary to register a new project on Google Cloud Platform 
+(GCP) first. A project of this kind has to include the Google Assistant API, which can be enabled via GCP, as well as an OAuth 2.0 
+client. Finally, at the moment of running the application, it seeks a JSON file that contains all this information. By default, it 
+must be placed in the home folder and it must be called assistant.json.
+
+Google Assistant gathers all the user’s information from their Google account, so they must have enabled the web and app activity, 
+the device information and the voice and audio activity from their Activity Controls panel in their Google account settings.
+
+\subsection{Setting up openHAB 2}
+In this case, the goal is to install openHAB in the Linux distribution that the AIY Kit provides, which is a fork of Raspbian 
+(that is a fork of Debian made for the Raspberry Pi), with the suitable drivers in order to support all the accessories from the kit. 
+Luckily, openHAB provide in their documentation pages\cite{openHABDocs} enough instructions to make this process easier.
+
+In this process, I used a keyboard and a mouse for interacting with the operating system, but it can also be done remotely via 
+SSH connection.
+
+As a prerequisite, Java 8 must be installed on the system. Users may prefer Zulu, the main Java \textit{alternative}, a fully 
+certified build of OpenJDK.\cite{zuluWebsite}
+
+OpenHAB 2 can be installed though a package repository or manually from file, but it is recommended to install through a package
+repository, using \textit{apt}, \textit{apt-get}, \textit{yum} or \textit{dnf}. As this operating system is based on Debian, I used 
+\textit{apt-get}.
+
+First of all, I have to add the openHAB 2 Bintray repository key to the package manager and allow \textit{apt} to use the HTTPS 
+Protocol.
+
+\begin{lstlisting}
+wget -qO - 'https://bintray.com/user/downloadSubjectPublicKey?username=openhab' | sudo apt-key add - 
+sudo apt-get install apt-transport-https
+\end{lstlisting}
+
+OpenHAB offers Stable (Official), Beta and Snapshot builds to choose from. The stable builds contain the latest official release 
+with tested features, so it is the \textit{safest} to use. I will install this one. Then, I need to add the openHAB 2 Stable Repository 
+to your systems apt sources list
+
+\begin{lstlisting}
+echo 'deb https://dl.bintray.com/openhab/apt-repo2 stable main' | sudo tee /etc/apt/sources.list.d/openhab2.list
+\end{lstlisting}
+
+Next, I have to resynchronize the package index:
+
+\begin{lstlisting}
+sudo apt-get update
+\end{lstlisting}
+
+And now I can install openHAB:
+
+\begin{lstlisting}
+sudo apt-get install openhab2
+\end{lstlisting}
+
+Optionally, it is possible to install the add-ons package (\textit{openhab2-addons}), but it is meant to be installed if the machine 
+is going to be disconnected from the Internet, as openHAB downloads them on request by default. In this case, I assume that the
+system is going to be connected to Internet always.
+
+At this point, I can start openHAB and register it to be automatically executed at system startup. To this end, the documentation 
+provides the following commands for systems based on \textit{systemd}, such as Raspbian:
+
+\begin{lstlisting}
+sudo systemctl start openhab2.service
+sudo systemctl status openhab2.service
+
+sudo systemctl daemon-reload
+sudo systemctl enable openhab2.service
+\end{lstlisting}
 
