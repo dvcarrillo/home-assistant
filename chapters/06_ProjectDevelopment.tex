@@ -356,7 +356,7 @@ repository, using \textit{apt}, \textit{apt-get}, \textit{yum} or \textit{dnf}. 
 First of all, I have to add the openHAB 2 Bintray repository key to the package manager and allow \textit{apt} to use the HTTPS 
 Protocol.
 
-\begin{lstlisting}
+\begin{lstlisting}[style=Consola]
 wget -qO - 'https://bintray.com/user/downloadSubjectPublicKey?username=openhab' | sudo apt-key add - 
 sudo apt-get install apt-transport-https
 \end{lstlisting}
@@ -365,19 +365,19 @@ OpenHAB offers Stable (Official), Beta and Snapshot builds to choose from. The s
 with tested features, so it is the \textit{safest} to use. I will install this one. Then, I need to add the openHAB 2 Stable Repository 
 to your systems apt sources list
 
-\begin{lstlisting}
+\begin{lstlisting}[style=Consola]
 echo 'deb https://dl.bintray.com/openhab/apt-repo2 stable main' | sudo tee /etc/apt/sources.list.d/openhab2.list
 \end{lstlisting}
 
 Next, I have to resynchronize the package index:
 
-\begin{lstlisting}
+\begin{lstlisting}[style=Consola]
 sudo apt-get update
 \end{lstlisting}
 
 And now I can install openHAB:
 
-\begin{lstlisting}
+\begin{lstlisting}[style=Consola]
 sudo apt-get install openhab2
 \end{lstlisting}
 
@@ -388,7 +388,7 @@ system is going to be connected to Internet always.
 At this point, I can start openHAB and register it to be automatically executed at system startup. To this end, the documentation 
 provides the following commands for systems based on \textit{systemd}, such as Raspbian:
 
-\begin{lstlisting}
+\begin{lstlisting}[style=Consola]
 sudo systemctl start openhab2.service
 sudo systemctl status openhab2.service
 
