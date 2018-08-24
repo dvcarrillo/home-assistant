@@ -386,7 +386,7 @@ is going to be disconnected from the Internet, as openHAB downloads them on requ
 system is going to be connected to Internet always.
 
 At this point, I can start openHAB and register it to be automatically executed at system startup. To this end, the documentation 
-provides the following commands for systems based on \textit{systemd}, such as Raspbian:
+provides the following commands for systems based on \textit{systemd}, such as Raspbian.
 
 \begin{lstlisting}[style=Consola]
 sudo systemctl start openhab2.service
@@ -395,4 +395,289 @@ sudo systemctl status openhab2.service
 sudo systemctl daemon-reload
 sudo systemctl enable openhab2.service
 \end{lstlisting}
+
+After some minutes, openHAB is ready on the local server, in the port 8080 (accessible in http://localhost:8080). Then, the following
+commands are used to control the service.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=1\textwidth]{images/Chapter_06/openhab-startup.png}
+	\caption{OpenHAB 2 startup screen}
+	\label{fig:openhab-startup}
+\end{figure}
+
+\begin{lstlisting}[style=Consola]
+# Current service status
+sudo /etc/init.d/openhab2 status
+
+# (Re-)Start openHAB (background service)
+sudo /etc/init.d/openhab2 restart
+
+# Stop the openHAB background service
+sudo /etc/init.d/openhab2 stop
+
+# Make openHAB automatically start after booting the Linux host
+sudo update-rc.d openhab2 defaults
+\end{lstlisting}
+
+OpenHAB installs also a utility in the command line interface, named \textit{openhab-cli}, that provides access to the openHAB-specific 
+commands.
+
+\begin{lstlisting}[style=Consola]
+Usage:  openhab-cli command [options]
+
+Possible commands:
+  start [--debug]     -- Starts openHAB in the terminal.
+  stop                -- Stops any running instance of openHAB.
+  status              -- Checks to see if openHAB is running.
+  console             -- Opens the openHAB console.
+  backup [filename]   -- Stores the current configuration of openHAB.
+  restore filename    -- Restores the openHAB configuration from a backup.
+  showlogs            -- Displays the log messages of openHAB.
+  info                -- Displays distribution information.
+\end{lstlisting}
+
+Lastly, to stay up to date to new releases, they recommend to execute the following commands periodically. Note that this also applies
+to the rest of the packages installed in the Linux system.
+
+\begin{lstlisting}[style=Consola]
+sudo apt-get update
+sudo apt-get upgrade
+\end{lstlisting}
+
+\subsection{Adding Philips Hue Devices}
+Now that we have openHAB 2 up and running in the Raspberry Pi integrated in the AIY Kit, it is desirable to add a device to the home 
+automation system. We have a Philips Hue lightning system available, so in this section I will explain the process that we have followed
+to add it and configure it in our openHAB 2 instance.
+
+\subsubsection{The Hue System}
+Our Philips Hue system is composed by the \textit{white and color ambiance starter kit}\cite{philipsHueMeethue} (which consists 
+in three Hue white and color lights and a Hue hub) as well as a Hue motion sensor:
+
+\begin{itemize}
+	\item \textbf{The Hue Hub} acts as a bridge between the user interface (the smartphone application or the OpenHab instance) and 
+	the connected devices. It is configured and controlled via the Hue app and supports up to 50 lights at the same time. It communicates 
+	via Zigbee with the Hue devices.
+	\item \textbf{The Hue Motion Sensor} can be configured to turn on and off the lights when it detects movement and under some 
+	defined conditions. By default, it is configured from the Hue app.
+	\item \textbf{The Hue White and Color Lights} are customizable RGB lights. By default, they are configurable from the Hue app, 
+	which offers many ways of changing the light emission.
+\end{itemize}
+
+\subsubsection{Installation and Configuration Process on PaperUI}
+Philips, as many other companies, is restrictive regarding their home automation devices, and every communication between the Hue 
+devices and the controller (openHAB in this case) needs to pass through the Hue Hub. The Hub communicates via WiFi with the controller 
+and via Zigbee with the Hue devices. The software it uses is privative, but luckily openHAB 2 implements protocols that make possible 
+the communication between the controller and the Hub. This makes the Hub, though, a frustrating addition to our home automation system.
+
+The Hue system needs to be configured from the Philips Hue mobile application in the first place. This process will link the Hub with the 
+desired Hue devices, so the next time that the user connects to the Hub, it will not be necessary to configure them again, even if 
+the connection is done from openHAB. The application allows to manage rooms and sort the devices, as well as setting automated commands 
+(for instance, turning the light on when the motion sensor detects any movement). OpenHAB is unable to perform such complex operations 
+by default, providing only a few channels for the light bulb.
+
+Once the Hub is on, connected and linked with the Hue devices, we can proceed to configure it on OpenHAB. In this case, I explain 
+the process to follow in order to add the light bulb controls, but it might work for other Hue devices in a future. If OpenHAB is 
+used on a system connected to the same network as the Hub, the Hub will automatically appear in the \textit{Inbox} section. We have 
+to make sure before that its related binding. Adding the Hub in the Inbox section means that it will be listed as a Thing. OpenHAB 
+takes care automatically of the Thing (figure \ref{fig:philips-hue-hub-thing}) and Items configuration. After adding them, the host 
+device and the Hub will be able to communicate between them. However, the user needs to press the pairing button on the Hub in 
+order to activate the communication.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.9\textwidth]{images/Chapter_06/philips-hue-hub-thing.png}
+	\caption{Philips Hue Hub Thing}
+	\label{fig:philips-hue-hub-thing}
+\end{figure}
+
+After that, the Hub will act as a bridge and openHAB will be able to display all the compatible devices connected to the Hub. In 
+this case, the Hue color lamp appears in the Inbox. The process for adding it is the same as with the Hub. Nevertheless, this time 
+the light controls will be added automatically to the Control panel according to the linked channels on the thing. OpenHAB supports 
+two channels that are directly related to the bulb functionality: \textit{color} (which is divided in tone, brightness and saturation) 
+and \textit{white temperature}. The first one will set the light in a color with the desired properties, and the second will set a 
+white color from a range of whites (from cold to warm white). Additionally, OpenHAB provides two more channels: \textit{alert}, 
+to use the bulb as an alert light under certain circumstances, and \textit{color loop}, which will make the light color iterate in 
+the whole color spectrum. The figure \ref{fig:hue-color-bulb-channels} shows the PaperUI interface showing these channels.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.9\textwidth]{images/Chapter_06/hue-color-bulb-channels.png}
+	\caption{Available channels in the Hue color bulb}
+	\label{fig:hue-color-bulb-channels}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=1\textwidth]{images/Chapter_06/openhab-control-hue.png}
+	\caption{OpenHAB 2 Control Panel with the Hue color bulb controls}
+	\label{fig:openhab-control-hue}
+\end{figure}
+
+\subsubsection{Internal Functionality}
+OpenHAB is able to communicate with the Hue Hub and Hue devices thanks to the Philips Hue binding (represented as a set of packages 
+in Java, as shown in the figure \ref{fig:hue-binding-structure}), integrated in the Eclipse SmartHome Extensions repository. 
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.6\textwidth]{images/Chapter_06/hue-binding-structure.png}
+	\caption{Philips Hue binding internal structure}
+	\label{fig:hue-binding-structure}
+\end{figure}
+
+As we can see, there are packages for handling the lights and Hub (which is named \textit{bridge}), and for managing the internal 
+functionality of the binding and OpenHAB. That is, discovering the devices and showing them in the Inbox and managing exceptions. 
+Examples of exceptions can be having the device off or sending the device a wrong command.
+
+Looking more closely at the device handlers, we can see that the bridge handler implements a \textit{Runnable} object with a 
+\textit{run} method, which gets the Hub configuration. The function gets the IDs of all the lights connected to the Hub and iterates 
+over them. If a light is not listed in a list of light states caught from OpenHAB, it is added as a new light. If it is listed, then 
+it checks for changes in the status of the light, comparing the actual state with the last one saved. If the states are different, 
+notifies the Light listeners. There is a \textit{LightStatusListener} interface that is called on each change, it will modify the 
+Light and Hue objects.
+
+\subsection{Specifying Items Manually}
+In previous chapters, I introduced the concept of Item in openHAB 2. Items represent functionalities that can be used by the 
+applications, mainly user interfaces or automation logic.
+
+OpenHAB is able to configure many Things and Items automatically in the PaperUI. But in many cases we may need to specify Items
+manually. For example, for creating custom views(sitemaps), as we will see below. Therefore, it is important to know how to specify
+Items manually.
+
+First of all, I need to create an Items file. Both the items and the sitemap files are located in the \$OPENHAB\_CONF directory, 
+which is different on different operating systems. In my case, they are located in:
+
+\begin{lstlisting}[style=Consola]
+/usr/share/openhab2/conf/items       <-- *.items files
+/usr/share/openhab2/conf/sitemaps    <-- *.sitemap files
+\end{lstlisting}
+
+After a fresh installation these directories are empty (except for the \textit{readme} files), so I have to create a file there.
+I will call it \textit{default.items}.
+
+OpenHAB has its own syntax for defining Items and Sitemaps, but it is very easy to use. The basic syntax for defining an item is:
+
+\begin{lstlisting}[style=Consola]
+ItemType ItemName "ItemDescription" <ItemIcon> {ItemToThingChannelLink}
+\end{lstlisting}
+
+The code I have used for defining the item linked to the color channel and the item linked to the white tone channel of a Philips 
+Hue color bulb is the following:
+
+\begin{lstlisting}[style=Consola]
+Color HueColor1 "Hue Light Bulb 1 Color" <lightbulb> {channel="hue:0210:00178828e0d0:1:color"}
+
+Dimmer HueDimmer1 "Hue Light Bulb 1 Temperature" <lightbulb> {channel="hue:0210:00178828e0d0:1:color_temperature"}
+\end{lstlisting}
+
+Now, these Items are registered in the system, but before we can see them, I have to define a sitemap and include them there.
+
+\subsection{Creating a Sitemap}
+PaperUI, the newest addition in openHAB 2, is meant to make easier the device management, configuration and discovery. Many of 
+these processes are carried out seamlessly, without user intervention. But this user interface lacks some functionalities, such as
+custom ordering of Things. \textit{Sitemaps} are custom views that can be displayed in another user interface, the Basic UI, which
+is also automatically installed at the beginning.\cite{openHABDocs} Sitemaps take defined Items and display them as the user specifies 
+in the UI.
+
+The user is able to define as many sitemaps as desired, and they can be selected from OpenHAB 2 home screen, in the Basic UI. Sitemaps 
+are text files with the .sitemap extension, and they are defined in the folder thet I specified in the previous section, inside the OpenHAB 
+installation directory.
+
+The basic syntax that a sitemap follows is:
+
+\begin{lstlisting}[style=Consola]
+sitemap <sitemapname> label="<title of the main screen>" 
+{
+    [all sitemap elements]
+}
+\end{lstlisting}
+
+Sitemaps are composed by arranging various user interface elements. A set of different element types supports a user-friendly and 
+clear presentation. One line of Sitemap element definition produces one corresponding UI element. As shown in the example on the
+figure \ref{fig:hue-bulb-sitemap}, each element generates a descriptive text next to an icon on the left side and a status and/or 
+interaction elements on the right.
+
+A certain set of parameters can be configured to customize the presentation of an element. In the shown example \textit{item} and 
+\textit{icon} are parameters. Almost all parameters are optional, some are however needed to result in a meaningful user interface. 
+
+By encapsulating elements with curly brackets, multiple elements can be nested inside or behind others. The Frame element type is 
+often used in combination with element blocks. Frames are used to visually distinguish multiple elements of the same topic on one 
+interface page. When using code blocks behind other element types such as \textit{Text}, \textit{Group} or \textit{Switch}, these UI 
+elements will, in addition to their normal function, be links to a new view, presenting the nested elements. In the example in 
+\ref{fig:hue-bulb-sitemap}, I created a single Frame that represented all the functionalities of the Hue Color Light.
+
+The \textit{sitemap} element is mandatory in a Sitemap definition. This element shall be the first line in the sitemap file, and the 
+following code block comprises the entire Sitemap definition.\cite{openHABDocs}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.9\textwidth]{images/Chapter_06/hue-bulb-sitemap.png}
+	\caption{Basic UI displaying a Hue Color Light Item}
+	\label{fig:hue-bulb-sitemap}
+\end{figure}
+
+From the previous example, I built a sitemap that could display the Hue color light Item that I configured previously in the Basic UI.
+The figure \ref{fig:hue-bulb-sitemap} shows the result of introducing the following code in a file that I called \textit{default.sitemap}.
+
+\begin{lstlisting}[style=Consola]
+sitemap demo label="Main Menu"
+{
+    Frame label="Hue Color Light 1" {
+        Colorpicker item=HueColor1 icon="slider"
+        Slider item=HueDimmer1 icon="colorwheel"
+    }
+}
+\end{lstlisting}
+
+A frame is containing the main functionality of the Hue color light bulb, and that can be done for every new component installed at home.
+
+OpenHAB 2 allows us to group our items so we can sort them by room or type. That can be made through the Group Item type.
+
+\subsubsection{Elements on a Sitemap}
+The element types specified in the table \ref{table:openhab-sitemaps-types} may be used in a Sitemap definition file.
+
+\begin{table}[]
+	\centering
+	\resizebox{\textwidth}{!}{%
+		\begin{tabular}{|l|l|}
+			\hline
+			\multicolumn{1}{|c|}{\textbf{Type}} & \multicolumn{1}{c|}{\textbf{Description}} \\ \hline
+			Chart & Adds a time-series chart object for persisted data \\ \hline
+			Colorpicker & Allows the user to choose a color from a color wheel \\ \hline
+			Default & \begin{tabular}[c]{@{}l@{}}Renders an Item in the default UI representation specified \\ by the type of the given Item\end{tabular} \\ \hline
+			Frame & \begin{tabular}[c]{@{}l@{}}Establishes an area containing various other Sitemap \\ elements\end{tabular} \\ \hline
+			Group & \begin{tabular}[c]{@{}l@{}}Concentrates all elements of a given group in a nested \\ block\end{tabular} \\ \hline
+			Image & Renders an image given by an URL \\ \hline
+			Mapview & Displays an OSM map based on a given Location Item \\ \hline
+			Selection & \begin{tabular}[c]{@{}l@{}}Provides a dropdown or modal popup presenting values\\ to choose from for an Item\end{tabular} \\ \hline
+			Setpoint & \begin{tabular}[c]{@{}l@{}}Renders a value between an increase and a decrease \\ buttons\end{tabular} \\ \hline
+			Slider & Presents a value in a progress-bar-like slider \\ \hline
+			Switch & Renders an Item as an ON/OFF or multi-button switch \\ \hline
+			Text & Renders an Item as text \\ \hline
+			Video & Displays a video stream, given a direct URL \\ \hline
+			Webview & Displays the content of a webpage \\ \hline
+		\end{tabular}%
+	}
+	\caption{Types of elements for a Sitemap in openHAB 2}
+	\label{table:openhab-sitemaps-types}
+\end{table}
+
+Data presented by Sitemap elements will almost always originate from a referenced Item. Each Item is of a certain Item type, for 
+example \textit{Switch}, \textit{Number} or \textit{String}.
+
+While not all combinations are meaningful, Items of one \textit{datatype} may be linked to different Sitemap element types. This 
+provides the flexibility to present Items in the way desired in the home automation user interface.
+
+\bigskip
+At this point, I have openHAB installed in the Raspberry Pi inside the AIY Voice Kit. OpenHAB is communicating with the Hue Hub and
+the Hue Color Light, and its state can be changed by accessing to the server that openHAB has created in the local network. This means
+that, if I type on the browser of my mobile phone the IP address of openHAB and its port (8080), I will be able to control the light from
+my phone as well. The state of the bulb can be changed from PaperUI (with the view that it has generated automatically) and from 
+Basic UI, with the view and Items that I have specified in these previous steps.
+
+Now the challenge is to build an assistant that can communicate with openHAB, and that is able to change the state of the configured
+Items.
+
+\subsection{Voice assistants and Speech-To-Text services}
+
 
