@@ -678,6 +678,66 @@ Basic UI, with the view and Items that I have specified in these previous steps.
 Now the challenge is to build an assistant that can communicate with openHAB, and that is able to change the state of the configured
 Items.
 
-\subsection{Voice assistants and Speech-To-Text services}
+\subsection{Voice Assistants and Speech-To-Text Services}
+The Google AIY Voice Kit, the device I am building the system on, already provides some files to access the Google Assistant. This
+means that, by default, it can work just like any Google Home device (I explored these devices in previous chapters), so it can
+provide general information and knowledge, play songs and tell the weather forecast, among other things. The files that the AIY Voice
+Kit provide are accessible and modifiable, so I could write an assistant that would work on top of the Google Assistant, with special
+commands.
 
+\subsubsection{Introduction}
+We could divide a simple voice assistant, like the one we are building on top of the Google Assistant for managing OpenHAB and the 
+Raspberry Pi, in three different parts:
+\begin{enumerate}
+	\item Speech-To-Text (STT) conversion.
+	\item Command processing.
+	\item Text-To-Speech (TTS) conversion.
+\end{enumerate}
+
+The flow after each command from the user follows the order above. On the next few lines, I am going to explain a little further 
+each one of these points.
+
+\subsubsection{Speech-To-Text}
+The Speech-To-Text or STT comes from the Speech Recognition, a sub-field of computational linguistics and IA. It is a computer 
+technique that enables the recognition and transcription of spoken language into text by analyzing the captured audio.
+
+It is the first step on the machine after capturing the voice, and it requires the execution of complex algorithms. This is why many 
+companies, like Google, offer “cloud speech recognition”, where the audio is entirely processed in the cloud, taking advantage of 
+very powerful computers. Thanks to this, its precision is much higher than other local solutions.
+
+\subsubsection{Command Processing}
+Once the system has the transcription of the spoken command, it must relate it with an action. It can be the execution of a function, 
+or just a spoken response, or both. The complexity of this part can vary significantly, depending on the range of actions we would 
+like the assistant to perform, or on how specific we want to be when recognizing the language.
+
+There are grammar specifications and even XML dialects for this purpose, like AIML. For the custom assistant I have built, I also 
+propose a model for processing the speech, as I will mention in further sections.
+
+\subsubsection{Text-To-Speech}
+Text-To-Speech or TTS is the inverse process of STT, that is, the artificial production of human speech given a text through a 
+number of processes that produce a pronounceable version of the text and a digital sound, thanks to signal treatment techniques.
+
+It is often the final step in the interaction with an assistant, when the assistant gives a response to a command given by the user.
+
+\subsubsection{STT and TTS in the Custom Assistant}
+The part where I have researched the most, which is also the one that offers more possibilities to this kind of assistant, is the 
+speech recognition. I have found plenty of services that offer this technology, locally and in the cloud. Many of them work on 
+Raspberry Pi, the heart of the Google AIY Kit.
+
+Google integrates in this kit the integration with two STT services: the Google Assistant Library and the Google Cloud 
+Speech-To-Text API. Both of them make the transcription in the cloud, freeing the Raspberry Pi from using much processing power 
+in it. Both of them are truly accurate and rarely produce a wrong result, as it is expected from Google. Using this implementation 
+of the Google Assistant Library is free, but it only works in English at this moment, so it is only possible to make the assistant 
+in this language with this service. On the other hand, the Google Cloud Speech API is capable of recognizing more than 120 languages 
+with its variants, even with long audio files. It can also provide content filters and automatic punctuation. But this solution is 
+not totally free, it comes with a price of \$0.006 USD per 15 seconds of audio after 60 minutes, each month.
+
+Outside of Google, there are many other services that could also work with our assistant, from local solutions like CMUSphinx to 
+cloud services provided by other companies. Local solutions offer offline recognition, in exchange for taking up large storage space 
+and being slower and a lot more inaccurate than the cloud ones. Furthermore, cloud services are constantly updated and offer 
+state-of-the-art voice recognition. They are usually very fast and, as they work in the cloud, do not need space on the user's drive. 
+Usually, the providers of these services are major technology companies such as Microsoft and IBM, which provide the API for a 
+periodic fee.
+
+To find out which service best fits in my custom assistant, I will compare the most interesting ones I have found in a table.
 
