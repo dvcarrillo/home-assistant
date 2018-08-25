@@ -725,19 +725,55 @@ speech recognition. I have found plenty of services that offer this technology, 
 Raspberry Pi, the heart of the Google AIY Kit.
 
 Google integrates in this kit the integration with two STT services: the Google Assistant Library and the Google Cloud 
-Speech-To-Text API. Both of them make the transcription in the cloud, freeing the Raspberry Pi from using much processing power 
-in it. Both of them are truly accurate and rarely produce a wrong result, as it is expected from Google. Using this implementation 
-of the Google Assistant Library is free, but it only works in English at this moment, so it is only possible to make the assistant 
-in this language with this service. On the other hand, the Google Cloud Speech API is capable of recognizing more than 120 languages 
-with its variants, even with long audio files. It can also provide content filters and automatic punctuation. But this solution is 
-not totally free, it comes with a price of \$0.006 USD per 15 seconds of audio after 60 minutes, each month.
+Speech-To-Text API\cite{googleCloudSttWebsite}. Both of them make the transcription in the cloud, freeing the Raspberry Pi from 
+using much processing power in it. Both of them are truly accurate and rarely produce a wrong result, as it is expected from Google. 
+Using this implementation of the Google Assistant Library is free, but it only works in English at this moment, so it is only 
+possible to make the assistant in this language with this service. On the other hand, the Google Cloud Speech API is capable of 
+recognizing more than 120 languages with its variants, even with long audio files. It can also provide content filters and automatic 
+punctuation. But this solution is not totally free, it comes with a price of \$0.006 USD per 15 seconds of audio after 60 minutes, 
+each month.\cite{craftworkzBlog}\cite{globalmeBlog}
 
-Outside of Google, there are many other services that could also work with our assistant, from local solutions like CMUSphinx to 
-cloud services provided by other companies. Local solutions offer offline recognition, in exchange for taking up large storage space 
-and being slower and a lot more inaccurate than the cloud ones. Furthermore, cloud services are constantly updated and offer 
-state-of-the-art voice recognition. They are usually very fast and, as they work in the cloud, do not need space on the user's drive. 
-Usually, the providers of these services are major technology companies such as Microsoft and IBM, which provide the API for a 
-periodic fee.
+Outside of Google, there are many other services that could also work with our assistant, from local solutions like 
+CMUSphinx\cite{cmusphinxWiki} to cloud services provided by other companies. Local solutions offer offline recognition, in 
+exchange for taking up large storage space and being slower and a lot more inaccurate than the cloud ones. Furthermore, 
+cloud services are constantly updated and offer state-of-the-art voice recognition. They are usually very fast and, as they work 
+in the cloud, do not need space on the user's drive. Usually, the providers of these services are major technology companies 
+such as Microsoft and IBM\cite{ibmWatsonSttWebsite}, which provide the API for a periodic fee.
 
-To find out which service best fits in my custom assistant, I will compare the most interesting ones I have found in a table.
+To find out which service best fits in my custom assistant, I compare the most interesting ones I have found in the table 
+\ref{table:comparison-stt-services}.
 
+\begin{table}[]
+	\centering
+	\resizebox{\textwidth}{!}{%
+		\begin{tabular}{|l|l|l|l|l|}
+			\hline
+			\textbf{Name} & Assistant Library & Cloud TTS\cite{googleCloudSttWebsite} & Pocketsphinx\cite{cmusphinxWiki} & Watson STT\cite{ibmWatsonSttWebsite}\cite{ibmDeveloperWorksRecipes} \\ \hline
+			\textbf{Maker} & Google & Google & CMUSphinx & IBM \\ \hline
+			\textbf{Location} & Cloud & Cloud & Local & Cloud \\ \hline
+			\textbf{\begin{tabular}[c]{@{}l@{}}Voice HAT\\ support\end{tabular}} & Yes & Yes & No & No \\ \hline
+			\textbf{\begin{tabular}[c]{@{}l@{}}Required \\ space\end{tabular}} & Insignificant & Insignificant & \begin{tabular}[c]{@{}l@{}}40 MB +\\ language models\end{tabular} & Insignificant \\ \hline
+			\textbf{\begin{tabular}[c]{@{}l@{}}Recognition\\ quality\end{tabular}} & Excellent & Excellent & Good & Excellent \\ \hline
+			\textbf{Languages} & English & 120 supported & 13 supported & 13 supported \\ \hline
+			\textbf{Prince} & \begin{tabular}[c]{@{}l@{}}Free (comes with\\ the AIY Kit)\end{tabular} & \begin{tabular}[c]{@{}l@{}}\$0.006 USD/15 \\ seconds after 60 \\ minutes/mo.\end{tabular} & Free & \begin{tabular}[c]{@{}l@{}}\$0.02 USD/min. \\ after 1,000 \\ minutes/mo.\end{tabular} \\ \hline
+			\textbf{Open source} & No & No & Yes & No \\ \hline
+		\end{tabular}%
+	}
+	\caption{Comparison of Speech-To-Text services}
+	\label{table:comparison-stt-services}
+\end{table}
+
+I have included a selection of services that can sum up the benefits and problems of all the available services. The main difference 
+is if they are in the cloud or installed locally. Generally, cloud services will provide great results, but they are not free in 
+most cases. Local services can be free and open source, but their recognition is usually poorer, and they require some storage 
+space that we might need for other things.
+
+Then, in our specific case, Voice HAT support is a great matter. This is a device made by Google and included in the AIY Voice Kit, 
+which connects the microphone and other components of the assistant with the Raspberry Pi. Google services support it natively, 
+but not the others, which recommend using a USB microphone, like the implementation of IBM Watson STT for Raspberry Pi. But we 
+cannot get rid of the HAT, because we need it for managing the speaker and the button. In conclusion, these other options do not 
+seem viable considering the effort and modifications they need in order to work properly.
+
+Therefore, when comparing the solutions provided by Google, the only advantage of the Cloud Text-To-Speech service is that it offers 
+support for many other languages. Although this option is very easy to implement (Google even includes an example of its usage with 
+the AIY Kit), considering the main points in this project I decided to keep the assistant free of charge and working in English.
