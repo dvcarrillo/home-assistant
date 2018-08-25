@@ -279,7 +279,7 @@ The AIY Voice Kit is a do-it-yourself project created by Google that demonstrate
 voice recognizer that works with Google Assistant, at a price of only EUR 30 in Europe. The project, aimed for makers, also lets the 
 user add their own questions, which is the most powerful part for our purpose. 
 
-The idea is to adapt the device in order to fetch the voice commands that the microphone captures and manage them in OpenHAB, 
+The idea is to adapt the device in order to fetch the voice commands that the microphone captures and manage them in openHAB, 
 making the system act following user’s instructions.
 
 \subsubsection{Capabilities}
@@ -295,7 +295,7 @@ and, by default, it is capable of doing almost everything that the Google Assist
 with the apps in the user’s smartphone and reading the news, among other things.
 
 \subsubsection{The Main Challenge}
-The challenge is to explore how Google AIY Voice Kit and OpenHAB 2, both installed on the same system, can work together and, 
+The challenge is to explore how Google AIY Voice Kit and openHAB 2, both installed on the same system, can work together and, 
 if it is possible, connect them so a standard user can control its smart home using voice commands and universal, open source solutions.
 
 \subsection{Building the Google AIY Voice Kit}
@@ -476,8 +476,8 @@ the connection is done from openHAB. The application allows to manage rooms and 
 (for instance, turning the light on when the motion sensor detects any movement). OpenHAB is unable to perform such complex operations 
 by default, providing only a few channels for the light bulb.
 
-Once the Hub is on, connected and linked with the Hue devices, we can proceed to configure it on OpenHAB. In this case, I explain 
-the process to follow in order to add the light bulb controls, but it might work for other Hue devices in a future. If OpenHAB is 
+Once the Hub is on, connected and linked with the Hue devices, we can proceed to configure it on openHAB. In this case, I explain 
+the process to follow in order to add the light bulb controls, but it might work for other Hue devices in a future. If openHAB is 
 used on a system connected to the same network as the Hub, the Hub will automatically appear in the \textit{Inbox} section. We have 
 to make sure before that its related binding. Adding the Hub in the Inbox section means that it will be listed as a Thing. OpenHAB 
 takes care automatically of the Thing (figure \ref{fig:philips-hue-hub-thing}) and Items configuration. After adding them, the host 
@@ -526,12 +526,12 @@ in Java, as shown in the figure \ref{fig:hue-binding-structure}), integrated in 
 \end{figure}
 
 As we can see, there are packages for handling the lights and Hub (which is named \textit{bridge}), and for managing the internal 
-functionality of the binding and OpenHAB. That is, discovering the devices and showing them in the Inbox and managing exceptions. 
+functionality of the binding and openHAB. That is, discovering the devices and showing them in the Inbox and managing exceptions. 
 Examples of exceptions can be having the device off or sending the device a wrong command.
 
 Looking more closely at the device handlers, we can see that the bridge handler implements a \textit{Runnable} object with a 
 \textit{run} method, which gets the Hub configuration. The function gets the IDs of all the lights connected to the Hub and iterates 
-over them. If a light is not listed in a list of light states caught from OpenHAB, it is added as a new light. If it is listed, then 
+over them. If a light is not listed in a list of light states caught from openHAB, it is added as a new light. If it is listed, then 
 it checks for changes in the status of the light, comparing the actual state with the last one saved. If the states are different, 
 notifies the Light listeners. There is a \textit{LightStatusListener} interface that is called on each change, it will modify the 
 Light and Hue objects.
@@ -579,8 +579,8 @@ custom ordering of Things. \textit{Sitemaps} are custom views that can be displa
 is also automatically installed at the beginning.\cite{openHABDocs} Sitemaps take defined Items and display them as the user specifies 
 in the UI.
 
-The user is able to define as many sitemaps as desired, and they can be selected from OpenHAB 2 home screen, in the Basic UI. Sitemaps 
-are text files with the .sitemap extension, and they are defined in the folder thet I specified in the previous section, inside the OpenHAB 
+The user is able to define as many sitemaps as desired, and they can be selected from openHAB 2 home screen, in the Basic UI. Sitemaps 
+are text files with the .sitemap extension, and they are defined in the folder thet I specified in the previous section, inside the openHAB 
 installation directory.
 
 The basic syntax that a sitemap follows is:
@@ -686,7 +686,7 @@ Kit provide are accessible and modifiable, so I could write an assistant that wo
 commands.
 
 \subsubsection{Introduction}
-We could divide a simple voice assistant, like the one I am building on top of the Google Assistant for managing OpenHAB and the 
+We could divide a simple voice assistant, like the one I am building on top of the Google Assistant for managing openHAB and the 
 Raspberry Pi, in three different parts:
 \begin{enumerate}
     \item Speech-To-Text (STT) conversion.
@@ -789,7 +789,7 @@ The best part of the Google AIY Voice Kit is that it is fully customizable and b
 is meant to be fully modifiable, so each user can play with it and use it for their needs.
 
 In this case, I are going to take advantage of this fact to build our own assistant, able to process custom commands that will 
-work with OpenHAB. 
+work with openHAB. 
 
 The AIY Voice Kit is able to process button taps and to recognize the “OK Google” command in order to trigger the assistant. In 
 our case, I can use both triggers, so the voice assistant is launched the same way no matter what way the user choses each time. 
@@ -851,17 +851,25 @@ We can also notice that this script only sends the commands to the assistant, an
 its responses and plays them on the speaker. This means that no processing is made in our computer, Google Assistant takes care 
 of the commands that the user sends and composes a response according to that.
 
-\subsubsection{Making My Own Script That Works With OpenHAB}
-The previous script falls short for our purpose, as it does not include any integration with OpenHAB and it only triggers the 
+\subsubsection{Making My Own Script That Works With openHAB}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.65\textwidth]{images/Chapter_06/custom-assistant-simple.png}
+	\caption{Basic diagram of the custom voice assistant}
+	\label{fig:custom-assistant-simple}
+\end{figure}
+
+The previous script falls short for our purpose, as it does not include any integration with openHAB and it only triggers the 
 assistant when the red button on the Google AIY box is pressed.
 
 I worked over this example script, and some more that Google brings with this kit, in order to create a new one that integrates 
-all the basic functionalities and works with OpenHAB. The main aspects to include are:
+all the basic functionalities and works with openHAB. The main aspects to include are:
 \begin{itemize}
     \item Activation via red button and “OK Google” command at the same time.
     \item Add custom commands to the assistant:
     \begin{itemize}
-        \item Ability to manage OpenHAB from the assistant.
+        \item Ability to manage openHAB from the assistant.
         \item Ability to manage the Raspberry Pi.
     \end{itemize}
     \item Possibility to integrate more languages.
@@ -906,3 +914,39 @@ if self._can_start_conversation:
           self._assistant.start_conversation()
 \end{lstlisting}
 
+This code snippet specifies just what we want to create at this moment. It has a call to the function \textit{\_process\_event()}, 
+which will process our events. I will talk about it in the following sections.
+
+\paragraph{Adding Custom Commands to the Assistant}
+The Google Assistant responds to a huge variety of commands and can perform a considerable range of actions. Some devices even 
+work with Google Home, but not many others that do work with openHAB 2. As we want to achieve an inexpensive, open-source home 
+automation system, we need to integrate the assistant with openHAB 2, although this solution will also cover the devices that are 
+compatible with Google Home, that are natively integrated with the assistant.
+
+Unfortunately, we cannot customize Google Assistant commands, but we can build a basic assistant over this one that will cover our 
+needs. Both will be working at the same time as well. 
+
+I will use the Text-To-Speech engine that Raspbian integrates: \textit{pico2wave}. In the function \textit{\_process\_event()} that 
+I mentioned before, we need to add some conditions for checking some “keywords” that will lead the program to stop the assistant 
+for that command and execute our own one.
+
+Apart from commands for managing openHAB 2, it is also a good idea to be able to manage the system from the assistant, as it is 
+meant to be headless (that is, able to work without a screen connected) and powering off the Raspberry Pi by disconnecting the 
+power cord is not recommendable. For now, I am going to add functions for powering off and rebooting the system:
+
+\begin{lstlisting}[style=PythonCode]
+def power_off_pi():
+  aiy.audio.say('Powering off the system. Good bye!')
+  subprocess.call('sudo shutdown now', shell=True)
+	
+def reboot_pi():
+  aiy.audio.say('Rebooting the system. Hold on!')
+  subprocess.call('sudo reboot', shell=True)
+\end{lstlisting}
+
+In each one, we define what the assistant is going to say when the function is executed with \textit{aiy.audio.say()} and what 
+command to execute in the system with subprocess.call().
+
+Then, with only one function we will be able to send any command to openHAB via REST. I have defined the URL in the same machine, 
+as the Raspberry Pi is supposed to host the assistant and openHAB. The function creates a POST request that includes the item(s) 
+and the desired state. When it gets the response, it responds with the success or failure of the command.
