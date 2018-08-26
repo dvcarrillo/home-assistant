@@ -22,6 +22,7 @@
 %\RequirePackage[Glenn]{fncychap}
 \usepackage{fancyhdr}
 \usepackage{graphicx}
+\usepackage[table,xcdraw]{xcolor}
 \usepackage{afterpage}
 
 \usepackage{longtable}
@@ -208,18 +209,24 @@ pdfproducer = {pdflatex}
 
 \input{chapters/07_Conclusions_and_future_work}
 
-% \nocite{*}
+\nocite{asadullah16}
+\nocite{openHABCommunity}
+\nocite{raspberryPiForums}
+\nocite{pythonDocumentation}
+\nocite{mdnWebDocs}
+\nocite{cmusphinxFaq}
+\nocite{microsoftCortanaDev}
+\nocite{cleveroad}
+\nocite{jonesPythonCookbok}
+
 \bibliographystyle{plain}
 \bibliography{bibliography/bibliography}
 \addcontentsline{toc}{chapter}{Bibliography}
 
-%\appendix
-%\input{apendices/manual_usuario/manual_usuario}
-%%\input{apendices/paper/paper}
-%\input{glosario/entradas_glosario}
-% \addcontentsline{toc}{chapter}{Glosario}
-% \printglossary
-\chapter*{}
+\appendix
+\input{appendices/01_VoiceAssistantScript}
+
+\newpage \
 \thispagestyle{empty}
 
 \end{document}

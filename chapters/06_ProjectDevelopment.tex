@@ -1,18 +1,18 @@
 \chapter{Project Development}
-    
-In each of the previous chapters I have explored different aspects of the fields of home automation and voice assistance from a 
-theoretical point of view, from their definition to smaller details, including additional explanations about a specific home automation 
+
+In each of the previous chapters I have explored different aspects of the fields of home automation and voice assistance from a
+theoretical point of view, from their definition to smaller details, including additional explanations about a specific home automation
 system, openHAB.
 
-At this time, I think I have provided enough background to begin my case study: the building of a home automation controller. As I 
+At this time, I think I have provided enough background to begin my case study: the building of a home automation controller. As I
 mentioned in the openHAB chapter, I will base my project on this system and build on it, as it accomplishes very well the main
 requirements that I determined for this project.
 
 In this chapter, I will detail the process that I have followed in order to develop this project, from its specification to the final result.
 
 \section{Product Specification}
-The first task to do is to define the product. What should a home automation system do? What do users expect it to do? How? All 
-the answers to these questions can be clarified by following some processes that, although they do not completely answer them (we 
+The first task to do is to define the product. What should a home automation system do? What do users expect it to do? How? All
+the answers to these questions can be clarified by following some processes that, although they do not completely answer them (we
 can see many failed projects from time to time), they provide a very clear and detailed specification from the beginning.
 
 \subsection{Personas}
@@ -21,31 +21,31 @@ design, and it is applicable in this project in order to have a better idea of w
 
 A persona is a representation of a user, typically based off user research and incorporating user goals, needs, and interests.
 
-In this project, I am going to use proto-personas, which are based on secondary research and the guess of who they should be designed 
+In this project, I am going to use proto-personas, which are based on secondary research and the guess of who they should be designed
 for, as currently we do not have means and time for making true research-based personas (and it is not the main objective in this project).
 
-After thinking about the main uses of this system and the people that would be interested on it, I have extracted these three personas, 
+After thinking about the main uses of this system and the people that would be interested on it, I have extracted these three personas,
 representing its main uses, although not the only ones. I have built them with the online platform Xtensio, and the figures
-\ref{fig:persona-oswald-douglas}, \ref{fig:persona-anna-lahtinen} and \ref{fig:persona-rosario-vera} represent them. I tried to extract 
-a varied range of backgrounds, current situations, desires and worries. 
+\ref{fig:persona-oswald-douglas}, \ref{fig:persona-anna-lahtinen} and \ref{fig:persona-rosario-vera} represent them. I tried to extract
+a varied range of backgrounds, current situations, desires and worries.
 
-Oswald Douglas (figure \ref{fig:persona-oswald-douglas}) is a freelance technology blogger from Dallas, USA, that is very interested 
-in the areas of home automation and Internet of Things. He is looking to automate his own home and write about his experience in 
-his blog. He already has experience with technology, and this next step will not be too difficult for him. His interests are clear: 
+Oswald Douglas (figure \ref{fig:persona-oswald-douglas}) is a freelance technology blogger from Dallas, USA, that is very interested
+in the areas of home automation and Internet of Things. He is looking to automate his own home and write about his experience in
+his blog. He already has experience with technology, and this next step will not be too difficult for him. His interests are clear:
 to try cutting-edge technology in his own home and make the most of home automation.
 
-Anna Lahtinen (figure \ref{fig:persona-anna-lahtinen}) is a 16 year-old high school student from Lappeenranta, Finland. She is up 
-to date on technology but she is not passionate about it. However, she heard about home automation and thinks that she could enjoy 
-a better media experience with it. In addition, she thinks that adding smart color light bulbs to her bedroom would make it look more 
-beautiful. However, she feels that there is a lack of general information about devices and the set up and configuration of a home 
+Anna Lahtinen (figure \ref{fig:persona-anna-lahtinen}) is a 16 year-old high school student from Lappeenranta, Finland. She is up
+to date on technology but she is not passionate about it. However, she heard about home automation and thinks that she could enjoy
+a better media experience with it. In addition, she thinks that adding smart color light bulbs to her bedroom would make it look more
+beautiful. However, she feels that there is a lack of general information about devices and the set up and configuration of a home
 automation system. She thinks that the price of it is too high as well.
 
-Rosario Vera (figure \ref{fig:persona-rosario-vera}) is an administrative from Vitoria-Gasteiz, Spain. She is 37 years old, is married and 
-has two young children. She is not very familiar with technology, but she has heard about home automation in the news and thinks 
-that it could fit her needs. Rosario and her husband work outside home, and sometimes their children need to be alone at home. Home 
-automation would provide more security to the home and would allow them to have more spare time. Voice assistance would be helpful 
-for their children when they are alone, as it is a very easy and natural way to interact with technology. However, she is concerned about 
-their privacy regarding these systems and she thinks that companies should give more accessible explanations about it. In addition, 
+Rosario Vera (figure \ref{fig:persona-rosario-vera}) is an administrative from Vitoria-Gasteiz, Spain. She is 37 years old, is married and
+has two young children. She is not very familiar with technology, but she has heard about home automation in the news and thinks
+that it could fit her needs. Rosario and her husband work outside home, and sometimes their children need to be alone at home. Home
+automation would provide more security to the home and would allow them to have more spare time. Voice assistance would be helpful
+for their children when they are alone, as it is a very easy and natural way to interact with technology. However, she is concerned about
+their privacy regarding these systems and she thinks that companies should give more accessible explanations about it. In addition,
 she finds these systems difficult to use.
 
 \begin{sidewaysfigure}
@@ -79,7 +79,7 @@ human-computer interaction through the voice. A more detailed specification of t
 below.
 
 \subsubsection{Functional Requirements}
-Functional requirements are a description of the facility or feature required. They deal with what the system should do or provide 
+Functional requirements are a description of the facility or feature required. They deal with what the system should do or provide
 for users.\cite{sqaFunctionalNonFunctional}
 
 \begin{itemize}
@@ -88,7 +88,7 @@ for users.\cite{sqaFunctionalNonFunctional}
     \item \textbf{FR3}: The system will not need any operation to launch openHAB after it is powered on.
     \item \textbf{FR4}: The system will be able to turn itself off safely.
     \item \textbf{FR5}: The system will automatically detect new smart devices connected to the local network.
-    \item \textbf{FR6}: The system will be able to detect the possible operations with each connected smart device. 
+    \item \textbf{FR6}: The system will be able to detect the possible operations with each connected smart device.
     \item \textbf{FR7}: The system will be able to operate with the connected devices according to the detected possible operations.
     \item \textbf{FR8}: The system will be able to tell the user in an understandable manner the current connection status for each
     device.
@@ -139,7 +139,7 @@ to what standard a function should be provided.\cite{sqaFunctionalNonFunctional}
     \item \textbf{NFR11}: The cost of the system must me minimal.
     \item \textbf{NFR12}: The system must be interoperable with multiple devices.
     \item \textbf{NFR13}: The voice assistant will recognize English.
-    \item \textbf{NFR14}: The voice assistant will be fast in its response. Therefore, its procedure for deciding a response will 
+    \item \textbf{NFR14}: The voice assistant will be fast in its response. Therefore, its procedure for deciding a response will
     be optimal.
     \item \textbf{NFR15}: The voice assistant will operate with the home automation system via REST, so it can be installed in a
     different computer than the one with the home assistant.
@@ -148,7 +148,7 @@ to what standard a function should be provided.\cite{sqaFunctionalNonFunctional}
 \subsection{Use Cases}
 The next step after the specification of requirements is to specify the use cases of the system.
 
-Use case diagrams are usually referred to as behavior diagrams used to describe a set of actions (use cases) that some system or 
+Use case diagrams are usually referred to as behavior diagrams used to describe a set of actions (use cases) that some system or
 systems (subject) should or can perform in collaboration with one or more external users of the system (actors).\cite{umlUseCaseDiagrams}
 
 %TODO
@@ -160,7 +160,7 @@ systems (subject) should or can perform in collaboration with one or more extern
 %Especificar aquí los subsistemas funcionales
 
 \subsection{Implementation Possibilities}
-After exploring what users would expect from a system like this, it is worth thinking about how it should be implemented. Together 
+After exploring what users would expect from a system like this, it is worth thinking about how it should be implemented. Together
 with my director, I proposed different options to meet the previous requirements.
 
 \subsubsection{Web Platform}
@@ -174,24 +174,24 @@ OpenHAB mounts a web platform in a local server by default, and provides several
 not require much effort, and it offers many possibilities.
 
 \subsubsection{Desktop Application}
-Another solution, focused on the Raspberry Pi desktop (where we mainly want to implement the system), is developing a desktop 
-application with an adapted user interface for tactile screens. The advantage of a desktop application is that it usually requires 
-less resources and it is faster, but it is a specific solution for the Raspberry Pi, so it would only work there. We would need a 
+Another solution, focused on the Raspberry Pi desktop (where we mainly want to implement the system), is developing a desktop
+application with an adapted user interface for tactile screens. The advantage of a desktop application is that it usually requires
+less resources and it is faster, but it is a specific solution for the Raspberry Pi, so it would only work there. We would need a
 different application if we wanted it to run on mobile phones or tablets.
 
 We would need to make it from scratch, as openHAB does not provide any desktop application.
 
 \subsubsection{Mobile Application}
-Mobile phones and \textit{tablets} are common devices that are widely used to manage smart homes. Some setups have a tablet located 
+Mobile phones and \textit{tablets} are common devices that are widely used to manage smart homes. Some setups have a tablet located
 somewhere in the home, which is only used for managing the domotic devices. An application is faster and more accessible than a web
 platform, and users are more used to them, so it would be convenient in some cases.
 
-However, making the system only accessible from a mobile or tablet application would reduce the utility of the Raspberry Pi, and 
+However, making the system only accessible from a mobile or tablet application would reduce the utility of the Raspberry Pi, and
 would at least require two devices (one for the local server and another one for accessing it). Although it is a good complement to the
 system, it is not convenient to base it only on a mobile application. However, it is applicable in a hybrid solution.
 
 \subsubsection{Hybrid Solution}
-A hybrid solution consists of applying two or more solutions together of those specified above. For example, providing a web platform 
+A hybrid solution consists of applying two or more solutions together of those specified above. For example, providing a web platform
 and an optional mobile application to easily manage the system from a mobile device.
 
 OpenHAB provides a web platform, as explained above, and a mobile application for iOS and Android than connects to the web platform.
@@ -216,8 +216,8 @@ The table \ref{table:possible-implementations} compares all the possibilities fo
     \label{table:possible-implementations}
 \end{table}
 
-As we can see, the hybrid solution, which is a web platform and mobile application, meets all the features in the best way, and 
-offers easy and fast implementation. At this point, I have not considered the implementation of the voice assistant, which I will 
+As we can see, the hybrid solution, which is a web platform and mobile application, meets all the features in the best way, and
+offers easy and fast implementation. At this point, I have not considered the implementation of the voice assistant, which I will
 talk about in following sections.
 
 \bigskip
@@ -255,15 +255,15 @@ assistant.
 \end{figure}
 
 As I have mentioned before, the main objective is to install the system in a Raspberry Pi, which is an affordable and small computer,
-with enough power and connectivity options to install a home automation system on it, and even a voice assistant. The possibilities 
-of this device are endless: it can work with or without display, and has a special connector to which the user can connect screens, 
-microphones, speakers and many other accessories. It also has USB ports on its high-end models, and accepts all the USB 
+with enough power and connectivity options to install a home automation system on it, and even a voice assistant. The possibilities
+of this device are endless: it can work with or without display, and has a special connector to which the user can connect screens,
+microphones, speakers and many other accessories. It also has USB ports on its high-end models, and accepts all the USB
 accessories that a normal computer would accept.\cite{raspberryPiDocs}
 
-The first approach to this system was to install Raspbian, a Linux distribution provided by openHAB, over a Raspberry Pi 3 Model B 
-(figure \ref{fig:raspberry-pi-3b}). Raspbian has openHAB preinstalled and configured, so it is ready to use. The first idea was to 
-have a computer with openHAB and then a voice assistant in other machine. I installed the distribution on this mini PC, but after 
-reviewing the possible voice assistants, I found that it was not the best way to implement it. 
+The first approach to this system was to install Raspbian, a Linux distribution provided by openHAB, over a Raspberry Pi 3 Model B
+(figure \ref{fig:raspberry-pi-3b}). Raspbian has openHAB preinstalled and configured, so it is ready to use. The first idea was to
+have a computer with openHAB and then a voice assistant in other machine. I installed the distribution on this mini PC, but after
+reviewing the possible voice assistants, I found that it was not the best way to implement it.
 
 I found the Google AIY Voice Kit, which is a kit provided by Google to makers that want to play around with voice recognition.
 They provide a package with some accessories for the Raspberry Pi and a cardboard box that is meant to contain the board and the
@@ -275,27 +275,27 @@ smart home graphically from the same device.
 I thought this would be the best solution, and it would still meet all the requirements specified previously. So, I began working on it.
 
 \subsection{Introduction to Google AIY Voice Kit}
-The AIY Voice Kit is a do-it-yourself project created by Google that demonstrates how easy and inexpensive can be to create a natural 
-voice recognizer that works with Google Assistant, at a price of only EUR 30 in Europe. The project, aimed for makers, also lets the 
-user add their own questions, which is the most powerful part for our purpose. 
+The AIY Voice Kit is a do-it-yourself project created by Google that demonstrates how easy and inexpensive can be to create a natural
+voice recognizer that works with Google Assistant, at a price of only EUR 30 in Europe. The project, aimed for makers, also lets the
+user add their own questions, which is the most powerful part for our purpose.
 
-The idea is to adapt the device in order to fetch the voice commands that the microphone captures and manage them in openHAB, 
+The idea is to adapt the device in order to fetch the voice commands that the microphone captures and manage them in openHAB,
 making the system act following user’s instructions.
 
 \subsubsection{Capabilities}
-The main advantage of the Google AIY Voice Kit, and the reason why we have chosen it for this project, is that we can access the 
-Google Cloud Voice API and create our own voice interfaces. Everything is coded in Python, and we can create voice commands to 
+The main advantage of the Google AIY Voice Kit, and the reason why we have chosen it for this project, is that we can access the
+Google Cloud Voice API and create our own voice interfaces. Everything is coded in Python, and we can create voice commands to
 control it.
 
-This, along with the more than reasonable quality of its stereo microphone and speaker, make it a very useful device that could 
+This, along with the more than reasonable quality of its stereo microphone and speaker, make it a very useful device that could
 perfectly fit in a smart home, despite its looks.
 
-The device is capable of recognizing the “OK Google” command, as well triggering the assistant when the big red button is pressed, 
-and, by default, it is capable of doing almost everything that the Google Assistant on smartphones can do, including integration 
+The device is capable of recognizing the “OK Google” command, as well triggering the assistant when the big red button is pressed,
+and, by default, it is capable of doing almost everything that the Google Assistant on smartphones can do, including integration
 with the apps in the user’s smartphone and reading the news, among other things.
 
 \subsubsection{The Main Challenge}
-The challenge is to explore how Google AIY Voice Kit and openHAB 2, both installed on the same system, can work together and, 
+The challenge is to explore how Google AIY Voice Kit and openHAB 2, both installed on the same system, can work together and,
 if it is possible, connect them so a standard user can control its smart home using voice commands and universal, open source solutions.
 
 \subsection{Building the Google AIY Voice Kit}
@@ -318,51 +318,51 @@ For making the voice recognizer, I primarily used:
     \label{fig:aiy-voice-kit}
 \end{figure}
 
-First of all, I had to put all the items together and assemble the cardboard body. The Voice HAT accessory board is connected to the 
+First of all, I had to put all the items together and assemble the cardboard body. The Voice HAT accessory board is connected to the
 Raspberry Pi through its GPIO connector, which is adapted to connect the rest of devices: the speaker, the microphone board and the
-button. Once everything was correctly connected, I had to assemble the cardboard body, which was composed by two 
+button. Once everything was correctly connected, I had to assemble the cardboard body, which was composed by two
 pieces.\cite{aiyProjectsVoice}
 
-The next step was to write the Voice Kit SD image\cite{voiceKitSdImage} to the microSD card. I used the \textit{Etcher.io} macOS 
-application for this purpose. 
+The next step was to write the Voice Kit SD image\cite{voiceKitSdImage} to the microSD card. I used the \textit{Etcher.io} macOS
+application for this purpose.
 
-The system includes everything that the Raspberry Pi needs to use the connected devices, so I only needed to check that they worked 
-fine and were correctly connected. The system also includes two demos with Google Assistant: one that triggers the assistant by saying 
+The system includes everything that the Raspberry Pi needs to use the connected devices, so I only needed to check that they worked
+fine and were correctly connected. The system also includes two demos with Google Assistant: one that triggers the assistant by saying
 “OK Google!”, and another that needs the button to be pressed to trigger it.
 
-To make any demo or a new app that uses Google Assistant work, it is necessary to register a new project on Google Cloud Platform 
-(GCP) first. A project of this kind has to include the Google Assistant API, which can be enabled via GCP, as well as an OAuth 2.0 
-client. Finally, at the moment of running the application, it seeks a JSON file that contains all this information. By default, it 
+To make any demo or a new app that uses Google Assistant work, it is necessary to register a new project on Google Cloud Platform
+(GCP) first. A project of this kind has to include the Google Assistant API, which can be enabled via GCP, as well as an OAuth 2.0
+client. Finally, at the moment of running the application, it seeks a JSON file that contains all this information. By default, it
 must be placed in the home folder and it must be called assistant.json.
 
-Google Assistant gathers all the user’s information from their Google account, so they must have enabled the web and app activity, 
+Google Assistant gathers all the user’s information from their Google account, so they must have enabled the web and app activity,
 the device information and the voice and audio activity from their Activity Controls panel in their Google account settings.
 
 \subsection{Setting up openHAB 2}
-In this case, the goal is to install openHAB in the Linux distribution that the AIY Kit provides, which is a fork of Raspbian 
-(that is a fork of Debian made for the Raspberry Pi), with the suitable drivers in order to support all the accessories from the kit. 
+In this case, the goal is to install openHAB in the Linux distribution that the AIY Kit provides, which is a fork of Raspbian
+(that is a fork of Debian made for the Raspberry Pi), with the suitable drivers in order to support all the accessories from the kit.
 Luckily, openHAB provide in their documentation pages\cite{openHABDocs} enough instructions to make this process easier.
 
-In this process, I used a keyboard and a mouse for interacting with the operating system, but it can also be done remotely via 
+In this process, I used a keyboard and a mouse for interacting with the operating system, but it can also be done remotely via
 SSH connection.
 
-As a prerequisite, Java 8 must be installed on the system. Users may prefer Zulu, the main Java \textit{alternative}, a fully 
+As a prerequisite, Java 8 must be installed on the system. Users may prefer Zulu, the main Java \textit{alternative}, a fully
 certified build of OpenJDK.\cite{zuluWebsite}
 
 OpenHAB 2 can be installed though a package repository or manually from file, but it is recommended to install through a package
-repository, using \textit{apt}, \textit{apt-get}, \textit{yum} or \textit{dnf}. As this operating system is based on Debian, I used 
+repository, using \textit{apt}, \textit{apt-get}, \textit{yum} or \textit{dnf}. As this operating system is based on Debian, I used
 \textit{apt-get}.
 
-First of all, I have to add the openHAB 2 Bintray repository key to the package manager and allow \textit{apt} to use the HTTPS 
+First of all, I have to add the openHAB 2 Bintray repository key to the package manager and allow \textit{apt} to use the HTTPS
 Protocol.
 
 \begin{lstlisting}[style=Consola]
-wget -qO - 'https://bintray.com/user/downloadSubjectPublicKey?username=openhab' | sudo apt-key add - 
+wget -qO - 'https://bintray.com/user/downloadSubjectPublicKey?username=openhab' | sudo apt-key add -
 sudo apt-get install apt-transport-https
 \end{lstlisting}
 
-OpenHAB offers Stable (Official), Beta and Snapshot builds to choose from. The stable builds contain the latest official release 
-with tested features, so it is the \textit{safest} to use. I will install this one. Then, I need to add the openHAB 2 Stable Repository 
+OpenHAB offers Stable (Official), Beta and Snapshot builds to choose from. The stable builds contain the latest official release
+with tested features, so it is the \textit{safest} to use. I will install this one. Then, I need to add the openHAB 2 Stable Repository
 to your systems apt sources list
 
 \begin{lstlisting}[style=Consola]
@@ -381,11 +381,11 @@ And now I can install openHAB:
 sudo apt-get install openhab2
 \end{lstlisting}
 
-Optionally, it is possible to install the add-ons package (\textit{openhab2-addons}), but it is meant to be installed if the machine 
+Optionally, it is possible to install the add-ons package (\textit{openhab2-addons}), but it is meant to be installed if the machine
 is going to be disconnected from the Internet, as openHAB downloads them on request by default. In this case, I assume that the
 system is going to be connected to Internet always.
 
-At this point, I can start openHAB and register it to be automatically executed at system startup. To this end, the documentation 
+At this point, I can start openHAB and register it to be automatically executed at system startup. To this end, the documentation
 provides the following commands for systems based on \textit{systemd}, such as Raspbian.
 
 \begin{lstlisting}[style=Consola]
@@ -396,8 +396,8 @@ sudo systemctl daemon-reload
 sudo systemctl enable openhab2.service
 \end{lstlisting}
 
-After some minutes, openHAB is ready on the local server, in the port 8080 (accessible in http://localhost:8080). Then, the following
-commands are used to control the service.
+After some minutes, openHAB is ready on the local server, in the port 8080 (accessible in \textit{http://localhost:8080}). Then,
+the following commands are used to control the service.
 
 \begin{figure}
     \centering
@@ -420,7 +420,7 @@ sudo /etc/init.d/openhab2 stop
 sudo update-rc.d openhab2 defaults
 \end{lstlisting}
 
-OpenHAB installs also a utility in the command line interface, named \textit{openhab-cli}, that provides access to the openHAB-specific 
+OpenHAB installs also a utility in the command line interface, named \textit{openhab-cli}, that provides access to the openHAB-specific
 commands.
 
 \begin{lstlisting}[style=Consola]
@@ -446,42 +446,42 @@ sudo apt-get upgrade
 \end{lstlisting}
 
 \subsection{Adding Philips Hue Devices}
-Now that we have openHAB 2 up and running in the Raspberry Pi integrated in the AIY Kit, it is desirable to add a device to the home 
+Now that we have openHAB 2 up and running in the Raspberry Pi integrated in the AIY Kit, it is desirable to add a device to the home
 automation system. We have a Philips Hue lightning system available, so in this section I will explain the process that we have followed
 to add it and configure it in our openHAB 2 instance.
 
 \subsubsection{The Hue System}
-Our Philips Hue system is composed by the \textit{white and color ambiance starter kit}\cite{philipsHueMeethue} (which consists 
+Our Philips Hue system is composed by the \textit{white and color ambiance starter kit}\cite{philipsHueMeethue} (which consists
 in three Hue white and color lights and a Hue hub) as well as a Hue motion sensor:
 
 \begin{itemize}
-    \item \textbf{The Hue Hub} acts as a bridge between the user interface (the smartphone application or the OpenHab instance) and 
-    the connected devices. It is configured and controlled via the Hue app and supports up to 50 lights at the same time. It communicates 
+    \item \textbf{The Hue Hub} acts as a bridge between the user interface (the smartphone application or the OpenHab instance) and
+    the connected devices. It is configured and controlled via the Hue app and supports up to 50 lights at the same time. It communicates
     via Zigbee with the Hue devices.
-    \item \textbf{The Hue Motion Sensor} can be configured to turn on and off the lights when it detects movement and under some 
+    \item \textbf{The Hue Motion Sensor} can be configured to turn on and off the lights when it detects movement and under some
     defined conditions. By default, it is configured from the Hue app.
-    \item \textbf{The Hue White and Color Lights} are customizable RGB lights. By default, they are configurable from the Hue app, 
+    \item \textbf{The Hue White and Color Lights} are customizable RGB lights. By default, they are configurable from the Hue app,
     which offers many ways of changing the light emission.
 \end{itemize}
 
 \subsubsection{Installation and Configuration Process on PaperUI}
-Philips, as many other companies, is restrictive regarding their home automation devices, and every communication between the Hue 
-devices and the controller (openHAB in this case) needs to pass through the Hue Hub. The Hub communicates via WiFi with the controller 
-and via Zigbee with the Hue devices. The software it uses is privative, but luckily openHAB 2 implements protocols that make possible 
+Philips, as many other companies, is restrictive regarding their home automation devices, and every communication between the Hue
+devices and the controller (openHAB in this case) needs to pass through the Hue Hub. The Hub communicates via WiFi with the controller
+and via Zigbee with the Hue devices. The software it uses is privative, but luckily openHAB 2 implements protocols that make possible
 the communication between the controller and the Hub. This makes the Hub, though, a frustrating addition to our home automation system.
 
-The Hue system needs to be configured from the Philips Hue mobile application in the first place. This process will link the Hub with the 
-desired Hue devices, so the next time that the user connects to the Hub, it will not be necessary to configure them again, even if 
-the connection is done from openHAB. The application allows to manage rooms and sort the devices, as well as setting automated commands 
-(for instance, turning the light on when the motion sensor detects any movement). OpenHAB is unable to perform such complex operations 
+The Hue system needs to be configured from the Philips Hue mobile application in the first place. This process will link the Hub with the
+desired Hue devices, so the next time that the user connects to the Hub, it will not be necessary to configure them again, even if
+the connection is done from openHAB. The application allows to manage rooms and sort the devices, as well as setting automated commands
+(for instance, turning the light on when the motion sensor detects any movement). OpenHAB is unable to perform such complex operations
 by default, providing only a few channels for the light bulb.
 
-Once the Hub is on, connected and linked with the Hue devices, we can proceed to configure it on openHAB. In this case, I explain 
-the process to follow in order to add the light bulb controls, but it might work for other Hue devices in a future. If openHAB is 
-used on a system connected to the same network as the Hub, the Hub will automatically appear in the \textit{Inbox} section. We have 
-to make sure before that its related binding. Adding the Hub in the Inbox section means that it will be listed as a Thing. OpenHAB 
-takes care automatically of the Thing (figure \ref{fig:philips-hue-hub-thing}) and Items configuration. After adding them, the host 
-device and the Hub will be able to communicate between them. However, the user needs to press the pairing button on the Hub in 
+Once the Hub is on, connected and linked with the Hue devices, we can proceed to configure it on openHAB. In this case, I explain
+the process to follow in order to add the light bulb controls, but it might work for other Hue devices in a future. If openHAB is
+used on a system connected to the same network as the Hub, the Hub will automatically appear in the \textit{Inbox} section. We have
+to make sure before that its related binding. Adding the Hub in the Inbox section means that it will be listed as a Thing. OpenHAB
+takes care automatically of the Thing (figure \ref{fig:philips-hue-hub-thing}) and Items configuration. After adding them, the host
+device and the Hub will be able to communicate between them. However, the user needs to press the pairing button on the Hub in
 order to activate the communication.
 
 \begin{figure}
@@ -491,13 +491,13 @@ order to activate the communication.
     \label{fig:philips-hue-hub-thing}
 \end{figure}
 
-After that, the Hub will act as a bridge and openHAB will be able to display all the compatible devices connected to the Hub. In 
-this case, the Hue color lamp appears in the Inbox. The process for adding it is the same as with the Hub. Nevertheless, this time 
-the light controls will be added automatically to the Control panel according to the linked channels on the thing. OpenHAB supports 
-two channels that are directly related to the bulb functionality: \textit{color} (which is divided in tone, brightness and saturation) 
-and \textit{white temperature}. The first one will set the light in a color with the desired properties, and the second will set a 
-white color from a range of whites (from cold to warm white). Additionally, OpenHAB provides two more channels: \textit{alert}, 
-to use the bulb as an alert light under certain circumstances, and \textit{color loop}, which will make the light color iterate in 
+After that, the Hub will act as a bridge and openHAB will be able to display all the compatible devices connected to the Hub. In
+this case, the Hue color lamp appears in the Inbox. The process for adding it is the same as with the Hub. Nevertheless, this time
+the light controls will be added automatically to the Control panel according to the linked channels on the thing. OpenHAB supports
+two channels that are directly related to the bulb functionality: \textit{color} (which is divided in tone, brightness and saturation)
+and \textit{white temperature}. The first one will set the light in a color with the desired properties, and the second will set a
+white color from a range of whites (from cold to warm white). Additionally, OpenHAB provides two more channels: \textit{alert},
+to use the bulb as an alert light under certain circumstances, and \textit{color loop}, which will make the light color iterate in
 the whole color spectrum. The figure \ref{fig:hue-color-bulb-channels} shows the PaperUI interface showing these channels.
 
 \begin{figure}
@@ -515,8 +515,8 @@ the whole color spectrum. The figure \ref{fig:hue-color-bulb-channels} shows the
 \end{figure}
 
 \subsubsection{Internal Functionality}
-OpenHAB is able to communicate with the Hue Hub and Hue devices thanks to the Philips Hue binding (represented as a set of packages 
-in Java, as shown in the figure \ref{fig:hue-binding-structure}), integrated in the Eclipse SmartHome Extensions repository. 
+OpenHAB is able to communicate with the Hue Hub and Hue devices thanks to the Philips Hue binding (represented as a set of packages
+in Java, as shown in the figure \ref{fig:hue-binding-structure}), integrated in the Eclipse SmartHome Extensions repository.
 
 \begin{figure}
     \centering
@@ -525,26 +525,26 @@ in Java, as shown in the figure \ref{fig:hue-binding-structure}), integrated in 
     \label{fig:hue-binding-structure}
 \end{figure}
 
-As we can see, there are packages for handling the lights and Hub (which is named \textit{bridge}), and for managing the internal 
-functionality of the binding and openHAB. That is, discovering the devices and showing them in the Inbox and managing exceptions. 
+As we can see, there are packages for handling the lights and Hub (which is named \textit{bridge}), and for managing the internal
+functionality of the binding and openHAB. That is, discovering the devices and showing them in the Inbox and managing exceptions.
 Examples of exceptions can be having the device off or sending the device a wrong command.
 
-Looking more closely at the device handlers, we can see that the bridge handler implements a \textit{Runnable} object with a 
-\textit{run} method, which gets the Hub configuration. The function gets the IDs of all the lights connected to the Hub and iterates 
-over them. If a light is not listed in a list of light states caught from openHAB, it is added as a new light. If it is listed, then 
-it checks for changes in the status of the light, comparing the actual state with the last one saved. If the states are different, 
-notifies the Light listeners. There is a \textit{LightStatusListener} interface that is called on each change, it will modify the 
+Looking more closely at the device handlers, we can see that the bridge handler implements a \textit{Runnable} object with a
+\textit{run} method, which gets the Hub configuration. The function gets the IDs of all the lights connected to the Hub and iterates
+over them. If a light is not listed in a list of light states caught from openHAB, it is added as a new light. If it is listed, then
+it checks for changes in the status of the light, comparing the actual state with the last one saved. If the states are different,
+notifies the Light listeners. There is a \textit{LightStatusListener} interface that is called on each change, it will modify the
 Light and Hue objects.
 
 \subsection{Specifying Items Manually}
-In previous chapters, I introduced the concept of Item in openHAB 2. Items represent functionalities that can be used by the 
+In previous chapters, I introduced the concept of Item in openHAB 2. Items represent functionalities that can be used by the
 applications, mainly user interfaces or automation logic.
 
 OpenHAB is able to configure many Things and Items automatically in the PaperUI. But in many cases we may need to specify Items
 manually. For example, for creating custom views(sitemaps), as we will see below. Therefore, it is important to know how to specify
 Items manually.
 
-First of all, I need to create an Items file. Both the items and the sitemap files are located in the \$OPENHAB\_CONF directory, 
+First of all, I need to create an Items file. Both the items and the sitemap files are located in the \$OPENHAB\_CONF directory,
 which is different on different operating systems. In my case, they are located in:
 
 \begin{lstlisting}[style=Consola]
@@ -561,7 +561,7 @@ OpenHAB has its own syntax for defining Items and Sitemaps, but it is very easy 
 ItemType ItemName "ItemDescription" <ItemIcon> {ItemToThingChannelLink}
 \end{lstlisting}
 
-The code I have used for defining the item linked to the color channel and the item linked to the white tone channel of a Philips 
+The code I have used for defining the item linked to the color channel and the item linked to the white tone channel of a Philips
 Hue color bulb is the following:
 
 \begin{lstlisting}[style=Consola]
@@ -573,40 +573,40 @@ Dimmer HueDimmer1 "Hue Light Bulb 1 Temperature" <lightbulb> {channel="hue:0210:
 Now, these Items are registered in the system, but before we can see them, I have to define a sitemap and include them there.
 
 \subsection{Creating a Sitemap}
-PaperUI, the newest addition in openHAB 2, is meant to make easier the device management, configuration and discovery. Many of 
+PaperUI, the newest addition in openHAB 2, is meant to make easier the device management, configuration and discovery. Many of
 these processes are carried out seamlessly, without user intervention. But this user interface lacks some functionalities, such as
 custom ordering of Things. \textit{Sitemaps} are custom views that can be displayed in another user interface, the Basic UI, which
-is also automatically installed at the beginning.\cite{openHABDocs} Sitemaps take defined Items and display them as the user specifies 
+is also automatically installed at the beginning.\cite{openHABDocs} Sitemaps take defined Items and display them as the user specifies
 in the UI.
 
-The user is able to define as many sitemaps as desired, and they can be selected from openHAB 2 home screen, in the Basic UI. Sitemaps 
-are text files with the .sitemap extension, and they are defined in the folder thet I specified in the previous section, inside the openHAB 
+The user is able to define as many sitemaps as desired, and they can be selected from openHAB 2 home screen, in the Basic UI. Sitemaps
+are text files with the .sitemap extension, and they are defined in the folder thet I specified in the previous section, inside the openHAB
 installation directory.
 
 The basic syntax that a sitemap follows is:
 
 \begin{lstlisting}[style=Consola]
-sitemap <sitemapname> label="<title of the main screen>" 
+sitemap <sitemapname> label="<title of the main screen>"
 {
     [all sitemap elements]
 }
 \end{lstlisting}
 
-Sitemaps are composed by arranging various user interface elements. A set of different element types supports a user-friendly and 
+Sitemaps are composed by arranging various user interface elements. A set of different element types supports a user-friendly and
 clear presentation. One line of Sitemap element definition produces one corresponding UI element. As shown in the example on the
-figure \ref{fig:hue-bulb-sitemap}, each element generates a descriptive text next to an icon on the left side and a status and/or 
+figure \ref{fig:hue-bulb-sitemap}, each element generates a descriptive text next to an icon on the left side and a status and/or
 interaction elements on the right.
 
-A certain set of parameters can be configured to customize the presentation of an element. In the shown example \textit{item} and 
-\textit{icon} are parameters. Almost all parameters are optional, some are however needed to result in a meaningful user interface. 
+A certain set of parameters can be configured to customize the presentation of an element. In the shown example \textit{item} and
+\textit{icon} are parameters. Almost all parameters are optional, some are however needed to result in a meaningful user interface.
 
-By encapsulating elements with curly brackets, multiple elements can be nested inside or behind others. The Frame element type is 
-often used in combination with element blocks. Frames are used to visually distinguish multiple elements of the same topic on one 
-interface page. When using code blocks behind other element types such as \textit{Text}, \textit{Group} or \textit{Switch}, these UI 
-elements will, in addition to their normal function, be links to a new view, presenting the nested elements. In the example in 
+By encapsulating elements with curly brackets, multiple elements can be nested inside or behind others. The Frame element type is
+often used in combination with element blocks. Frames are used to visually distinguish multiple elements of the same topic on one
+interface page. When using code blocks behind other element types such as \textit{Text}, \textit{Group} or \textit{Switch}, these UI
+elements will, in addition to their normal function, be links to a new view, presenting the nested elements. In the example in
 \ref{fig:hue-bulb-sitemap}, I created a single Frame that represented all the functionalities of the Hue Color Light.
 
-The \textit{sitemap} element is mandatory in a Sitemap definition. This element shall be the first line in the sitemap file, and the 
+The \textit{sitemap} element is mandatory in a Sitemap definition. This element shall be the first line in the sitemap file, and the
 following code block comprises the entire Sitemap definition.\cite{openHABDocs}
 
 \begin{figure}
@@ -662,17 +662,17 @@ The element types specified in the table \ref{table:openhab-sitemaps-types} may 
     \label{table:openhab-sitemaps-types}
 \end{table}
 
-Data presented by Sitemap elements will almost always originate from a referenced Item. Each Item is of a certain Item type, for 
+Data presented by Sitemap elements will almost always originate from a referenced Item. Each Item is of a certain Item type, for
 example \textit{Switch}, \textit{Number} or \textit{String}.
 
-While not all combinations are meaningful, Items of one \textit{datatype} may be linked to different Sitemap element types. This 
+While not all combinations are meaningful, Items of one \textit{datatype} may be linked to different Sitemap element types. This
 provides the flexibility to present Items in the way desired in the home automation user interface.
 
 \bigskip
 At this point, I have openHAB installed in the Raspberry Pi inside the AIY Voice Kit. OpenHAB is communicating with the Hue Hub and
 the Hue Color Light, and its state can be changed by accessing to the server that openHAB has created in the local network. This means
 that, if I type on the browser of my mobile phone the IP address of openHAB and its port (8080), I will be able to control the light from
-my phone as well. The state of the bulb can be changed from PaperUI (with the view that it has generated automatically) and from 
+my phone as well. The state of the bulb can be changed from PaperUI (with the view that it has generated automatically) and from
 Basic UI, with the view and Items that I have specified in these previous steps.
 
 Now the challenge is to build an assistant that can communicate with openHAB, and that is able to change the state of the configured
@@ -686,7 +686,7 @@ Kit provide are accessible and modifiable, so I could write an assistant that wo
 commands.
 
 \subsubsection{Introduction}
-We could divide a simple voice assistant, like the one I am building on top of the Google Assistant for managing openHAB and the 
+We could divide a simple voice assistant, like the one I am building on top of the Google Assistant for managing openHAB and the
 Raspberry Pi, in three different parts:
 \begin{enumerate}
     \item Speech-To-Text (STT) conversion.
@@ -694,53 +694,53 @@ Raspberry Pi, in three different parts:
     \item Text-To-Speech (TTS) conversion.
 \end{enumerate}
 
-The flow after each command from the user follows the order above. On the next few lines, I am going to explain a little further 
+The flow after each command from the user follows the order above. On the next few lines, I am going to explain a little further
 each one of these points.
 
 \subsubsection{Speech-To-Text}
-The Speech-To-Text or STT comes from the Speech Recognition, a sub-field of computational linguistics and IA. It is a computer 
+The Speech-To-Text or STT comes from the Speech Recognition, a sub-field of computational linguistics and IA. It is a computer
 technique that enables the recognition and transcription of spoken language into text by analyzing the captured audio.
 
-It is the first step on the machine after capturing the voice, and it requires the execution of complex algorithms. This is why many 
-companies, like Google, offer “cloud speech recognition”, where the audio is entirely processed in the cloud, taking advantage of 
+It is the first step on the machine after capturing the voice, and it requires the execution of complex algorithms. This is why many
+companies, like Google, offer “cloud speech recognition”, where the audio is entirely processed in the cloud, taking advantage of
 very powerful computers. Thanks to this, its precision is much higher than other local solutions.
 
 \subsubsection{Command Processing}
-Once the system has the transcription of the spoken command, it must relate it with an action. It can be the execution of a function, 
-or just a spoken response, or both. The complexity of this part can vary significantly, depending on the range of actions we would 
+Once the system has the transcription of the spoken command, it must relate it with an action. It can be the execution of a function,
+or just a spoken response, or both. The complexity of this part can vary significantly, depending on the range of actions we would
 like the assistant to perform, or on how specific we want to be when recognizing the language.
 
-There are grammar specifications and even XML dialects for this purpose, like AIML. For the custom assistant I have built, I also 
+There are grammar specifications and even XML dialects for this purpose, like AIML. For the custom assistant I have built, I also
 propose a model for processing the speech, as I will mention in further sections.
 
 \subsubsection{Text-To-Speech}
-Text-To-Speech or TTS is the inverse process of STT, that is, the artificial production of human speech given a text through a 
+Text-To-Speech or TTS is the inverse process of STT, that is, the artificial production of human speech given a text through a
 number of processes that produce a pronounceable version of the text and a digital sound, thanks to signal treatment techniques.
 
 It is often the final step in the interaction with an assistant, when the assistant gives a response to a command given by the user.
 
 \subsubsection{STT and TTS in the Custom Assistant}
-The part where I have researched the most, which is also the one that offers more possibilities to this kind of assistant, is the 
-speech recognition. I have found plenty of services that offer this technology, locally and in the cloud. Many of them work on 
+The part where I have researched the most, which is also the one that offers more possibilities to this kind of assistant, is the
+speech recognition. I have found plenty of services that offer this technology, locally and in the cloud. Many of them work on
 Raspberry Pi, the heart of the Google AIY Kit.
 
-Google integrates in this kit the integration with two STT services: the Google Assistant Library and the Google Cloud 
-Speech-To-Text API\cite{googleCloudSttWebsite}. Both of them make the transcription in the cloud, freeing the Raspberry Pi from 
-using much processing power in it. Both of them are truly accurate and rarely produce a wrong result, as it is expected from Google. 
-Using this implementation of the Google Assistant Library is free, but it only works in English at this moment, so it is only 
-possible to make the assistant in this language with this service. On the other hand, the Google Cloud Speech API is capable of 
-recognizing more than 120 languages with its variants, even with long audio files. It can also provide content filters and automatic 
-punctuation. But this solution is not totally free, it comes with a price of \$0.006 USD per 15 seconds of audio after 60 minutes, 
+Google integrates in this kit the integration with two STT services: the Google Assistant Library and the Google Cloud
+Speech-To-Text API\cite{googleCloudSttWebsite}. Both of them make the transcription in the cloud, freeing the Raspberry Pi from
+using much processing power in it. Both of them are truly accurate and rarely produce a wrong result, as it is expected from Google.
+Using this implementation of the Google Assistant Library is free, but it only works in English at this moment, so it is only
+possible to make the assistant in this language with this service. On the other hand, the Google Cloud Speech API is capable of
+recognizing more than 120 languages with its variants, even with long audio files. It can also provide content filters and automatic
+punctuation. But this solution is not totally free, it comes with a price of \$0.006 USD per 15 seconds of audio after 60 minutes,
 each month.\cite{craftworkzBlog}\cite{globalmeBlog}
 
-Outside of Google, there are many other services that could also work with our assistant, from local solutions like 
-CMUSphinx\cite{cmusphinxWiki} to cloud services provided by other companies. Local solutions offer offline recognition, in 
-exchange for taking up large storage space and being slower and a lot more inaccurate than the cloud ones. Furthermore, 
-cloud services are constantly updated and offer state-of-the-art voice recognition. They are usually very fast and, as they work 
-in the cloud, do not need space on the user's drive. Usually, the providers of these services are major technology companies 
+Outside of Google, there are many other services that could also work with our assistant, from local solutions like
+CMUSphinx\cite{cmusphinxWiki} to cloud services provided by other companies. Local solutions offer offline recognition, in
+exchange for taking up large storage space and being slower and a lot more inaccurate than the cloud ones. Furthermore,
+cloud services are constantly updated and offer state-of-the-art voice recognition. They are usually very fast and, as they work
+in the cloud, do not need space on the user's drive. Usually, the providers of these services are major technology companies
 such as Microsoft and IBM\cite{ibmWatsonSttWebsite}, which provide the API for a periodic fee.
 
-To find out which service best fits in my custom assistant, I compare the most interesting ones I have found in the table 
+To find out which service best fits in my custom assistant, I compare the most interesting ones I have found in the table
 \ref{table:comparison-stt-services}.
 
 \begin{table}[]
@@ -763,39 +763,39 @@ To find out which service best fits in my custom assistant, I compare the most i
     \label{table:comparison-stt-services}
 \end{table}
 \addtocounter{footnote}{-2}
-\stepcounter{footnote}\footnotetext{There are at the moment 13 language models available to download in their website. Although 
+\stepcounter{footnote}\footnotetext{There are at the moment 13 language models available to download in their website. Although
 new languages can be added by creating new language models}
-\stepcounter{footnote}\footnotetext{This price is maintained until 250,000 minutes are used. The complete set of prices is: \$0.02 
-USD for minutes 1,001 - 250,000, \$0.015 USD for minutes 250,001 - 500,000, \$0.0125 USD for minutes 500,001 - 1,000,000, 
+\stepcounter{footnote}\footnotetext{This price is maintained until 250,000 minutes are used. The complete set of prices is: \$0.02
+USD for minutes 1,001 - 250,000, \$0.015 USD for minutes 250,001 - 500,000, \$0.0125 USD for minutes 500,001 - 1,000,000,
 \$0.01 USD for minutes 1,000,001 and up}
 
-I have included a selection of services that can sum up the benefits and problems of all the available services. The main difference 
-is if they are in the cloud or installed locally. Generally, cloud services will provide great results, but they are not free in 
-most cases. Local services can be free and open source, but their recognition is usually poorer, and they require some storage 
+I have included a selection of services that can sum up the benefits and problems of all the available services. The main difference
+is if they are in the cloud or installed locally. Generally, cloud services will provide great results, but they are not free in
+most cases. Local services can be free and open source, but their recognition is usually poorer, and they require some storage
 space that we might need for other things.
 
-Then, in our specific case, Voice HAT support is a great matter. This is a device made by Google and included in the AIY Voice Kit, 
-which connects the microphone and other components of the assistant with the Raspberry Pi. Google services support it natively, 
-but not the others, which recommend using a USB microphone, like the implementation of IBM Watson STT for Raspberry Pi. But I 
-cannot get rid of the HAT, because I need it for managing the speaker and the button. In conclusion, these other options do not 
+Then, in our specific case, Voice HAT support is a great matter. This is a device made by Google and included in the AIY Voice Kit,
+which connects the microphone and other components of the assistant with the Raspberry Pi. Google services support it natively,
+but not the others, which recommend using a USB microphone, like the implementation of IBM Watson STT for Raspberry Pi. But I
+cannot get rid of the HAT, because I need it for managing the speaker and the button. In conclusion, these other options do not
 seem viable considering the effort and modifications they need in order to work properly.
 
-Therefore, when comparing the solutions provided by Google, the only advantage of the Cloud Text-To-Speech service is that it offers 
-support for many other languages. Although this option is very easy to implement (Google even includes an example of its usage with 
+Therefore, when comparing the solutions provided by Google, the only advantage of the Cloud Text-To-Speech service is that it offers
+support for many other languages. Although this option is very easy to implement (Google even includes an example of its usage with
 the AIY Kit), considering the main points in this project I decided to keep the assistant free of charge and working in English.
 
 \subsection{Bulding the Custom Voice Assistant}
-The best part of the Google AIY Voice Kit is that it is fully customizable and backed up by the Google Assistant API. This device 
+The best part of the Google AIY Voice Kit is that it is fully customizable and backed up by the Google Assistant API. This device
 is meant to be fully modifiable, so each user can play with it and use it for their needs.
 
-In this case, I are going to take advantage of this fact to build our own assistant, able to process custom commands that will 
-work with openHAB. 
+In this case, I are going to take advantage of this fact to build our own assistant, able to process custom commands that will
+work with openHAB.
 
-The AIY Voice Kit is able to process button taps and to recognize the “OK Google” command in order to trigger the assistant. In 
-our case, I can use both triggers, so the voice assistant is launched the same way no matter what way the user choses each time. 
+The AIY Voice Kit is able to process button taps and to recognize the “OK Google” command in order to trigger the assistant. In
+our case, I can use both triggers, so the voice assistant is launched the same way no matter what way the user choses each time.
 
 \subsubsection{The Base Assistant}
-For the programmer, it is really easy to create customized assistants. Google provides some examples that basically triggers the 
+For the programmer, it is really easy to create customized assistants. Google provides some examples that basically triggers the
 Google Assistant by pressing the button or saying the “OK Google” command. I am going to work over them to reach our objective.
 
 Below is a Python program that activates the assistant by pressing the red button.
@@ -847,23 +847,15 @@ We can see that in the previous script there are some statuses for the assistant
     \item Stopping
 \end{itemize}
 
-We can also notice that this script only sends the commands to the assistant, an object that works with Google Assistant, catches 
-its responses and plays them on the speaker. This means that no processing is made in our computer, Google Assistant takes care 
+We can also notice that this script only sends the commands to the assistant, an object that works with Google Assistant, catches
+its responses and plays them on the speaker. This means that no processing is made in our computer, Google Assistant takes care
 of the commands that the user sends and composes a response according to that.
 
-\subsubsection{Making My Own Script That Works With openHAB}
-
-\begin{figure}
-	\centering
-	\includegraphics[width=0.65\textwidth]{images/Chapter_06/custom-assistant-simple.png}
-	\caption{Basic diagram of the custom voice assistant}
-	\label{fig:custom-assistant-simple}
-\end{figure}
-
-The previous script falls short for our purpose, as it does not include any integration with openHAB and it only triggers the 
+\subsubsection{Making the Custom Assistant}
+The previous script falls short for our purpose, as it does not include any integration with openHAB and it only triggers the
 assistant when the red button on the Google AIY box is pressed.
 
-I worked over this example script, and some more that Google brings with this kit, in order to create a new one that integrates 
+I worked over this example script, and some more that Google brings with this kit, in order to create a new one that integrates
 all the basic functionalities and works with openHAB. The main aspects to include are:
 \begin{itemize}
     \item Activation via red button and “OK Google” command at the same time.
@@ -876,18 +868,18 @@ all the basic functionalities and works with openHAB. The main aspects to includ
 \end{itemize}
 
 \paragraph{Activating the Assistant via Voice Commands and by Pressing the Red Button}
-I wanted users to be able to trigger the assistant in all the possible ways, so the first task is to make a script that can trigger 
+I wanted users to be able to trigger the assistant in all the possible ways, so the first task is to make a script that can trigger
 the assistant by pressing the button and by saying “OK Google”.
 
-We can make the program listen for “OK Google” by importing the Google Assistant Library. It will be listening on the microphone 
-all the time waiting for this command, as any Android phone with Google Assistant would do. This library has direct access to the 
+We can make the program listen for “OK Google” by importing the Google Assistant Library. It will be listening on the microphone
+all the time waiting for this command, as any Android phone with Google Assistant would do. This library has direct access to the
 audio API, so our Python program does not need to record any audio.
 
-However, the Google Assistant Library event loop (which is the responsible of hearing the “OK Google” command) blocks the running 
-thread, so we cannot place everything in the same thread because the function that is executed when the button is pressed would 
+However, the Google Assistant Library event loop (which is the responsible of hearing the “OK Google” command) blocks the running
+thread, so we cannot place everything in the same thread because the function that is executed when the button is pressed would
 never be invoked. We need to import threading and run the event loop in a separate thread.
 
-To simplify matters, I will create a class called MyAssistant, which will create the threads in the constructor and will have a 
+To simplify matters, I will create a class called MyAssistant, which will create the threads in the constructor and will have a
 variable that will indicate if it is ready and an object of the Google Assistant.
 
 \begin{lstlisting}[style=PythonCode]
@@ -914,39 +906,453 @@ if self._can_start_conversation:
           self._assistant.start_conversation()
 \end{lstlisting}
 
-This code snippet specifies just what we want to create at this moment. It has a call to the function \textit{\_process\_event()}, 
+This code snippet specifies just what we want to create at this moment. It has a call to the function \textit{\_process\_event()},
 which will process our events. I will talk about it in the following sections.
 
 \paragraph{Adding Custom Commands to the Assistant}
-The Google Assistant responds to a huge variety of commands and can perform a considerable range of actions. Some devices even 
-work with Google Home, but not many others that do work with openHAB 2. As we want to achieve an inexpensive, open-source home 
-automation system, we need to integrate the assistant with openHAB 2, although this solution will also cover the devices that are 
+The Google Assistant responds to a huge variety of commands and can perform a considerable range of actions. Some devices even
+work with Google Home, but not many others that do work with openHAB 2. As we want to achieve an inexpensive, open-source home
+automation system, we need to integrate the assistant with openHAB 2, although this solution will also cover the devices that are
 compatible with Google Home, that are natively integrated with the assistant.
 
-Unfortunately, we cannot customize Google Assistant commands, but we can build a basic assistant over this one that will cover our 
-needs. Both will be working at the same time as well. 
+Unfortunately, we cannot customize Google Assistant commands, but we can build a basic assistant over this one that will cover our
+needs. Both will be working at the same time as well.
 
-I will use the Text-To-Speech engine that Raspbian integrates: \textit{pico2wave}. In the function \textit{\_process\_event()} that 
-I mentioned before, we need to add some conditions for checking some “keywords” that will lead the program to stop the assistant 
+I will use the Text-To-Speech engine that Raspbian integrates: \textit{pico2wave}. In the function \textit{\_process\_event()} that
+I mentioned before, we need to add some conditions for checking some “keywords” that will lead the program to stop the assistant
 for that command and execute our own one.
 
-Apart from commands for managing openHAB 2, it is also a good idea to be able to manage the system from the assistant, as it is 
-meant to be headless (that is, able to work without a screen connected) and powering off the Raspberry Pi by disconnecting the 
+Apart from commands for managing openHAB 2, it is also a good idea to be able to manage the system from the assistant, as it is
+meant to be headless (that is, able to work without a screen connected) and powering off the Raspberry Pi by disconnecting the
 power cord is not recommendable. For now, I am going to add functions for powering off and rebooting the system:
 
 \begin{lstlisting}[style=PythonCode]
 def power_off_pi():
   aiy.audio.say('Powering off the system. Good bye!')
   subprocess.call('sudo shutdown now', shell=True)
-	
+
 def reboot_pi():
   aiy.audio.say('Rebooting the system. Hold on!')
   subprocess.call('sudo reboot', shell=True)
 \end{lstlisting}
 
-In each one, we define what the assistant is going to say when the function is executed with \textit{aiy.audio.say()} and what 
-command to execute in the system with subprocess.call().
+In each one, we define what the assistant is going to say when the function is executed with \textit{aiy.audio.say()} and what
+command to execute in the system with \textit{subprocess.call()}.
 
-Then, with only one function we will be able to send any command to openHAB via REST. I have defined the URL in the same machine, 
-as the Raspberry Pi is supposed to host the assistant and openHAB. The function creates a POST request that includes the item(s) 
+Then, with only one function we will be able to send any command to openHAB via REST. I have defined the URL in the same machine,
+as the Raspberry Pi is supposed to host the assistant and openHAB. The function creates a POST request that includes the item(s)
 and the desired state. When it gets the response, it responds with the success or failure of the command.
+
+\begin{lstlisting}[style=PythonCode]
+def openhab_command(item, state):
+  url = 'http://localhost:8080/rest/items/' + item
+  headers = {'Content-Type': 'text/plain',
+             'Accept':       'application/json'}
+  response = requests.post(url, headers=headers, data=state)
+  if response.status_code == 200:
+      aiy.audio.say('OK, command sent to OpenHAB')
+  elif response.status_code == 400:
+      aiy.audio.say('There has been an error: bad command')
+  elif response.status_code == 404:
+      aiy.audio.say('There has been an error: unknown item')
+  else:
+      aiy.audio.say('Command failed')
+\end{lstlisting}
+
+To execute these commands, and to trigger the assistant when necessary, we need the \textit{\_process\_event()} function. It receives
+an event each time it is called, that includes a state. We will read this state to determine what to do in each step and the state
+of the assistant. We will consider the following ones in the\textit{ \_process\_event()} function:
+
+\begin{itemize}
+	\item \textbf{ON\_START\_FINISHED}: the assistant is ready to receive commands and it is set as \textit{ready}.
+    \item \textbf{ON\_CONVERSATION\_TURN\_STARTED}: the user has started speaking and the assistant is hearing. It is set to
+    \textit{listening} state.
+    \item \textbf{ON\_END\_OF\_UTTERANCE}: the user has finished speaking and now the assistant must process its command. The assistant
+    is set to \textit{thinking} state.
+    \item \textbf{ON\_RECOGNIZING\_SPEECH\_FINISHED}: the assistant has finished recognizing the command. Its state does not change
+    in this case, but here is where it processes the custom commands and calls to their respective functions.
+    \item \textbf{ON\_CONVERSATION\_TURN\_FINISHED}: the conversation has ended, and the assistant is ready again. It is set to
+    \textit{ready} state.
+    \item \textbf{ON\_ASSISTANT\_ERROR}: there has been an error and, if it is fatal, it stops the execution.
+\end{itemize}
+
+For the custom commands, we just need to check the text that is included when the event is \textit{ON\_RECOGNIZING\_SPEECH\_FINISHED}.
+The program will recognize the custom commands by looking for substrings inside the speech of the user. This part of the code
+takes care of it:
+
+\begin{lstlisting}[style=PythonCode]
+elif event.type == EventType.ON_RECOGNIZING_SPEECH_FINISHED and event.args:
+  print('You said:', event.args['text'])
+  text = event.args['text'].lower()
+  if 'power off the system' in text:
+    self._assistant.stop_conversation()
+    power_off_pi()
+  elif 'reboot the system' in text:
+    self._assistant.stop_conversation()
+    reboot_pi()
+  elif 'make a test' in text:
+    self._assistant.stop_conversation()
+    test_speech()
+  elif 'all the lights on' in text:
+    self._assistant.stop_conversation()
+    openhab_command("ALL_LIGHTS", "ON")
+  elif 'all the lights off' in text:
+    self._assistant.stop_conversation()
+    openhab_command("ALL_LIGHTS", "OFF")
+\end{lstlisting}
+
+So, if the user says, \textit{Can you please power off the system?}, the program will call the function \textit{power\_off\_pi()},
+specified above. But that would also work if the user says, “Power off the system”. More flexibility in the voice recognition can
+be added by reducing the granularity of the substring search.
+
+\paragraph{Integrating More Languages in the Assistant}
+A desirable function is that the assistant can understand and respond in languages other than English, so users from any part of
+the world would be able to use it.
+
+However, the Google Assistant is a rather young project and there is not event an official version for many languages. Google does
+not offer any documentation either about changing the language of the AIY Kit. Some users have reported that they have been able
+to change the languages of their AIY Kits, but as far as I have researched, it is a complex process that can lead to secondary
+problems, which is neither intuitive nor usable by the standard user. So, for now, I've decided to leave this issue for the Google
+Assistant part.
+
+Luckily, we can make the assistant speak other languages for our custom commands, because it depends on \textit{pico2wave}, the TTS
+engine that comes with this distribution. In my case, I have set the en-GB voice, that sounds much clearer than the default en-US.
+But it is possible to modify the responses and write them in other languages, and then set the voice according to it. This way,
+the assistant will be able to respond in other languages. For example:
+\begin{itemize}
+	\item Setting the assistant in English from Great Britain:\\
+		\textit{aiy.i18n.set\_language\_code('en-GB')}
+	\item Setting the assistant in Spanish from Spain: \\
+		\textit{aiy.i18n.set\_language\_code('es-ES')}
+	\item Setting only a response in Spanish from Spain: \\
+		\textit{aiy.audio.say('encendiendo luces', lang='es-ES')}
+\end{itemize}
+
+Nevertheless, it is more complicated when it comes to recognizing speeches in different languages. In my script, I have used the
+Google Assistant Library, which does the job, but only in English. The best alternative for professional voice recognition, that
+detects more than 110 languages, is the Google Cloud Speech API, a paid option. Though if we would like to keep the whole system
+open source, a good alternative is CMUSphinx\cite{cmusphinxWiki} (\textit{pocketsphinx} in the Raspberry Pi), which is
+language-independent but needs an acoustic model and a language model.
+
+\subsubsection{Managing All the Lights With One Command}
+In the previous examples, when the script had to process the command \textit{turn on/off all the lights}, a call was produced, indicating
+the item(s) and their new state (\textit{ON} or \textit{OFF}). In this case, I did the call to \textit{ALL\_LIGHTS}, which we can
+assume is a group composed by all the lights in our home.
+
+At this point, it is imperative to underline the importance of groups in this system. Groups bring a great deal of flexibility to the system,
+as they allow users to send commands to a specific part of the home, or to a specific kind of devices, just with one command.
+
+Luckily, OpenHAB 2 allows the user to specify as many groups as possible, and to make an item part of one or many groups.
+
+\paragraph{Groups in openHAB 2}
+For OpenHAB, groups are a special type of Item. As I have mentioned before, Items represent a functionality of the real entities
+(e.g. the color of a Philips Hue light bulb) that is used by the application. There are Items that represent dates, images or locations,
+and then there is the group Item.
+
+Group items collect other Items into groups and can themselves be members of other group items.
+
+OpenHAB 2 presents two ways of specifying groups. The first one is inherited from their previous version (OpenHAB 1 and its Basic
+UI) and requires to manually edit the \textit{*.items} files. For example, if we would like to collect two items into a group item,
+called \textit{Lights\_ALL}, the items file should have a structure like the following one:
+
+\begin{lstlisting}[style=Consola]
+/* Group all the lights */
+Group Lights_ALL
+
+/* Philips Hue Light 1 */
+Color HueColor1 "Light Color" (Lights_ALL)
+Dimmer HueDimmer1 "Light Color Temperature" (Lights_ALL)
+\end{lstlisting}
+
+The second way is to specify the groups in PaperUI, the GUI that comes with OpenHAB 2. This is one of the most important new features
+in OpenHAB 2, and they encourage its use, as many processes are greatly simplified. The Items defined in the items file do not
+appear in PaperUI, so in my case I have to create the same ones but in this UI. The final result, which is literally the translation
+of the previous code in PaperUI, is shown in the figure \ref{fig:group-definition-paperui}.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=1\textwidth]{images/Chapter_06/group-definition-paperui.png}
+	\caption{Definition of group Items in PaperUI, OpenHAB 2}
+	\label{fig:group-definition-paperui}
+\end{figure}
+
+Once we have these items grouped in PaperUI, it is recommendable to check if everything is working OK and ready to receive commands
+from the assistant. A GET request to the following URL:\\
+\begin{center}
+	\textit{http://192.168.30.103:8080/rest/items?recursive=false}\\
+\end{center}
+Returns the following JSON, assuming that 192.168.30.103 is the IP of the machine.
+
+\begin{lstlisting}[style=Consola]
+[
+  {
+    "link": "http://192.168.30.103:8080/rest/items/hue_0210_00178828e0d0_1_color",
+    "state": "OFF",
+    "type": "Color",
+    "name": "hue_0210_00178828e0d0_1_color",
+    "label": "Light Color",
+    "category": "colorwheel",
+    "tags": [],
+    "groupNames": [
+      "Lights_ALL"
+    ]
+  },
+  {
+    "link": "http://192.168.30.103:8080/rest/items/hue_0210_00178828e0d0_1_color_temperature",
+    "state": "OFF",
+    "type": "Dimmer",
+    "name": "hue_0210_00178828e0d0_1_color_temperature",
+    "label": "Light Color Temperature",
+    "category": "colorwheel",
+    "tags": [],
+    "groupNames": [
+      "Lights_ALL"
+    ]
+  },
+  {
+    "members": [],
+    "link": "http://192.168.30.103:8080/rest/items/Lights_ALL",
+    "state": "OFF",
+    "type": "Group",
+    "name": "Lights_ALL",
+    "label": "All lights",
+    "category": "light",
+    "tags": [],
+    "groupNames": []
+  }
+]
+\end{lstlisting}
+
+As we can see, all the specified items are working and accessible from the REST API. As the script sends PUT requests to this API,
+we can tell that it will reach the group and change all the states of its members.
+
+Finally, the script that manages the assistant should be modified according to the number of groups the user has created, and their
+names. I will explore this further in the following section.
+
+\subsubsection{Final Result}
+The final script triggers the assistant by pressing the button and by saying “OK Google”, has some customized commands for power
+and OpenHAB management, and supports responses in a variety of languages. But there is still room to improve, as I will state in the
+next section.
+
+\subsection{Improving Command Processing}
+The current structure of the custom assistant script can recognize portions (substrings) on the transcribed command. Although this
+solution works, it requires the user to know exactly what to say to trigger his or her desired command, losing all the flexibility
+that an assistant can have. Moreover, it is a very clumsy solution if we would like to add more custom commands, and they substitute
+the actions that Google Assistant can perform given the same command. So, the challenge now is to complete the following points:
+\begin{itemize}
+	\item \textbf{Create a more flexible assistant}: make the assistant perform the same action from a broad range of different
+	commands with the same meaning.
+	\item \textbf{Make the assistant more extendible}: modularize and optimize the current script so it is easier to add more commands.
+	Do not force the assistant to check all the possible commands after making the transcription.
+	\item \textbf{Do not substitute any command that the Google Assistant could perform}: we want to keep the Google Assistant, but
+	adding a layer for controlling OpenHAB. To avoid substituting the Google Assistant commands with our own custom commands,
+	one possibility is to define another \textit{hotword}, so that we can use it to access our custom commands.
+\end{itemize}
+
+For this purpose, we can define a simple grammar that is going to help us to process the commands and will make possible to cover
+all the previous points.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.65\textwidth]{images/Chapter_06/custom-assistant-simple.png}
+	\caption{Basic diagram of the custom voice assistant}
+	\label{fig:custom-assistant-simple}
+\end{figure}
+
+\subsubsection{Grammar Definition}
+According to the Speech Recognition Grammar Specification v1.0 by the W3C, a token is typically an orthographic entity of the language 
+being recognized. In the field of speech recognition, tokens can have a variety of forms (a single word, a number, a pair of words…),
+but they all need to go through the same process, composed by: tokenization, white space normalization, token normalization and
+pronunciation lookup.\cite{w3SpeechGrammar}
+
+In our script, the Assistant Library takes care of this and returns us a clean, clutter-free string with the spoken phrase. But we
+will consider tokens from another perspective for the next step: command processing.
+
+First of all, I am going to define a \textit{hotword}, this is, a word or a couple of words that can identify the whole range of
+available commands that we have defined to manage OpenHAB, so after the assistant identifies it, it can discard triggering Google
+Assistant. It could be placed at the beginning of the sentence (prefixal), in the middle of it (infixal) or at the end (suffixal).
+In this case, I am going to consider only the prefixal placement, so I let Google Assistant to process all the other sentences,
+even if they have the hotword placed elsewhere.
+
+The hotword that I am going to use is \textit{home}. It is easily recognizable by the assistant and cannot produce much confusion
+in its pronunciation.
+
+The hotword will be followed by a sentence whose form will be more or less free. At this point, trying to identify a substring of
+more than two words is not very useful, so we can check for some keywords inside the sentence and discard the other options, step
+by step. For that, we need to know how sentences are formed. In our case, the most common form will be as indicated in table
+\ref{table:sentence-form-assistant}.
+
+\begin{table}[]
+	\centering
+	\resizebox{\textwidth}{!}{%
+		\begin{tabular}{|
+				>{\columncolor[HTML]{C0C0C0}}c
+				>{\columncolor[HTML]{C0C0C0}}c | ccc |}
+			\hline
+			\textbf{OK Google!} & \textbf{Hotword} & \begin{tabular}[c]{@{}c@{}}\textbf{Verb}\\ \textit{What to do}\end{tabular} & \begin{tabular}[c]{@{}c@{}}\textbf{Noun}\\ \textit{What to change}\end{tabular} & \begin{tabular}[c]{@{}c@{}}\textbf{Adjective}\\ \textit{To which state}\end{tabular} \\ \hline
+		\end{tabular}%
+	}
+	\caption{Example sentence form for the assistant}
+	\label{table:sentence-form-assistant}
+\end{table}
+
+So, the assistant has to process the part that goes right after the \textit{hotword}. In my case, I am going to check for actions,
+like \textit{turn} or \textit{power}. If the action is contained anywhere in the sentence, it will check for derived words. For
+example, it makes sense to check for \textit{on} or \textit{off} after these previous words. But before that, just to keep the
+specified order, I will check the noun. In other words, the device to which the action is directed. As the script checks only if
+the word is contained in the sentence, the order that it follows for checking words is not a big issue. But why does not it keep
+track of the order?
+
+\begin{enumerate}
+	\item “Turn on all the lights”
+	\item “Turn all the lights on”\\
+
+	\item “Set the office light to red”
+	\item “Turn red the office light”
+\end{enumerate}
+
+The sentences 1 and 2 and, on the other hand, the sentences 3 and 4, mean exactly the same. In an assistant that expects to receive
+a relatively small amount of commands, this should be enough, though in more complex assistants checking the word order matters.
+
+The sentence check will always end with the execution of a function. If it recognizes the correct words, it will trigger an OpenHAB
+command or a system one, for example. If the sentence does not match what the assistant expects, it will say that the command has
+not been recognized, in any case. To give it a more \textit{human} touch, it will exactly say \textit{Sorry, I cannot do that yet}.
+
+We can see that this way we can extend a lot the functionality of the assistant, while keeping a well-organized code. Despite it
+might have to do more checks than the previous version in some cases, in the long run with more commands, this will be
+much more efficient, because it has the ability to discard many other options and go straight to the requested command.
+
+Although I have tried to make a user-friendly script, it is clear that any house arrangement will need a specific configuration in
+the script, depending on the devices and states that they can have.
+
+\subsubsection{Improving the Range of Actions}
+At this moment, the assistant is able to turn on and off all the lights and to manage the system (shutting down and rebooting).
+
+Taking advantage of the improved command processing that I have specified above, I have implemented a few more actions. The following
+example has been made over a system composed by a Philips HUE color light. It is really easy to implement more lights; the user just
+needs to add their item IDs and a name for each light to the beginning of the file. The script will automatically recognize them,
+and it will be able to send commands to them. Now, the actions that it can perform are:
+\begin{itemize}
+	\item For all the lights (through a \textit{Group} item):
+	\begin{itemize}
+		\item Turn on and off.
+	\end{itemize}
+	\item For each light:
+	\begin{itemize}
+		\item Turn on and off.
+		\item Change the light color (red, yellow, blue, pink, green), maintaining its brightness.
+		\item Change the light color temperature (cold, warm, natural).
+		\item Increase and decrease its brightness.
+	\end{itemize}
+	\item For the system:
+	\begin{itemize}
+		\item Turn off.
+		\item Reboot.
+	\end{itemize}
+\end{itemize}
+
+The last three commands specific to a single light require a new function, which makes a GET request to the REST API of OpenHAB,
+in order to get the current state of a light. The state of a Philips HUE light is composed by three numbers: its color (defined
+between 0 and 360 degrees, like a color wheel), its saturation and its brightness (between 0 and 100). On each POST request, I need
+to send these three values, so the script uses GET requests to send the same value that it had before in the parameters that we want
+to maintain. This new function is really simple, and it uses the Python \textit{Requests} library.\cite{requestsDocumentation}
+
+\begin{lstlisting}[style=PythonCode]
+def openhab_get_state(item):
+  url = 'http://localhost:8080/rest/items/' + item + '/state'
+  r = requests.get(url)
+  return r.text
+\end{lstlisting}
+
+\subsubsection{Final Result}
+The full script is included in the appendix A.
+
+\subsection{Adding Automation via IFTTT}
+An often desirable function of a home automation system is the possibility to add and manage rules. Rules enable users to set actions 
+when a specific situation happens, so they do not have to interact directly with the system to perform these actions. This is called 
+automation, and an example of it can be lowering the shutters after 8 PM or turning on the house lights when a motion detector 
+perceives movement.
+
+\subsubsection{Introduction to IFTTT}
+There is a free platform that has become more popular over the last years called “If This Then Else”, or IFTTT. This web-based 
+service allows users to create chains of conditional statements, known as applets, and they can be really powerful. A conditional 
+statement could be one of the conditions mentioned above.\cite{iftttWebsite}
+
+Apart from the website, IFTTT offers an application for iOS and Android, and integration with openHAB, which is the most interesting 
+part for us. Additionally, it is possible to connect other web services to IFTTT, such as social networks, and it is possible to use 
+them as well to trigger actions in OpenHAB.
+
+The main disadvantage of IFTTT and other similar solutions is that the rule must be implemented to use it, and the user may not be 
+able to carry out the automation the way he wants. However, there are plenty of rules that can meet most requirements.
+
+\subsubsection{OpenHAB and IFTTT}
+As we can see, IFTTT perfectly complements OpenHAB, adding a functionality that, in spite of being present in other proprietary 
+home automation solutions, has many more possibilities.
+
+IFTTT is available to all openHAB users through myopenHAB, which is an instance of the openHAB Cloud Service hosted by the openHAB 
+foundation. Thanks to this service, us and other apps can access and interact with our openHAB instance from the 
+Internet.\cite{openHABIftttDocs}
+
+\subsubsection{Installation and Configuration}
+By default, openHAB cannot connect to any openHAB Cloud instance, but there is a binding named \textit{openHAB Cloud Connector} 
+that we can install for this purpose. The binding is installed through the PaperUI. After this, two new files are created in the installation 
+folder of openHAB, in my case:
+
+\begin{lstlisting}[style=Consola]
+/var/lib/openhab2/uuid
+/var/lib/openhab2/openhabcloud/secret
+\end{lstlisting}
+
+These files contain the UUID and secret key of the instance of openHAB. We need to create an account on myopenHAB, indicating an 
+email, password and these previous keys. Once the account is created, we can go back to our instance of the platform and configure 
+the binding (under \textit{Configuration $>$ Services $>$ IO $>$ openHAB Cloud}).
+
+\begin{figure}
+	\centering
+	\includegraphics[width=1\textwidth]{images/Chapter_06/openhab-cloud-binding-conf.png}
+	\caption{openHAB Cloud Binding configuration}
+	\label{fig:openhab-cloud-binding-conf}
+\end{figure}
+
+The user must add some items to expose so IFTTT can manage them. Then, back to myopenHAB, we should be able to see the panel 
+of our instance. Thanks to this service, it is now accessible as well from any part of the world and to external services, like IFTTT.
+
+After this, I have created an account on IFTTT, which is also a very quick process. Once the account is created, IFTTT shows a list 
+of the services that it is capable to handle. OpenHAB is between them, and I am taken back to myopenHAB to allow their connection.
+
+Now, I am able to set IFTTT rules. I will set the first one on their web platform. The process begins with creating a new applet 
+of openHAB. 
+
+\begin{figure}
+	\centering
+	\includegraphics[width=1\textwidth]{images/Chapter_06/selection-iftt.png}
+	\caption{Configuration of an openHAB IFTTT applet}
+	\label{fig:selection-iftt}
+\end{figure}
+
+I can only select three different triggers, as shown in figure \ref{fig:selection-iftt}. In this example, I am going to make lights 
+turn blue if the humidity is over 70\%, so the if condition is going to be that \textit{item state raises above}. Then, I need to 
+specify the item (previously made accessible from openHAB), and give the minimum value, "70” in this case. After this, I am taken 
+back to the service selector, that offers us again a broad range of actions to accomplish if this condition happens. I choose again 
+openHAB, the item that is going to receive the command, and the command itself, which is simply: 260, 100, 100 (which turns the 
+light blue, at 100\% of brightness and saturation).
+
+As this situation is not likely to happen in the moment I am writing these lines, I am going to set a new rule, which combines 
+openHAB and another service, like Twitter. Now the light is going to turn red every time I send a new tweet. I put Twitter as the 
+\textit{if condition} and openHAB in the \textit{then condition}. IFTTT is fully integrated with Twitter and includes very useful 
+shortcuts. However, with openHAB we need to write the full command, as if we were dealing with its REST API. This time, the command 
+that is sent to the light color item is pretty similar: 0, 100, 100 (zero indicates the red color, and the other parameters are the 
+same as in the previous command).
+
+\begin{figure}
+	\centering
+	\includegraphics[width=1\textwidth]{images/Chapter_06/iftt-applet-panel.png}
+	\caption{IFTTT applet panel}
+	\label{fig:iftt-applet-panel}
+\end{figure}
+
+The applet works finely. I publish a tweet and, after some minutes, the light turns red. Although I have used this as an example, 
+it might not be really useful in a real environment, but the end user could use a similar rule as a notification system every time 
+he is mentioned on Twitter, or when he receives new emails. It is also possible to set very useful rules with the date and time as 
+the \textit{if condition}, like turning on the lights after 8 PM. Possibilities seem to be endless when combining openHAB and IFTTT.
+
