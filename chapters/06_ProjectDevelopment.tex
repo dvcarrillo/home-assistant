@@ -1268,34 +1268,34 @@ def openhab_get_state(item):
 The full script is included in the appendix A.
 
 \subsection{Adding Automation via IFTTT}
-An often desirable function of a home automation system is the possibility to add and manage rules. Rules enable users to set actions 
-when a specific situation happens, so they do not have to interact directly with the system to perform these actions. This is called 
-automation, and an example of it can be lowering the shutters after 8 PM or turning on the house lights when a motion detector 
+An often desirable function of a home automation system is the possibility to add and manage rules. Rules enable users to set actions
+when a specific situation happens, so they do not have to interact directly with the system to perform these actions. This is called
+automation, and an example of it can be lowering the shutters after 8 PM or turning on the house lights when a motion detector
 perceives movement.
 
 \subsubsection{Introduction to IFTTT}
-There is a free platform that has become more popular over the last years called “If This Then Else”, or IFTTT. This web-based 
-service allows users to create chains of conditional statements, known as applets, and they can be really powerful. A conditional 
+There is a free platform that has become more popular over the last years called “If This Then Else”, or IFTTT. This web-based
+service allows users to create chains of conditional statements, known as applets, and they can be really powerful. A conditional
 statement could be one of the conditions mentioned above.\cite{iftttWebsite}
 
-Apart from the website, IFTTT offers an application for iOS and Android, and integration with openHAB, which is the most interesting 
-part for us. Additionally, it is possible to connect other web services to IFTTT, such as social networks, and it is possible to use 
+Apart from the website, IFTTT offers an application for iOS and Android, and integration with openHAB, which is the most interesting
+part for us. Additionally, it is possible to connect other web services to IFTTT, such as social networks, and it is possible to use
 them as well to trigger actions in OpenHAB.
 
-The main disadvantage of IFTTT and other similar solutions is that the rule must be implemented to use it, and the user may not be 
+The main disadvantage of IFTTT and other similar solutions is that the rule must be implemented to use it, and the user may not be
 able to carry out the automation the way he wants. However, there are plenty of rules that can meet most requirements.
 
 \subsubsection{OpenHAB and IFTTT}
-As we can see, IFTTT perfectly complements OpenHAB, adding a functionality that, in spite of being present in other proprietary 
+As we can see, IFTTT perfectly complements OpenHAB, adding a functionality that, in spite of being present in other proprietary
 home automation solutions, has many more possibilities.
 
-IFTTT is available to all openHAB users through myopenHAB, which is an instance of the openHAB Cloud Service hosted by the openHAB 
-foundation. Thanks to this service, us and other apps can access and interact with our openHAB instance from the 
+IFTTT is available to all openHAB users through myopenHAB, which is an instance of the openHAB Cloud Service hosted by the openHAB
+foundation. Thanks to this service, us and other apps can access and interact with our openHAB instance from the
 Internet.\cite{openHABIftttDocs}
 
 \subsubsection{Installation and Configuration}
-By default, openHAB cannot connect to any openHAB Cloud instance, but there is a binding named \textit{openHAB Cloud Connector} 
-that we can install for this purpose. The binding is installed through the PaperUI. After this, two new files are created in the installation 
+By default, openHAB cannot connect to any openHAB Cloud instance, but there is a binding named \textit{openHAB Cloud Connector}
+that we can install for this purpose. The binding is installed through the PaperUI. After this, two new files are created in the installation
 folder of openHAB, in my case:
 
 \begin{lstlisting}[style=Consola]
@@ -1303,8 +1303,8 @@ folder of openHAB, in my case:
 /var/lib/openhab2/openhabcloud/secret
 \end{lstlisting}
 
-These files contain the UUID and secret key of the instance of openHAB. We need to create an account on myopenHAB, indicating an 
-email, password and these previous keys. Once the account is created, we can go back to our instance of the platform and configure 
+These files contain the UUID and secret key of the instance of openHAB. We need to create an account on myopenHAB, indicating an
+email, password and these previous keys. Once the account is created, we can go back to our instance of the platform and configure
 the binding (under \textit{Configuration $>$ Services $>$ IO $>$ openHAB Cloud}).
 
 \begin{figure}
@@ -1314,14 +1314,14 @@ the binding (under \textit{Configuration $>$ Services $>$ IO $>$ openHAB Cloud})
 	\label{fig:openhab-cloud-binding-conf}
 \end{figure}
 
-The user must add some items to expose so IFTTT can manage them. Then, back to myopenHAB, we should be able to see the panel 
+The user must add some items to expose so IFTTT can manage them. Then, back to myopenHAB, we should be able to see the panel
 of our instance. Thanks to this service, it is now accessible as well from any part of the world and to external services, like IFTTT.
 
-After this, I have created an account on IFTTT, which is also a very quick process. Once the account is created, IFTTT shows a list 
+After this, I have created an account on IFTTT, which is also a very quick process. Once the account is created, IFTTT shows a list
 of the services that it is capable to handle. OpenHAB is between them, and I am taken back to myopenHAB to allow their connection.
 
-Now, I am able to set IFTTT rules. I will set the first one on their web platform. The process begins with creating a new applet 
-of openHAB. 
+Now, I am able to set IFTTT rules. I will set the first one on their web platform. The process begins with creating a new applet
+of openHAB.
 
 \begin{figure}
 	\centering
@@ -1330,18 +1330,18 @@ of openHAB.
 	\label{fig:selection-iftt}
 \end{figure}
 
-I can only select three different triggers, as shown in figure \ref{fig:selection-iftt}. In this example, I am going to make lights 
-turn blue if the humidity is over 70\%, so the if condition is going to be that \textit{item state raises above}. Then, I need to 
-specify the item (previously made accessible from openHAB), and give the minimum value, "70” in this case. After this, I am taken 
-back to the service selector, that offers us again a broad range of actions to accomplish if this condition happens. I choose again 
-openHAB, the item that is going to receive the command, and the command itself, which is simply: 260, 100, 100 (which turns the 
+I can only select three different triggers, as shown in figure \ref{fig:selection-iftt}. In this example, I am going to make lights
+turn blue if the humidity is over 70\%, so the if condition is going to be that \textit{item state raises above}. Then, I need to
+specify the item (previously made accessible from openHAB), and give the minimum value, "70” in this case. After this, I am taken
+back to the service selector, that offers us again a broad range of actions to accomplish if this condition happens. I choose again
+openHAB, the item that is going to receive the command, and the command itself, which is simply: 260, 100, 100 (which turns the
 light blue, at 100\% of brightness and saturation).
 
-As this situation is not likely to happen in the moment I am writing these lines, I am going to set a new rule, which combines 
-openHAB and another service, like Twitter. Now the light is going to turn red every time I send a new tweet. I put Twitter as the 
-\textit{if condition} and openHAB in the \textit{then condition}. IFTTT is fully integrated with Twitter and includes very useful 
-shortcuts. However, with openHAB we need to write the full command, as if we were dealing with its REST API. This time, the command 
-that is sent to the light color item is pretty similar: 0, 100, 100 (zero indicates the red color, and the other parameters are the 
+As this situation is not likely to happen in the moment I am writing these lines, I am going to set a new rule, which combines
+openHAB and another service, like Twitter. Now the light is going to turn red every time I send a new tweet. I put Twitter as the
+\textit{if condition} and openHAB in the \textit{then condition}. IFTTT is fully integrated with Twitter and includes very useful
+shortcuts. However, with openHAB we need to write the full command, as if we were dealing with its REST API. This time, the command
+that is sent to the light color item is pretty similar: 0, 100, 100 (zero indicates the red color, and the other parameters are the
 same as in the previous command).
 
 \begin{figure}
@@ -1351,8 +1351,227 @@ same as in the previous command).
 	\label{fig:iftt-applet-panel}
 \end{figure}
 
-The applet works finely. I publish a tweet and, after some minutes, the light turns red. Although I have used this as an example, 
-it might not be really useful in a real environment, but the end user could use a similar rule as a notification system every time 
-he is mentioned on Twitter, or when he receives new emails. It is also possible to set very useful rules with the date and time as 
+The applet works finely. I publish a tweet and, after some minutes, the light turns red. Although I have used this as an example,
+it might not be really useful in a real environment, but the end user could use a similar rule as a notification system every time
+he is mentioned on Twitter, or when he receives new emails. It is also possible to set very useful rules with the date and time as
 the \textit{if condition}, like turning on the lights after 8 PM. Possibilities seem to be endless when combining openHAB and IFTTT.
+
+\subsection{Adding Global Access to the System}
+An openHAB instance can, by default, only be accessed from the same network as the device on which it is installed. This is also
+the case in some other home automation systems and smart devices.
+
+However, a home automation system that can be accessed from any place, regardless of the network the user is connected to, can
+greatly extend its usability. For example, it would be possible to turn the oven on 30 minutes before arriving home and have the
+food cooked at the moment the user arrives. Or checking the temperature inside home from the office.
+
+In this section I will explore the different options we have to implement this feature, from doing it manually to making use of
+the possibilities offered by openHAB.
+
+\subsubsection{Making the Instance Accessible From the Public Internet}
+The first option is to make the local instance accessible from the public Internet. This is a process that can be done with any
+software that is hosted in a computer connected to the Internet and that listens to any port and consists in making a route
+between the device and its port, and the public Internet.\cite{nchPublicInternet}
+
+In most homes and businesses, routers use a Network Address Translator, or a NAT, which is mainly what disallows to make devices
+directly reachable from Internet. The NAT takes the public IP address for itself and assigns local IP addresses for the computers
+and devices on the local network, so that they are all effectively sharing the same IP address. So, if we want to make a single
+device reachable from outside, we need to tell the router how to address a specific request. This is called port forwarding and,
+as the name indicates, it makes use of the ports. Ports are usually specific to each server-based application, and this is also the
+case in openHAB, which uses the port 8080 by default.
+
+Most of the routers nowadays provide a software where we can make any necessary change, which is accessible via HTTP in the local
+address of the router. Here it is possible to set the ports that we want to forward.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=1\textwidth]{images/Chapter_06/port-forwarding.png}
+	\caption{Control panel of the router used in this project, in the Port Forwarding section}
+	\label{fig:port-forwarding}
+\end{figure}
+
+For setting a port forwarding rule we usually need to specify some properties, as the protocol to use, the start and end ports or
+the host IP. After that, the router should be able to address any request with the specified properties to the device.
+
+Although this is an easy and fast process, I will not go into detail too much, as this is a very unsafe solution. OpenHAB does
+not provide any authentication method nor any restricted access at this moment, so opening a port must be avoided, because anyone
+could access our system and view all data as if they were us.
+
+\subsubsection{Running openHAB Behind a Reverse Proxy}
+This solution will make our openHAB instance accessible from the Internet without depending on any third-party servers. However,
+we need our own domain first. This solution is the best one if the user has already purchased a domain. If not, this would require
+spending between EUR 10 and EUR 20 every year\cite{startBloggingDomainCost}, so it might be more appropriate to use myopenHAB
+Cloud Service, which is free to use.
+
+Running openHAB behind a reverse proxy allows to access the openHAB runtime via port 80 (HTTP) and 443 (HTTPS). It also provides a
+simple way of protecting the server with authentication and secure certificates.
+
+The first step is to set up a HTTP server, like NGINX or Apache, which support reverse proxying. NGINX is based on configuration
+files, and we need to create one to allow it to proxy openHAB. The following code is the configuration to apply, as long as the
+openHAB instance is located in the same machine as the reverse proxy, as in my case:
+
+\begin{lstlisting}[style=Consola]
+server {
+  listen                                  80;
+  server_name                             openhabpi.me;
+
+  location / {
+    proxy_pass                            http://localhost:8080/;
+    proxy_set_header Host                 $http_host;
+    proxy_set_header X-Real-IP            $remote_addr;
+    proxy_set_header X-Forwarded-For      $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto    $scheme;
+  }
+}
+\end{lstlisting}
+
+Then, I save the file in sites-available and \textit{activate}it by linking it in the sites-enabled folder. After it, we only need
+to restart NGINX and it should be ready.
+
+The system can be secured thanks to the authentication system that NGINX provides, which needs to be configured with an
+authentication user file and with the utility htpasswd, included in the \textit{apache2-utils} package. The following command
+creates a file that we can use with NGINX. I am using \textit{dvcarrillo} as the username:
+
+\begin{lstlisting}[style=Consola]
+sudo htpasswd -c /etc/nginx/.htpasswd dvcarrillo
+\end{lstlisting}
+
+Once it has been created, I have to move it to the NGINX directory (in my case, \textit{/etc/nginx/sites-enabled/openhab}), and
+include these lines in the configuration file, underneath the \textit{proxy\_*} settings:
+
+\begin{lstlisting}[style=Consola]
+auth_basic                     "Username and Password Required";
+auth_basic_user_file           /etc/nginx/.htpasswd;
+\end{lstlisting}
+
+NGINX should be restarted to apply these changes now.
+
+Another way to secure the system without needing to enter a username and password is to restrict the access to only some specific
+IPs, blocking the access to everyone else. This can be done thanks to the NGINX directives \textit{satisfy} and \textit{deny}.
+For example, by adding these lines inside the location block:
+
+\begin{lstlisting}[style=Consola]
+satisfy  any;
+allow    192.168.0.1/24;
+allow    127.0.0.1;
+deny     all;
+\end{lstlisting}
+
+NGINX will allow anyone within the range from 192.168.0.1 to 192.168.0.24 and the \textit{localhost} to connect without a password.
+
+To pick this method or the previous one is totally up to the user’s needs and his own idea of the system. The password authentication
+is suitable if he wants to connect to his openHAB instance from several networks and he does not know their IP beforehand. But if
+he knows exactly the networks and devices that he is going to use, the second option provides extra security.
+
+Another option is to combine both, which would require to set up a password and then configure the IP allowance. This way, the
+allowed IP addresses would directly access openHAB and the rest of them would be asked to log in using the specified username and
+password.
+
+The reverse proxy choice also provides, as I mentioned, the possibility to enable HTTPS, so communications between the client and
+the server are encrypted. This is an important step that will protect against eavesdropping and possible forgery, and I would recommend
+it to anyone who chooses this method.
+
+The process to enable HTTPS in the reverse proxy begins with using OpenSSL to generate a self-signed certificate. Although if we
+have a valid domain and can change the DNS to point towards your IP, openHAB recommends using Let’s Script.\cite{letsEncryptWebsite}
+
+OpenSSL can generate a certificate which will be valid for a year with the following command:
+
+\begin{lstlisting}[style=Consola]
+sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/openhab.key -out /etc/ssl/openhab.cr
+\end{lstlisting}
+
+Then, I need to tell NGINX that there are SSL certificates and their location. This is done by adding the following to the
+configuration file, underneath the \textit{server\_name} variable, assuming we placed the certificate in the directory \textit{/etc/ssl/}:
+
+\begin{lstlisting}[style=Consola]
+ssl_certificate                 /etc/ssl/openhab.crt;
+ssl_certificate_key             /etc/ssl/openhab.key;
+\end{lstlisting}
+
+Then, I must tell the server to listen on the HTTPS port by changing the listen parameter:
+
+\begin{lstlisting}[style=Consola]
+listen                          443 ssl;
+\end{lstlisting}
+
+After restarting NGINX, we will be using a valid HTTPS certificate. Finally, we must redirect the HTTP traffic to HTTPS. To get this
+done, we only need to tell the server to direct all incoming connections on the port 80 (http) to the https version of the domain.
+
+\paragraph{Final Result}
+To summarize, the final NGINX configuration file will look like the following:
+
+\begin{lstlisting}[style=Consola]
+server {
+  listen                         80;
+  server_name                    openhabpi.me;
+  return 301                     https://$server_name$request_uri;
+}
+server {
+  listen                         443 ssl;
+  server_name                    openhabpi.me;
+
+  ssl_certificate                /etc/ssl/openhab.crt
+  ssl_certificate_key            /etc/ssl/openhab.key
+
+  location / {
+    proxy_pass                             http://localhost:8080/;
+    proxy_set_header Host                  $http_host;
+    proxy_set_header X-Real-IP             $remote_addr;
+    proxy_set_header X-Forwarded-For       $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto     $scheme;
+    satisfy                                any;
+    allow                                  192.168.0.1/24;
+    allow                                  127.0.0.1;
+    deny                                   all;
+    auth_basic                             "Username and Password Required";
+    auth_basic_user_file                   /etc/nginx/.htpasswd;
+  }
+}
+\end{lstlisting}
+
+This is the safest method I propose, and I believe that under normal circumstances, this security will be more than enough.
+Although it can even be improved further, indicating specific cyphers and SSL settings. OpenHAB proposes the following snippet for
+this purpose:
+
+\begin{lstlisting}[style=Consola]
+ssl_protocols                   TLSv1 TLSv1.1 TLSv1.2;
+ssl_prefer_server_ciphers       on;
+ssl_dhparam                     /etc/nginx/ssl/dhparam.pem;
+ssl_ciphers                     ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA256:ECDHE-RSA-AES256-SHA:HIGH:!aNULL:!eNULL:!LOW:!3DES:!MD5:!EXP:!CBC:!EDH:!kEDH:!PSK:!SRP:!kECDH;
+ssl_session_timeout             1d;
+ssl_session_cache               shared:SSL:10m;
+keepalive_timeout               70;
+\end{lstlisting}
+
+\subsubsection{Using myopenHAB Cloud Service}
+MyopenHAB is an instance of the openHAB Cloud service, which is hosted by the openHAB Foundation e.V.
+
+This service is fully free and it is meant to allow users to quickly check out its features without having to set up and host a 
+personal instance.
+
+Unlike the previous solution, this requires almost zero installation or configuration from the user, the set up process is easy
+and fast. As I mentioned in the previous IFTTT section, the openHAB Cloud Connector binding would allow our system to be reachable
+from anywhere in the world, thanks to myopenHAB.
+
+Then, the first step is to install the Cloud Connector bundle on the local openHAB runtime. This bundle establishes the connection 
+to myopenHAB.org and authenticates against it. After this, I can log in to myopenHAB website (\textit{https://myopenhab.org}).
+This will give us remote web access to the web UIs of our openHAB instance and will also let us check for the state of the items, 
+notifications and events.
+
+On the downside, the reliability of this service depends on third parties. They explicitly specify in their website\cite{myopenHAB}
+that we must be aware that they cannot offer any SLAs regarding availability. However, they promise to keep it up and running to 
+the best of their capabilities.
+
+\paragraph{Integration With the Mobile Application} The advantages of using myopenHAB are also related to the openHAB mobile application.
+By default, we are able to access the system if we are connected to the local network where the openHAB server is located. However,
+if we use myopenHAB and enter \textit{https://myopenhab.org} as a remote URL and the user and password in the credentials, we will
+be able to manage the openHAB runtime from anywhere in the world, and from the mobile phone. This is a very positive point to 
+consider when choosing one of these options.
+
+\subsubsection{Conclusion}
+In this case, I will choose myopenHAB Cloud Service. After testing it, I find it reliable enough for a domestic use, although in 
+other cases where we need to assure its functionality for the longest time, it is more recommendable to run openHAB behind a reverse 
+proxy. MyopenHAB is also free and easy to use, and its integration with the mobile application works perfectly.
+
+However, I would never recommend using the first proposed solution (making the instance accessible from the public Internet), as 
+it presents major security problems.
 
