@@ -1,3 +1,50 @@
 \chapter{Conclusions and future work}
 
-Conclusions and future work.
+Since the beginning of this project, the main objective has been maintained: to create an affordable, functional and usable voice-driven 
+home automation controller. At this point, I can tell that this objective has been mostly reached, although there are many things
+to improve in a future.
+
+When I began working on this system, I only knew some the most popular commercial virtual assistants with a home automation system, 
+like Google Home or Amazon Alexa, and none of them had been launched in the Spanish market. Today, almost ten months after, only 
+Google Home is available. It was when I started this project that I realized how many open source solutions were available, like openHAB. 
+This allowed me to work over an existing basis and to improve its capabilities, always maintaining the main objective of affordability
+and functionality. The end result, although much less flexible, can offer most of the features offered by the main products on the 
+market. The custom voice assistant, that uses Google Assistant to answer all the commands not related to openHAB, makes this product
+very useful for all kinds of situations.
+
+One of the main issues that I find is that this system needs to be configured by a technical person at least in its installation.
+The installation of openHAB itself requires some technical knowledge, but its configuration and, most importantly, the configuration
+of the voice assistant, requires coding. A very convenient future improvement would be to automate the generation of the voice 
+assistant script every time that a device is added. Of course, it would also be a good improvement to automate all the process.
+
+This project relies heavily on third party solutions, like the Google services for processing the speech or the service 
+\textit{myopenHAB}. However, I have tried to explore and provide alternatives in every case, that would cover any different situation.
+
+Another important future improvement is related to privacy. We observed that many devices, such as the Philips Hue Smart Bridge,
+are in constant communication with the cloud, when in many cases this is not necessary. Some way of blocking this communication 
+and restricting it to the local network should be explored.
+
+\begin{table}[]
+	\centering
+	\resizebox{\textwidth}{!}{%
+		\begin{tabular}{|l|c|l|}
+			\hline
+			\multicolumn{1}{|c|}{\textbf{Objective}} & \textbf{Fulfillment} & \multicolumn{1}{c|}{\textbf{Observations}} \\ \hline
+			\begin{tabular}[c]{@{}l@{}}1. Integrate a home automation \\ system in a embedded system\end{tabular} & 100\% & \begin{tabular}[c]{@{}l@{}}I have successfully installed and integrated\\ openHAB in the Raspberry Pi\end{tabular} \\ \hline
+			\begin{tabular}[c]{@{}l@{}}2. Integrate a voice assistant in \\ the same embedded system as \\ the home automation system\end{tabular} & 100\% & \begin{tabular}[c]{@{}l@{}}The custom assistant integrates Google\\ Assistant and a voice assistant for\\ openHAB\end{tabular} \\ \hline
+			\begin{tabular}[c]{@{}l@{}}3. Explore current home \\ automation systems and \\ voice assistants, focusing \\ on open-source solutions\end{tabular} & 80\% & \begin{tabular}[c]{@{}l@{}}I have explored some of these systems on\\ Chapter 3, but the inclusion of open source\\ solutions has been reduced\end{tabular} \\ \hline
+			\begin{tabular}[c]{@{}l@{}}4. Explore automation \\ possibilities and implement\\ an automation service in the \\ domotic system\end{tabular} & 70\% & \begin{tabular}[c]{@{}l@{}}I have successfully implemented an \\ automation service using IFTTT and \\ the REST API of openHAB. Some other \\ services might have been explored\end{tabular} \\ \hline
+			\begin{tabular}[c]{@{}l@{}}5. Explore options for \\ managing the system from a \\ mobile application\end{tabular} & 90\% & \begin{tabular}[c]{@{}l@{}}The system is currently manageable\\ thanks to the Cloud Connector and the\\ mobile application of openHAB\end{tabular} \\ \hline
+			\begin{tabular}[c]{@{}l@{}}6. Explore options for \\ providing global access to \\ the system and implement one\end{tabular} & 100\% & \begin{tabular}[c]{@{}l@{}}I have explored these options on Chapter 6 \\ and I have tested the service \\ myopenHAB\end{tabular} \\ \hline
+			\begin{tabular}[c]{@{}l@{}}7. Explore safety and privacy \\ concerns related to the home \\ automation system\end{tabular} & 30\% & \begin{tabular}[c]{@{}l@{}}Some safety concerns have been covered\\ through this work, but I have not covered\\ the main aspects related to privacy\end{tabular} \\ \hline
+			\begin{tabular}[c]{@{}l@{}}8. Provide an adaptive and \\ responsive user interface, \\ usable on touch and non-touch \\ screens\end{tabular} & 100\% & \begin{tabular}[c]{@{}l@{}}I explained how to configure Basic UI and\\ PaperUI. Both user interfaces comply \\ with these points\end{tabular} \\ \hline
+			\begin{tabular}[c]{@{}l@{}}9. Connect the virtual assistant\\ to openHAB, so it can manage \\ the devices present in the \\ system\end{tabular} & 100\% & \begin{tabular}[c]{@{}l@{}}The custom virtual assistant communicates\\ with openHAB thanks to the REST API\\ of openHAB and the Requests Python \\ library\end{tabular} \\ \hline
+			\begin{tabular}[c]{@{}l@{}}10. Test domotic devices in the\\ final system and present an \\ usable solution\end{tabular} & 70\% & \begin{tabular}[c]{@{}l@{}}The current solution is completely\\ functional and usable. However, more \\ devices should have been tested\end{tabular} \\ \hline
+		\end{tabular}%
+	}
+	\caption{Fulfillment of the specific objectives presented in Chapter 1}
+	\label{table:fulfillment-objectives}
+\end{table}
+
+The table \ref{table:fulfillment-objectives} presents the fulfillment level of the specific objectives that I presented in the 
+Introduction chapter.
