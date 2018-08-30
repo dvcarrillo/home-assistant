@@ -74,51 +74,53 @@ she finds these systems difficult to use.
 The Software Requirements Specification (SRS) includes a functional point of view of the project to develop, that is, the capabilities
 that the software system will have.
 
-The domotic controller will be able to control all modern devices in our home, regardless of their maker and the technology they use.
-It will provide an easy to use user interface and the ability to easily install, modify or remove the devices. It will also include natural
-human-computer interaction through the voice. A more detailed specification of the requirements can be found in the subsections
-below.
+This project focuses on building a home automation controller that can be manageable through new human-computer interaction technologies,
+like virtual assistants. The controller will be able to control all modern domotic devices in our home, regardless of their maker and the 
+technology they use, as long as it is supported by our system. It will also allow user to add different information, such as the weather 
+forecast or the moon phases, from different data providers. It will provide an easy to use user interface and the ability to easily install, 
+modify or remove the devices. It will also include natural human-computer interaction through the voice. A more detailed specification 
+of the requirements can be found in the subsections below.
 
 \subsubsection{Functional Requirements}
 Functional requirements are a description of the facility or feature required. They deal with what the system should do or provide
 for users.\cite{sqaFunctionalNonFunctional}
 
 \begin{itemize}
-    \item \textbf{FR1}: The system will be able to retrieve automatically the status of the different properties of the elements.
-    \item \textbf{FR2}: The system will be able to retrieve automatically data from its different data providers.
-    \item \textbf{FR3}: The system will not need any operation to launch openHAB after it is powered on.
-    \item \textbf{FR4}: The system will be able to turn itself off safely.
-    \item \textbf{FR5}: The system will automatically detect new smart devices connected to the local network.
-    \item \textbf{FR6}: The system will be able to detect the possible operations with each connected smart device.
-    \item \textbf{FR7}: The system will be able to operate with the connected devices according to the detected possible operations.
-    \item \textbf{FR8}: The system will be able to tell the user in an understandable manner the current connection status for each
+    \item \textbf{FR1}: The system must retrieve automatically the status of the different properties of the devices.
+    \item \textbf{FR2}: The system must retrieve automatically data from its different data providers.
+    \item \textbf{FR3}: The system must launch openHAB automatically when it is powered on.
+    \item \textbf{FR4}: The system must place the home automation runtime in an accessible local server.
+    \item \textbf{FR5}: The system must automatically detect new smart devices connected to the local network.
+    \item \textbf{FR6}: The system must detect the possible operations with each connected smart device.
+    \item \textbf{FR7}: The system must operate with the connected devices according to the detected possible operations.
+    \item \textbf{FR8}: The system must tell the user in an understandable manner the current connection status for each
     device.
-    \item \textbf{FR9}: The system will provide different user interfaces, so users can choose one between them, according to
+    \item \textbf{FR9}: The system must provide different user interfaces, so users can choose one between them, according to
     their needs.
-    \item \textbf{FR10}: The user will be able to change the configuration of the system from a graphical user interface.
-    \item \textbf{FR11}: The system will be manually configurable and modifiable using configuration files.
-    \item \textbf{FR12}: The system will automatically include and configure new devices found in the network, after the user decides
-    to add them.
-    \item \textbf{FR13}: The user will be able to configure the name, display icon, IP and all possible aspects of the item directly from
-    the user interface.
-    \item \textbf{FR14}: The system will allow the user to make groups of items.
-    \item \textbf{FR15}: The system will allow the user to add groups of items to other groups of items.
-    \item \textbf{FR16}: The system will be modular and include a package system. Each package supports a set of devices.
-    \item \textbf{FR17}: The package system will be accessible from the graphical user interface.
-    \item \textbf{FR18}: The installation of packages will be done automatically after the user clicks on the install button.
-    \item \textbf{FR19}: The removal of packages will be done automatically after the user clicks on the remove button.
-    \item \textbf{FR20}: The system will maintain an updated and classified list of packages according to an external repository.
-    \item \textbf{FR21}: The system will be manageable from external sources.
-    \item \textbf{FR22}: The system will be accessible from external devices and from the Internet.
-    \item \textbf{FR23}: The system will allow to have automation rules defined by the user.
-    \item \textbf{FR24}: The voice assistant will allow to perform the main operations of each device in the system.
-    \item \textbf{FR25}: The voice assistant will be able to answer in different languages.
-    \item \textbf{FR26}: The voice assistant will be able to do power management tasks in the system, such as powering the system
-    off or restarting the system.
-    \item \textbf{FR27}: The voice assistant will be operable through mechanical methods or by voice.
-    \item \textbf{FR28}: The users will be able to edit and adapt the functionalities of the voice assistant according to their needs.
-    \item \textbf{FR29}: The voice assistant will provide spoken feedback if there has been an error performing the given command.
-    \item \textbf{FR30}: The voice assistant will be able to print debug information in the command line if it is required.
+    \item \textbf{FR10}: The system must allow the user to change its configuration from a graphical user interface.
+    \item \textbf{FR11}: The system must be manually configurable and modifiable using manual configuration files.
+    \item \textbf{FR12}: The system must automatically include and configure new devices found in the local network, after the user 
+    decides to add them.
+    \item \textbf{FR13}: The system must allow the user to configure the name, display icon, IP and all possible aspects of the item 
+    directly from the user interface.
+    \item \textbf{FR14}: The system must allow the user to group the devices.
+    \item \textbf{FR15}: The system must allow the user to add groups of devices to other groups of devices.
+    \item \textbf{FR16}: The system must be modular and include a package system. Each package will support a set of devices.
+    \item \textbf{FR17}: The package system must be accessible from the graphical user interface.
+    \item \textbf{FR18}: The installation of packages must be done automatically after the user clicks on the install button.
+    \item \textbf{FR19}: The removal of packages must be done automatically after the user clicks on the remove button.
+    \item \textbf{FR20}: The system must maintain an updated and classified list of packages according to an external repository.
+    \item \textbf{FR21}: The system must be manageable from external sources.
+    \item \textbf{FR22}: The system must allow the access from external devices and from the Internet.
+    \item \textbf{FR23}: The system must allow the definition of automation rules.
+    \item \textbf{FR24}: The voice assistant must perform the main operations of each device in the system.
+    \item \textbf{FR25}: The voice assistant must be able to answer in different languages.
+    \item \textbf{FR26}: The voice assistant must do power management tasks in the system, such as powering the system
+    off or restarting the system, if asked by the user.
+    \item \textbf{FR27}: The voice assistant has to be operable through mechanical methods or by voice.
+    \item \textbf{FR28}: The voice assistant functionalities must be editable so users can adapt it to their needs.
+    \item \textbf{FR29}: The voice assistant must provide spoken feedback if there has been an error performing the given command.
+    \item \textbf{FR30}: The voice assistant must print debug information in the command line if it is required.
 \end{itemize}
 
 \subsubsection{Non-Functional Requirements}
@@ -152,40 +154,66 @@ The next step after the specification of requirements is to specify the use case
 Use case diagrams are usually referred to as behavior diagrams used to describe a set of actions (use cases) that some system or
 systems (subject) should or can perform in collaboration with one or more external users of the system (actors).\cite{umlUseCaseDiagrams}
 
-Use cases are represented in the figures \ref{fig:UC-device-and-service-management}, \ref{fig:UC-platform-management},
-\ref{fig:UC-automation-control} and \ref{fig:UC-voice-assistant-management}.
+\subsubsection{Actor Description}
 
-\begin{figure}
+The Unified Modeling Language (UML)  defines an Actor as an entity that specifies a role played by a user or any other system 
+that interacts with the subject.
+
+In this case, we have specified three actors: user, administrator and timer. A description of each one is provided in the tables
+\ref{table:actor-1}, \ref{table:actor-2} and \ref{table:actor-3}.
+
+\begin{table}[]
 	\centering
-	\includegraphics[width=1\textwidth]{images/Chapter_06/UC-device-and-service-management.png}
-	\caption{Use cases diagram for the Device and Service Management subsystem}
-	\label{fig:UC-device-and-service-management}
-\end{figure}
-
-\begin{figure}
+	\resizebox{\textwidth}{!}{%
+		\begin{tabular}{|l|l|l|l|l|l|}
+			\hline
+			\textbf{Actor} & \multicolumn{4}{l|}{User} & \cellcolor[HTML]{C0C0C0}AC-1 \\ \hline
+			\textbf{Description} & \multicolumn{5}{l|}{Main actor, it can be any person that uses the system} \\ \hline
+			\textbf{Characteristics} & \multicolumn{5}{l|}{\begin{tabular}[c]{@{}l@{}}Actor that can perform consultations and modifications over the present\\ domotic devices and their state, as well as over the platform, and the \\ automation rules. The operation with the voice assistant is also allowed\\ to this actor, but not the edition of its parameters.\end{tabular}} \\ \hline
+			\textbf{Relationships} & \multicolumn{5}{l|}{} \\ \hline
+			\textbf{References} & \multicolumn{5}{l|}{} \\ \hline
+			\textbf{Author} & David Vargas Carrillo & \textbf{Date} & 30/08/2018 & \textbf{Version} & 1.0 \\ \hline
+		\end{tabular}%
+	}
+	\caption{Actor 1 definition}
+	\label{table:actor-1}
+	
+	\bigskip
 	\centering
-	\includegraphics[width=1\textwidth]{images/Chapter_06/UC-platform-management.png}
-	\caption{Use cases diagram for the Platform Management subsystem}
-	\label{fig:UC-platform-management}
-\end{figure}
-
-\begin{figure}
+	\resizebox{\textwidth}{!}{%
+		\begin{tabular}{|l|l|l|l|l|l|}
+			\hline
+			\textbf{Actor} & \multicolumn{4}{l|}{Administrator} & \cellcolor[HTML]{C0C0C0}AC-2 \\ \hline
+			\textbf{Description} & \multicolumn{5}{l|}{\begin{tabular}[c]{@{}l@{}}Actor whose unique purpose is to adapt the voice assistant to the\\ current state of the home automation system\end{tabular}} \\ \hline
+			\textbf{Characteristics} & \multicolumn{5}{l|}{\begin{tabular}[c]{@{}l@{}}The administrator is of great importance in this system, as it will be\\ in charge of adapting the voice assistant to the final setup of the\\ home automation system\end{tabular}} \\ \hline
+			\textbf{Relationships} & \multicolumn{5}{l|}{User} \\ \hline
+			\textbf{References} & \multicolumn{5}{l|}{} \\ \hline
+			\textbf{Author} & David Vargas Carrillo & \textbf{Date} & 30/08/2018 & \textbf{Version} & 1.0 \\ \hline
+		\end{tabular}%
+	}
+	\caption{Actor 2 definition}
+	\label{table:actor-2}
+	
+	\bigskip
 	\centering
-	\includegraphics[width=0.8\textwidth]{images/Chapter_06/UC-automation-control.png}
-	\caption{Use cases diagram for the Automation Control subsystem}
-	\label{fig:UC-automation-control}
-\end{figure}
+	\resizebox{\textwidth}{!}{%
+		\begin{tabular}{|l|l|l|l|l|l|}
+			\hline
+			\textbf{Actor} & \multicolumn{4}{l|}{Timer} & \cellcolor[HTML]{C0C0C0}AC-3 \\ \hline
+			\textbf{Description} & \multicolumn{5}{l|}{This actor performs a task on the system every certain period of time} \\ \hline
+			\textbf{Characteristics} & \multicolumn{5}{l|}{\begin{tabular}[c]{@{}l@{}}The timer is an agent on the system that performs repetitive tasks \\ every certain period of time, normally automated tasks related to \\ the current configuration of the system\end{tabular}} \\ \hline
+			\textbf{Relationships} & \multicolumn{5}{l|}{User} \\ \hline
+			\textbf{References} & \multicolumn{5}{l|}{} \\ \hline
+			\textbf{Author} & David Vargas Carrillo & \textbf{Date} & 30/08/2018 & \textbf{Version} & 1.0 \\ \hline
+		\end{tabular}%
+	}
+	\caption{Actor 3 definition}
+	\label{table:actor-3}
+\end{table}
 
-\begin{figure}
-	\centering
-	\includegraphics[width=0.8\textwidth]{images/Chapter_06/UC-voice-assistant-management.png}
-	\caption{Use cases diagram for the Voice Assistant Management subsystem}
-	\label{fig:UC-voice-assistant-management}
-\end{figure}
-
-\subsection{Functional Subsystems}
-From the previously specified use cases, we can differentiate four functional subsystems. They are represented in the figure
-\ref{fig:functional-subsystems}.
+\subsubsection{Functional Subsystems}
+The entire functionality of the system can be encompassed in a set of functional subsystems. From the previously specified use cases, 
+we can differentiate four functional subsystems. They are represented in the figure \ref{fig:functional-subsystems}.
 
 \begin{figure}
 	\centering
@@ -194,7 +222,68 @@ From the previously specified use cases, we can differentiate four functional su
 	\label{fig:functional-subsystems}
 \end{figure}
 
-\subsection{Implementation Possibilities}
+The first functional subsystem is the \textbf{Device and Service Management}, which includes all the functionality related to the 
+configured devices and services on the platform, such as their addition, removal and modification. It also includes actions
+to update their status on the system and on the physical device. Its use cases are represented in the figure 
+\ref{fig:UC-device-and-service-management}.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=1\textwidth]{images/Chapter_06/UC-device-and-service-management.png}
+	\caption{Use cases diagram for the Device and Service Management subsystem}
+	\label{fig:UC-device-and-service-management}
+\end{figure}
+
+The \textbf{Platform Management} subsystem encompasses the actions aimed to install and uninstall packages to the platform, as well
+as all the actions related to change its configuration and the user interface. This subsystem also considers the automatic actions that
+are done in order to check for changes in the configuration files that are manually specified. These use cases are depicted in the diagram
+in the figure \ref{fig:UC-platform-management}.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.8\textwidth]{images/Chapter_06/UC-platform-management.png}
+	\caption{Use cases diagram for the Platform Management subsystem}
+	\label{fig:UC-platform-management}
+\end{figure}
+
+In third place, the \textbf{Automation Control} subsystem comprises the creation, modification and deletion of automation rules that
+are set in order to create automatized processes in the system. There are also actions for checking for rules and applying them to 
+the devices they are aimed to. The figure \ref{fig:UC-automation-control} includes a diagram of its use cases.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.8\textwidth]{images/Chapter_06/UC-automation-control.png}
+	\caption{Use cases diagram for the Automation Control subsystem}
+	\label{fig:UC-automation-control}
+\end{figure}
+
+Finally, the \textbf{Voice Assistant} subsystem is in charge of everything related to the voice assistant that interacts with the
+home automation system. Very few actions are considered in this subsystem, as its operation is quite simple. It includes actions 
+for activating the assistant, sending commands and processing them, and editing their properties. They are represented in the
+use cases diagram in figure \ref{fig:UC-voice-assistant-management}.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.8\textwidth]{images/Chapter_06/UC-voice-assistant-management.png}
+	\caption{Use cases diagram for the Voice Assistant Management subsystem}
+	\label{fig:UC-voice-assistant-management}
+\end{figure}
+
+\bigskip
+\section{System Analysis}
+%TODO
+%Introducir la sección
+
+\subsection{Conceptual Model}
+%TODO
+%Especificar el modelo conceptual
+
+\bigskip
+\section{System Design}
+%TODO
+%Introducir la seccion
+
+\subsection{Possible Operating Scenarios}
 After exploring what users would expect from a system like this, it is worth thinking about how it should be implemented. We proposed
 different options to meet the previous requirements.
 
@@ -235,39 +324,25 @@ OpenHAB provides a web platform, as explained above, and a mobile application fo
 The table \ref{table:possible-implementations} compares all the possibilities for the implementation of the system.
 
 \begin{table}[]
-    \centering
-    \resizebox{\textwidth}{!}{%
-        \begin{tabular}{|l|c|c|c|c|}
-            \hline
-            \multicolumn{1}{|c|}{\textbf{Feature}}                                  & \textbf{\begin{tabular}[c]{@{}c@{}}Web\\ platform\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}Desktop \\ application\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}Mobile\\ application\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}Hybrid\\ Solution\end{tabular}} \\ \hline
-            \begin{tabular}[c]{@{}l@{}}Support for \\ multiple devices\end{tabular} & Yes                                                             & Only PCs                                                                & \begin{tabular}[c]{@{}c@{}}Only mobile\\ phones/tablets\end{tabular}  & Yes                                                                \\ \hline
-            \begin{tabular}[c]{@{}l@{}}Allows access\\ from Internet\end{tabular}   & Yes                                                             & No                                                                      & No                                                                    & Yes                                                                \\ \hline
-            \begin{tabular}[c]{@{}l@{}}Control from\\ Raspberry Pi\end{tabular}     & Yes                                                             & Yes                                                                     & No                                                                    & Yes                                                                \\ \hline
-            \begin{tabular}[c]{@{}l@{}}Easy \\ implementation\end{tabular}          & Yes                                                             & No                                                                      & No                                                                    & Yes                                                                \\ \hline
-            \begin{tabular}[c]{@{}l@{}}Maximum\\ performance\end{tabular}           & No                                                              & Yes                                                                     & Yes                                                                   & Partially                                                          \\ \hline
-        \end{tabular}%
-    }
-    \caption{Comparison between possible implementations}
-    \label{table:possible-implementations}
+	\centering
+	\resizebox{\textwidth}{!}{%
+		\begin{tabular}{|l|c|c|c|c|}
+			\hline
+			\multicolumn{1}{|c|}{\textbf{Feature}}                                  & \textbf{\begin{tabular}[c]{@{}c@{}}Web\\ platform\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}Desktop \\ application\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}Mobile\\ application\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}Hybrid\\ Solution\end{tabular}} \\ \hline
+			\begin{tabular}[c]{@{}l@{}}Support for \\ multiple devices\end{tabular} & Yes                                                             & Only PCs                                                                & \begin{tabular}[c]{@{}c@{}}Only mobile\\ phones/tablets\end{tabular}  & Yes                                                                \\ \hline
+			\begin{tabular}[c]{@{}l@{}}Allows access\\ from Internet\end{tabular}   & Yes                                                             & No                                                                      & No                                                                    & Yes                                                                \\ \hline
+			\begin{tabular}[c]{@{}l@{}}Control from\\ Raspberry Pi\end{tabular}     & Yes                                                             & Yes                                                                     & No                                                                    & Yes                                                                \\ \hline
+			\begin{tabular}[c]{@{}l@{}}Easy \\ implementation\end{tabular}          & Yes                                                             & No                                                                      & No                                                                    & Yes                                                                \\ \hline
+			\begin{tabular}[c]{@{}l@{}}Maximum\\ performance\end{tabular}           & No                                                              & Yes                                                                     & Yes                                                                   & Partially                                                          \\ \hline
+		\end{tabular}%
+	}
+	\caption{Comparison between possible implementations}
+	\label{table:possible-implementations}
 \end{table}
 
 As we can see, the hybrid solution, which is a web platform and mobile application, meets all the features in the best way, and
 offers easy and fast implementation. At this point, we have not considered the implementation of the voice assistant, which we
 will talk about in following sections.
-
-\bigskip
-\section{System Analysis}
-%TODO
-%Introducir la sección
-
-\subsection{Conceptual Model}
-%TODO
-%Especificar el modelo conceptual
-
-\bigskip
-\section{System Design}
-%TODO
-%Introducir la seccion
 
 \subsection{Architecture}
 %TODO
