@@ -1,7 +1,7 @@
 \chapter{Product Analysis}
 
 The aim of this chapter is to provide a detailed analysis of the devices more closely related to this project, now that we have a
-clearer idea about its main pillars. I will go into many of the available commercial devices and software in the fields of home
+clearer idea about its main pillars. We will go into many of the available commercial devices and software in the fields of home
 automation, voice assistance and smart devices.
 
 \section{Home Automation Systems}
@@ -102,8 +102,8 @@ hand-held remotes.
 \\~\\
 
 In addition to the previous domotic systems, which are proprietary, there are also open source and more customizable solutions that,
-although they may require more time in their configuration, are much more adaptable to the needs of the user. I will explore three of
-the most popular: openHAB, Home-Assistant.io and Jeedom.
+although they may require more time in their configuration, are much more adaptable to the needs of the user. Three of the most popular
+open source home automation systems will be explored: openHAB, Home-Assistant.io and Jeedom.
 
 \subsection{OpenHAB}
 OpenHAB, the acronym for Open Home Automation Bus is an open source, technology agnostic home automation platform which runs
@@ -113,7 +113,7 @@ to automation rules.
 
 In its most recent version, openHAB 2, it has implemented new user interfaces that automate many processes, so it is almost unnecessary
 to write a single line of code, making the system more attractive to all types of users. OpenHAB needs to be installed in a computer that
-will act as a server in the local network, making the system accessible via HTTP. It also offers more connectivity options that I will explore
+will act as a server in the local network, making the system accessible via HTTP. It also offers more connectivity options that we will explore
 in the following chapters. The architecture, in this case, is decentralized, as there may be multiple controllers, including openHAB itself.
 
 OpenHAB's compatibility is somewhat limited when it comes to home automation devices, but it supports Apple HomeKit and common
@@ -153,7 +153,7 @@ experience}, could annoy some users and make them lean towards other platforms.
 \\~\\
 
 It seems difficult to directly compare these home automation systems, but all of them share characteristics that we can contrast.
-The table \ref{table:home-automation-comparison} represents a comparison of the features that I consider most important.
+The table \ref{table:home-automation-comparison} presents a comparison of the most important features.
 
 \begin{sidewaystable}[]
 	\begin{center}
@@ -178,11 +178,11 @@ The table \ref{table:home-automation-comparison} represents a comparison of the 
 
 \bigskip
 \section{Home Automation Devices and Related Services}
-In this section I will explore different devices, services and protocols that may be suitable for the outcome of this project.
+In this section we will explore different devices, services and protocols that may be suitable for the outcome of this project.
 The section presents a brief description of each device and a comparison between the same type of devices. These devices are
-usually handled in the same way in open source home automation systems. For example, in openHAB they are called 
-bindings\cite{openHABDocs}, and each of them is installable over the base system. As the main idea is to use open source technologies 
-in this project, I will focus on compatible devices, and analyze them based on their integration with openHAB. Therefore, I will talk about 
+usually handled in the same way in open source home automation systems. For example, in openHAB they are called
+bindings\cite{openHABDocs}, and each of them is installable over the base system. As the main idea is to use open source technologies
+in this project, we will focus on compatible devices, and analyze them based on their integration with openHAB. Therefore, we will talk about
 bindings, which is the abstraction layer that openHAB employs for devices, services and protocols.
 
 \subsection{Alarms}
@@ -395,15 +395,15 @@ This binding is for using Milight, Easybulb or LimitlessLed bulbs and the iBox.\
 What to consider:
 \begin{itemize}
 	\item The binding supports Milight/Easybulb bridges from 2014+, iBox from 2016 and iBox2 from 2017 and their respective bulbs.
-	The Dual White bulbs from 2015 and the new generation of Dual White bulbs is supported. RGB/White from 2014 and the 
+	The Dual White bulbs from 2015 and the new generation of Dual White bulbs is supported. RGB/White from 2014 and the
 	new generation RGB/White from 2016 as well as RGB/Cold, warm white and iBox bulbs work.
 	\item All supported bridges can be discovered by triggering a search in openHAB’s Inbox. Found bridges will show up and can
-	easily be added as things. Unfortunately, Milight like bulbs have no back channel and cannot report their presence, therefore all 
+	easily be added as things. Unfortunately, Milight like bulbs have no back channel and cannot report their presence, therefore all
 	possible bulbs are listed as new things after a bridge has been added.
 \end{itemize}
 Pros:
 \begin{itemize}
-	\item Extremely affordable products, these bulbs are one of the best options for the user due to their attractive price and good 
+	\item Extremely affordable products, these bulbs are one of the best options for the user due to their attractive price and good
 	performance (EUR 12,50 for RGB + Warm White MiLight, GearBest Spain prices)
 	\item Easy discovery and API support for recent devices
 	\item Seems that they can work directly with openHAB with no extra devices
@@ -416,7 +416,7 @@ Cons:
 \end{itemize}
 
 \subsubsection{WiFi LED}
-This binding is used to control LED stripes connected by WiFi. These devices are sold with different names, i.e. Magic Home LED, 
+This binding is used to control LED stripes connected by WiFi. These devices are sold with different names, i.e. Magic Home LED,
 UFO LED, LED NET controller, etc.\\~\\
 Pros:
 \begin{itemize}
@@ -462,9 +462,9 @@ Cons:
 \end{itemize}
 
 \subsubsection{X10}
-X10 is a company that makes gadgets like cameras and sensors for a Smart Home. This binding makes it possible to control X10 
+X10 is a company that makes gadgets like cameras and sensors for a Smart Home. This binding makes it possible to control X10
 devices via a server running the Mochad X10 daemon. Mochad is a Linux TCP gateway daemon for the X10 CM15A RF (radio frequency)
-and PL (power line) controller and the CM19A RF controller. With the current version of the binding items of type Switch, Dimmer, and 
+and PL (power line) controller and the CM19A RF controller. With the current version of the binding items of type Switch, Dimmer, and
 Rollershutter can be controlled. The binding only uses one-way communication so no status reading\\~\\
 Pros:
 \begin{itemize}
@@ -541,7 +541,7 @@ Pros:
 \end{itemize}
 Cons:
 \begin{itemize}
-	\item Quite complex to implement 
+	\item Quite complex to implement
 \end{itemize}
 
 \subsubsection{EcoTouch Binding}
@@ -552,7 +552,7 @@ Pros:
 \end{itemize}
 
 \subsubsection{MAX! Thermostats}
-This is the binding for the eQ-3 MAX! Home Solution. This binding allows you to integrate, view and control the MAX! Thermostats 
+This is the binding for the eQ-3 MAX! Home Solution. This binding allows you to integrate, view and control the MAX! Thermostats
 in the openHAB environment.\\~\\
 What to consider:
 \begin{itemize}
@@ -563,7 +563,7 @@ What to consider:
 Pros:
 \begin{itemize}
 	\item Communication via API (OpenHAB binding)
-	\item Useful and multipurpose. For example, it is possible to track the temperature of the heating devices anytime 
+	\item Useful and multipurpose. For example, it is possible to track the temperature of the heating devices anytime
 \end{itemize}
 Cons:
 \begin{itemize}
@@ -574,13 +574,13 @@ Cons:
 \subsubsection{Netatmo}
 The Netatmo binding integrates the following Netatmo products:
 \begin{itemize}
-	\item Personal Weather Station (figure \ref{fig:netatmo-weather-station}): reports temperature, humidity, air pressure, carbon 
+	\item Personal Weather Station (figure \ref{fig:netatmo-weather-station}): reports temperature, humidity, air pressure, carbon
 	dioxide concentration in the air, as well as the ambient noise level.
 	\item Thermostat: reports ambient temperature, allow to check target temperature, consult and change furnace heating status....
 \end{itemize}
 What to consider:
 \begin{itemize}
-	\item Discovery: Netatmo Binding is able to discover automatically all depending modules and devices from Netatmo website. It is 
+	\item Discovery: Netatmo Binding is able to discover automatically all depending modules and devices from Netatmo website. It is
 	also possible to add manually devices by creating things in in the *.things file.
 \end{itemize}
 Pros:
@@ -632,7 +632,7 @@ What to consider:
 \end{itemize}
 Pros:
 \begin{itemize}
-	\item Xiaomi is an extremely affordable brand that offers many devices for Home Automation. 
+	\item Xiaomi is an extremely affordable brand that offers many devices for Home Automation.
 	\item Easy to install and configure
 	\item Communication via API (OpenHAB binding)
 \end{itemize}
@@ -645,11 +645,11 @@ Cons:
 
 \subsubsection{Logitech Harmony  Hub}
 The Harmony Hub binding is used to enable communication between openHAB2 and multiple Logitech Harmony Hub devices. Logitech Smart
-Hub devices can control other devices like Apple TV, Amazon Alexa, or Sonos devices. The Binding works as a bridge between the Harmony 
+Hub devices can control other devices like Apple TV, Amazon Alexa, or Sonos devices. The Binding works as a bridge between the Harmony
 Hub and the devices connected to it.\\~\\
 Pros:
 \begin{itemize}
-	\item Might be beneficial to consider it given the fact that there could be devices (with proprietary communication protocols) that 
+	\item Might be beneficial to consider it given the fact that there could be devices (with proprietary communication protocols) that
 	we wouldn’t be able to support, like Apple TV
 	\item Communication via API (OpenHAB binding)
 \end{itemize}
@@ -670,7 +670,7 @@ Cons:
 \end{itemize}
 
 \subsubsection{MQTT}
-This binding allows openHAB to act as an MQTT (MQ Telemetry Transport) client, so that openHAB items can send and receive MQTT 
+This binding allows openHAB to act as an MQTT (MQ Telemetry Transport) client, so that openHAB items can send and receive MQTT
 messages from or to an MQTT broker.\\~\\
 What to consider:
 \begin{itemize}
@@ -678,7 +678,7 @@ What to consider:
 \end{itemize}
 
 \subsubsection{NTP}
-The NTP binding is used for displaying the local date and time based update from an NTP server. Discovery is used to place one default 
+The NTP binding is used for displaying the local date and time based update from an NTP server. Discovery is used to place one default
 tem in the inbox as a convenient way to add a Thing for the local time.
 
 \subsubsection{Weather Binding}
@@ -688,9 +688,9 @@ bindings.
 
 \bigskip
 \section{Voice Assistants}
-The objective of this section is to explore the main voice assistants available commercially. As I explained previously, the services
+The objective of this section is to explore the main voice assistants available commercially. As explained previously, the services
 provided by virtual assistants, and in particular voice assistants, are very varied. One of them is smart home control, and many of
-the home-oriented voice assistants provide it. The focus on this section will be on them, the most closely related to my project.
+the home-oriented voice assistants provide it. The focus on this section will be on them, the most closely related to the project.
 
 \subsection{Samsung Bixby}
 Bixby is the virtual assistant that Samsung includes in their phones, introduced in 2017, along with the introduction of the Samsung
