@@ -13,8 +13,9 @@ the final result.
 
 \section{Product Specification}
 The first task to do is to define the product. What should a home automation system do? What do users expect it to do? How? All
-the answers to these questions can be clarified by following some processes that, although they do not completely answer them (we
-can see many failed projects from time to time), they provide a very clear and detailed specification from the beginning.
+the answers to these questions can be clarified by following some processes that provide a very clear and detailed specification 
+from the beginning. I will start defining proto-personas, which will help us to understand the needs of the users in order to design 
+the system around them. Then, we will extract the requirements and, from them, the use cases.
 
 \subsection{Personas}
 Creating personas is a common process applied to the product design and development process in order to help in making a user-centered
@@ -270,21 +271,11 @@ use cases diagram in figure \ref{fig:UC-voice-assistant-management}.
 \end{figure}
 
 \bigskip
-\section{System Analysis}
-System analysis comes after the product specificaction, and it is a problem-solving technique that breaks down a system into its 
-component pieces for the purpose of the studying how well those component parts work and interact to accomplish their 
-purpose.\cite{bentleySystemAnalysis}
-
-\subsection{Conceptual Model}
-%TODO
-%Especificar el modelo conceptual
-
-\bigskip
 \section{System Design}
-At this point, we have a clear idea of the product and we have defined the elements that form this system. The next step is to design
-it, that is, to define all the characteristics of its elements, how they are going to be connected and how they interact with external 
-systems. This section begins defining operating scenarios of this system (how it could be used), then we will specify its architecture
-from an operating scenario, and it ends with the conceptual class diagram of the system.
+Now that we have a clear idea of the product and what users would expect from it, the next step is to design it, that is, to define 
+all the characteristics of its elements, how they are going to be connected and how they interact with external systems. This section 
+begins defining operating scenarios of this system (how it could be used), then we will specify its architecture from an operating 
+scenario, and it ends with the conceptual class diagram of the system.
 
 \subsection{Possible Operating Scenarios}
 After exploring what users would expect from a system like this, it is worth thinking about how it should be implemented. We proposed
@@ -344,16 +335,18 @@ The table \ref{table:possible-implementations} compares all the possibilities fo
 \end{table}
 
 As we can see, the hybrid solution, which is a web platform and mobile application, meets all the features in the best way, and
-offers easy and fast implementation. At this point, we have not considered the implementation of the voice assistant, which we
-will talk about in following sections.
+offers easy and fast implementation. This solution will be complemented with a virtual assistant.
 
 \subsection{Architecture}
-%TODO
-%Especificar la arquitectura del sistema, se puede hacer una explicacion rapida de los subsistemas que lo componen
+The architecture of the hybrid solution, considering it as a conjunction of the web platform and the mobile application, plus the voice
+assistant, is described in the figure \ref{fig:system-architecture}. 
 
-\subsection{Conceptual Class Diagram}
-%TODO
-%Introducir y especificar el DCC
+\begin{figure}
+	\centering
+	\includegraphics[width=1\textwidth]{images/Chapter_06/system-architecture.png}
+	\caption{Architecture of the home automation system}
+	\label{fig:system-architecture}
+\end{figure}
 
 \bigskip
 \section{Implementation}
