@@ -273,7 +273,7 @@ in the figure \ref{fig:UC-platform-management}.
 Next, we detail the use cases of this subsystem:
 \begin{itemize}
 	\item \textbf{Select User Interface}: the user selects a user interface from those offered by the system. The system then displays
-	this user interface with all the devices and services configured, and the control and information panels
+	this user interface with all the devices and services configured, and the control and information panels.
 	\item \textbf{Change configuration parameters}: the user changes any configuration parameter of the system. The system stores 
 	and applies the new configuration.
 	\item \textbf{Install package}: install a new package in the system. The package needs to be located and, once installed, it will be
@@ -300,6 +300,21 @@ In third place, the \textbf{Automation Control} subsystem comprises the creation
 are set in order to create automatized processes in the system. There are also actions for checking for rules and applying them to 
 the devices they are aimed to. The figure \ref{fig:UC-automation-control} includes a diagram of its use cases.
 
+These use cases are:
+\begin{itemize}
+	\item \textbf{Create automation rule}: the user creates a new automation rule indicating the affected devices, the command to 
+	send to them and a condition that will activate the rule. The rule will be saved and executed when this condition is met.
+	\item \textbf{Modify automation rule}: an automation rule previously created is modified by the user. The system will store its
+	new parameters.
+	\item \textbf{Delete automation rule}: delete an automation rule previously created. The system will not execute it again and
+	it will not be shown to the user.
+	\item \textbf{Check for automation rule}: the system checks repeatedly after a determined period of time if there are automation 
+	rules.
+	\item \textbf{Check affected devices}: the system checks the affected devices for a determined automation rule and verifies
+	that it is possible to communicate with them.
+	\item \textbf{Apply rule to devices}: from the found automation rules, the system executes them sequentially.
+\end{itemize}
+
 \begin{figure}
 	\centering
 	\includegraphics[width=0.8\textwidth]{images/Chapter_06/UC-automation-control.png}
@@ -311,6 +326,18 @@ Finally, the \textbf{Voice Assistant} subsystem is in charge of everything relat
 home automation system. Very few actions are considered in this subsystem, as its operation is quite simple. It includes actions 
 for activating the assistant, sending commands and processing them, and editing their properties. They are represented in the
 use cases diagram in figure \ref{fig:UC-voice-assistant-management}.
+
+These use cases are detailed below:
+\begin{itemize}
+	\item \textbf{Activate voice assistant}: the system is set to a \textit{listening} state, that is, it is waiting to receive a 
+	command after the user has activated it.
+	\item \textbf{Send a command}: the user sends a command with the voice and the system receives it and transforms it into text.
+	\item \textbf{Edit assistant parameters}: modify the assistant configuration and functionality, such as the devices that it has
+	to consider and the key words to process the voice commands.
+	\item \textbf{Button activation}: activate the assistant via a button tap.
+	\item \textbf{Voice activation}: activate the assistant via voice, by saying a key word or a set of key words.
+	\item \textbf{Process response}: process the command given by a user and determine a response according to it.
+\end{itemize}
 
 \begin{figure}
 	\centering
