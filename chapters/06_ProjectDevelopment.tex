@@ -228,6 +228,36 @@ configured devices and services on the platform, such as their addition, removal
 to update their status on the system and on the physical device. Its use cases are represented in the figure 
 \ref{fig:UC-device-and-service-management}.
 
+In this subsystem we can find the following use cases:
+\begin{itemize}
+	\item \textbf{Refresh all}: it is done by the user and its aim is to retrieve the latest status of the elements that have been 
+	added to the system.
+	\item \textbf{Operate device}: the status of any device is changed by the user on the system and that information needs to be
+	sent to the device.
+	\item \textbf{Modify device settings}: the configuration of any device, such as \textit{name}, \textit{location} or \textit{IP address},
+	is modified.
+	\item \textbf{Check device inbox}: the user enters the inbox of devices, the place where new devices found in the network are 
+	located, so the system has to provide them.
+	\item \textbf{Add device}: add a device that has been identified and located in the device inbox. The new device is registered 
+	in the system and ready to be configured.
+	\item \textbf{Remove device}: remove a device that has been previously identified in the system. The system will erase its
+	control panel, configuration, and everything related to it.
+	\item \textbf{Add service}: install a service that has been previously identified. The service will be registered in the system,
+	ready to be configured.
+	\item \textbf{Remove service}: remove a service that has been previously identified in the system. The system will erase its
+	information panel, configuration, and everything related to it.
+	\item \textbf{Retrieve status of devices}: communicate with the configured devices and update in the system their most recent
+	status.
+	\item \textbf{Retrieve data from data providers}: communicate with data providers and fetch their most recent update. Then, 
+	refresh the information shown on the services in the system.
+	\item \textbf{Update status of device}: communicate with a physical device and send the latest update performed in the controls 
+	for this device in the system.
+	\item \textbf{Update device list}: update the list of devices in the device inbox according to the new devices found in the network.
+	\item \textbf{Identify device}: get the name and IP address of the device. If possible, get additional information, such as 
+	channels of communication or possible statuses. Also, get the configuration files and entries on the system.
+	\item \textbf{Identify service}: get the name and URL of the provider related to a service.
+\end{itemize}
+
 \begin{figure}
 	\centering
 	\includegraphics[width=1\textwidth]{images/Chapter_06/UC-device-and-service-management.png}
@@ -239,6 +269,25 @@ The \textbf{Platform Management} subsystem encompasses the actions aimed to inst
 as all the actions related to change its configuration and the user interface. This subsystem also considers the automatic actions that
 are done in order to check for changes in the configuration files that are manually specified. These use cases are depicted in the diagram
 in the figure \ref{fig:UC-platform-management}.
+
+Next, we detail the use cases of this subsystem:
+\begin{itemize}
+	\item \textbf{Select User Interface}: the user selects a user interface from those offered by the system. The system then displays
+	this user interface with all the devices and services configured, and the control and information panels
+	\item \textbf{Change configuration parameters}: the user changes any configuration parameter of the system. The system stores 
+	and applies the new configuration.
+	\item \textbf{Install package}: install a new package in the system. The package needs to be located and, once installed, it will be
+	registered in the system and its new functions will be added.
+	\item \textbf{Remove installed package}: delete from the system a package previously installed. The package needs to be identified
+	and, after it, its functionalities will be removed in the system.
+	\item \textbf{Check manual configuration files}: check in the system directories for new configuration files or changes over 
+	the existing ones.
+	\item \textbf{Update repository}: retrieve the updated package list from the package repository on Internet.
+	\item \textbf{Search in the repository}: make a search by name in the package repository. The coincidences, if any, will be shown
+	to the user.
+	\item \textbf{Identify package}: search the entries and files of an installed package given a name.
+	\item \textbf{Apply configuration}: apply the configuration specified on the configuration files to the system.
+\end{itemize}
 
 \begin{figure}
 	\centering
