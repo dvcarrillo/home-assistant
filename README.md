@@ -19,6 +19,7 @@ and the possibility of creating low-cost functional home automation systems.
 
 ## Compiling
 The final version is ready in the file `project.pdf`. Hovewer, if you would like to recompile it, please run 
-the following command twice:
+the following command twice. Note that the package `texlive`, or any alternative for Windows or macOS, must be installed 
+on your system.
 
 `pdflatex -synctex=1 -interaction=nonstopmode "project".tex`
