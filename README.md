@@ -1,5 +1,7 @@
-# Creation of a voice-driven controller for home automation (ongoing project)
-## My BSc End Thesis at Universidad de Granada
+# Creation of a voice-driven controller for home automation
+
+This repository includes my BSc End Thesis at Universidad de Granada.
+
 ### Keywords
 home automation, voice assistance, distributed systems, Raspberry Pi, open source
 
@@ -15,7 +17,7 @@ environment, usable and extensible to any daily situation.
 Therefore, this project tries to demonstrate the infinite opportunities that the recent field of domotics enables, 
 and the possibility of creating low-cost functional home automation systems.
 
-### Compiling
+## Compiling
 The final version is ready in the file `project.pdf`. Hovewer, if you would like to recompile it, please run 
 the following command twice:
 
