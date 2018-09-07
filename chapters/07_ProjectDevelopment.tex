@@ -4,8 +4,8 @@ In each of the previous chapters we have explored different aspects of the field
 theoretical point of view, from their definition to smaller details, including additional explanations about a specific home automation
 system, openHAB.
 
-At this time, we have provided enough background to begin our case study: the building of a home automation controller. As
-mentioned in the openHAB chapter, we will base our project on this system and build on it, as it accomplishes very well the main
+At this time, we have provided enough background to begin our case study: the building of a voice-driven home automation controller. 
+As mentioned in the openHAB chapter, we will base our project on this system and build on it, as it accomplishes very well the main
 requirements that we determined for this project.
 
 In this chapter, the process that we have followed in order to develop this project will be detailed, from its specification to
@@ -1362,22 +1362,15 @@ in its pronunciation.
 
 The hotword will be followed by a sentence whose form will be more or less free. At this point, trying to identify a substring of
 more than two words is not very useful, so we can check for some keywords inside the sentence and discard the other options, step
-by step. For that, we need to know how sentences are formed. In our case, the most common form will be as indicated in table
-\ref{table:sentence-form-assistant}.
+by step. For that, we need to know how sentences are formed. In our case, the form of the sentences can follow the ways specified
+in figure \ref{fig:sentence-tree}.
 
-\begin{table}[]
+\begin{figure}
 	\centering
-	\resizebox{\textwidth}{!}{%
-		\begin{tabular}{|
-				>{\columncolor[HTML]{C0C0C0}}c
-				>{\columncolor[HTML]{C0C0C0}}c | ccc |}
-			\hline
-			\textbf{OK Google!} & \textbf{Hotword} & \begin{tabular}[c]{@{}c@{}}\textbf{Verb}\\ \textit{What to do}\end{tabular} & \begin{tabular}[c]{@{}c@{}}\textbf{Noun}\\ \textit{What to change}\end{tabular} & \begin{tabular}[c]{@{}c@{}}\textbf{Adjective}\\ \textit{To which state}\end{tabular} \\ \hline
-		\end{tabular}%
-	}
-	\caption{Example sentence form for the assistant}
-	\label{table:sentence-form-assistant}
-\end{table}
+	\includegraphics[width=0.7\textwidth]{images/Chapter_07/sentence-tree.png}
+	\caption{Sentence tree of the voice assistant}
+	\label{fig:sentence-tree}
+\end{figure}
 
 So, the assistant has to process the part that goes right after the \textit{hotword}. In this case, we are going to check for actions,
 like \textit{turn} or \textit{power}. If the action is contained anywhere in the sentence, it will check for derived words. For
