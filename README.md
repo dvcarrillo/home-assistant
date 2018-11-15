@@ -1,6 +1,6 @@
 # Creation of a voice-driven controller for home automation
 
-This repository includes my BSc End Thesis at Universidad de Granada. Presented in September 2018, the project was graded 10
+This repository contains my BSc End Thesis at Universidad de Granada. Presented in September 2018, the project was graded 10
 out of 10 with Matrícula de Honor (outstanding with distinction).
 
 ### Keywords
